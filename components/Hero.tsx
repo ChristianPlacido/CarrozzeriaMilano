@@ -24,6 +24,13 @@ const Hero = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
+            <div className="flex justify-center mb-6">
+              <div className="rounded-2xl bg-white/10 backdrop-blur border border-white/20 p-4 shadow-2xl shadow-primary/30 inline-flex">
+                <div className="w-40 md:w-48">
+                  <img src="/images/logo.svg" alt="Carrozzeria Milano" className="w-full h-auto" />
+                </div>
+              </div>
+            </div>
             <h1 className="font-display text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
               CARROZZERIA
               <span className="block text-primary-light">MILANO</span>
