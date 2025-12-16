@@ -4,11 +4,14 @@ import Image from 'next/image'
 import { motion, useAnimationControls } from 'framer-motion'
 import { useEffect } from 'react'
 import logoSrc from '@/public/images/logo.svg'
+import slide1 from '@/public/images/carousel-1.svg'
+import slide2 from '@/public/images/carousel-2.svg'
+import slide3 from '@/public/images/carousel-3.svg'
 
 const slides = [
-  { src: '/images/carousel-1.svg', alt: 'Carrozzeria Milano - lavoro 1' },
-  { src: '/images/carousel-2.svg', alt: 'Carrozzeria Milano - lavoro 2' },
-  { src: '/images/carousel-3.svg', alt: 'Carrozzeria Milano - lavoro 3' },
+  { src: slide1, alt: 'Carrozzeria Milano - lavoro 1' },
+  { src: slide2, alt: 'Carrozzeria Milano - lavoro 2' },
+  { src: slide3, alt: 'Carrozzeria Milano - lavoro 3' },
 ]
 
 const ImageCarousel = () => {
