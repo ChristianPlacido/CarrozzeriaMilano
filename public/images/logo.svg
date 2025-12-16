@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 340" width="600" height="340">
+  <!-- Background ellipse -->
+  <ellipse cx="300" cy="170" rx="290" ry="160" fill="#DC143C"/>
+  
+  <!-- Car silhouette -->
+  <path d="M 80 120 Q 100 100 200 110 Q 280 100 480 130 Q 530 150 560 180 Q 540 160 480 140 Q 280 110 200 120 Q 100 110 80 120 Z" 
+        fill="none" stroke="white" stroke-width="4"/>
+  
+  <path d="M 200 140 Q 300 120 500 160" 
+        fill="none" stroke="white" stroke-width="3" opacity="0.8"/>
+  
+  <!-- CARROZZERIA text -->
+  <text x="90" y="230" font-family="Arial, sans-serif" font-size="52" font-weight="bold" fill="white" style="font-style: italic; letter-spacing: -1px;">
+    CARROZZERIA
+  </text>
+  
+  <!-- Speed lines effect on text -->
+  <defs>
+    <pattern id="speedLines" x="0" y="0" width="10" height="3" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="1.5" x2="8" y2="1.5" stroke="white" stroke-width="2"/>
+    </pattern>
+  </defs>
+  
+  <!-- MILANO text -->
+  <text x="430" y="265" font-family="Arial, sans-serif" font-size="28" font-weight="bold" fill="white" style="font-style: italic;">
+    MILANO
+  </text>
+</svg>
