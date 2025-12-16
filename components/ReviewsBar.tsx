@@ -92,15 +92,18 @@ const ReviewsBar = () => {
             onHoverEnd={() => startScroll()}
           >
             {[...REVIEWS, ...REVIEWS].map((review, idx) => (
-              <motion.button
+              <motion.div
                 key={`${review.author}-${idx}`}
-                type="button"
-                onClick={() => setHighlighted(review)}
+                onMouseEnter={() => setHighlighted(review)}
+                onMouseLeave={() => setHighlighted(null)}
+                onFocus={() => setHighlighted(review)}
+                onBlur={() => setHighlighted(null)}
+                tabIndex={0}
                 className="focus:outline-none"
-                whileHover={{ scale: 1.04 }}
+                whileHover={{ scale: 1.06 }}
               >
                 <ReviewCard {...review} />
-              </motion.button>
+              </motion.div>
             ))}
           </motion.div>
           {highlighted && (
@@ -116,12 +119,7 @@ const ReviewsBar = () => {
                   <p className="text-base font-semibold text-slate-900">{highlighted.author}</p>
                   {highlighted.ago && <p className="text-xs text-slate-500">{highlighted.ago}</p>}
                 </div>
-                <button
-                  onClick={() => setHighlighted(null)}
-                  className="text-sm font-semibold text-primary hover:text-primary/80"
-                >
-                  Chiudi
-                </button>
+                <span className="text-sm font-semibold text-primary">In evidenza</span>
               </div>
               <div className="mt-2"><Stars /></div>
               <p className="mt-3 text-sm md:text-base text-slate-700 leading-relaxed">{highlighted.text}</p>
