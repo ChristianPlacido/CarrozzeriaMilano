@@ -65,7 +65,7 @@ const DynamicLogo = ({ className = '' }: DynamicLogoProps) => {
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       >
         <Image
-          src="/images/logo.png"
+          src="/images/logo.svg"
           alt="Carrozzeria Milano"
           width={200}
           height={80}
