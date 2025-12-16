@@ -3,7 +3,6 @@ import { Inter, Montserrat } from 'next/font/google'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import ReviewsBar from '@/components/ReviewsBar'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -30,7 +29,6 @@ export default function RootLayout({
     <html lang="it" className={`${inter.variable} ${montserrat.variable}`}>
       <body className={inter.className}>
         <Navbar />
-        <ReviewsBar />
         <main>
           {children}
         </main>
