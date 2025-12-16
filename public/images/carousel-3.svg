@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="g3" x1="0%" y1="100%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#7a0c25" />
+      <stop offset="100%" stop-color="#dc143c" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="675" fill="url(#g3)" />
+  <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="Montserrat, Arial, sans-serif" font-size="46" font-weight="700" opacity="0.9">Sostituisci con scatti reali</text>
+  <text x="50%" y="58%" dominant-baseline="middle" text-anchor="middle" fill="white" font-family="Inter, Arial, sans-serif" font-size="22" opacity="0.8">/public/images/carousel-3.svg</text>
+</svg>

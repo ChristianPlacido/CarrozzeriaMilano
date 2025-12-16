@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { FaBars, FaTimes, FaPhone, FaMapMarkerAlt } from 'react-icons/fa'
+import { FaBars, FaTimes, FaPhone, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
 import DynamicLogo from './DynamicLogo'
 import WhatsAppButton from './WhatsAppButton'
@@ -28,12 +28,26 @@ const Navbar = () => {
   ]
 
   return (
-    <nav
-      className={`fixed w-full z-50 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-lg py-2' : 'bg-transparent py-4'
-      }`}
-    >
-      <div className="container mx-auto px-4">
+    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
+      <div className="hidden lg:block bg-white/80 backdrop-blur border-b border-white/40 text-sm text-gray-700">
+        <div className="container mx-auto px-4 py-2 flex items-center justify-between">
+          <div className="flex items-center gap-3 text-primary">
+            <a href="https://facebook.com" aria-label="Facebook" className="hover:opacity-80"><FaFacebook /></a>
+            <a href="https://instagram.com" aria-label="Instagram" className="hover:opacity-80"><FaInstagram /></a>
+            <a href="https://linkedin.com" aria-label="LinkedIn" className="hover:opacity-80"><FaLinkedin /></a>
+          </div>
+          <div className="flex items-center gap-4">
+            <a href="tel:+390362238800" className="flex items-center gap-2 font-semibold text-primary hover:opacity-80">
+              <FaPhone /> 0362 238 800
+            </a>
+            <a href="https://wa.me/393331234567" className="flex items-center gap-2 text-green-600 hover:opacity-80">
+              <FaWhatsapp /> WhatsApp
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div className={`container mx-auto px-4 ${scrolled ? 'py-3' : 'py-4'}`}>
         <div className="flex justify-between items-center">
           {/* Logo */}
           <Link href="/" className="flex items-center">
