@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { FaPhone, FaMapMarkerAlt, FaClock } from 'react-icons/fa'
 import WhatsAppButton from './WhatsAppButton'
 
@@ -27,7 +28,7 @@ const Hero = () => {
             <div className="flex justify-center mb-6">
               <div className="rounded-2xl bg-white/10 backdrop-blur border border-white/20 p-4 shadow-2xl shadow-primary/30 inline-flex">
                 <div className="w-40 md:w-48">
-                  <img src="/images/logo.svg" alt="Carrozzeria Milano" className="w-full h-auto" />
+                  <Image src="/images/logo.svg" alt="Carrozzeria Milano" width={200} height={100} priority className="w-full h-auto" />
                 </div>
               </div>
             </div>

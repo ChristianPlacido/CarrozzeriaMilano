@@ -1,5 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  basePath: '/CarrozzeriaMilano',
+  assetPrefix: '/CarrozzeriaMilano',
   output: 'export',
   reactStrictMode: true,
   images: {
