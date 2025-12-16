@@ -3,6 +3,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion'
 import { useEffect, useRef } from 'react'
 import Image from 'next/image'
+import logoSrc from '@/public/images/logo.svg'
 
 interface DynamicLogoProps {
   className?: string
@@ -65,7 +66,7 @@ const DynamicLogo = ({ className = '' }: DynamicLogoProps) => {
         transition={{ type: 'spring', stiffness: 400, damping: 17 }}
       >
         <Image
-          src="/images/logo.svg"
+          src={logoSrc}
           alt="Carrozzeria Milano"
           width={200}
           height={80}
