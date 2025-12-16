@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import { motion, useAnimationControls } from 'framer-motion'
 import { useEffect } from 'react'
+import logoSrc from '@/public/images/logo.svg'
 
 const slides = [
   { src: '/images/carousel-1.svg', alt: 'Carrozzeria Milano - lavoro 1' },
@@ -54,6 +55,20 @@ const ImageCarousel = () => {
               </div>
             ))}
           </motion.div>
+
+          {/* Logo overlay in primo piano */}
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+            <div className="relative w-40 sm:w-52 md:w-64 lg:w-72 opacity-70 drop-shadow-lg">
+              <Image
+                src={logoSrc}
+                alt="Carrozzeria Milano"
+                fill
+                sizes="(max-width: 768px) 40vw, (max-width: 1024px) 30vw, 20vw"
+                className="object-contain"
+                priority
+              />
+            </div>
+          </div>
         </div>
         <p className="text-xs text-slate-500 mt-3">Sostituisci i file in /public/images/carousel-*.svg con le foto reali.</p>
       </div>
