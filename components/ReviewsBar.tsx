@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, useAnimationControls } from 'framer-motion'
 import { FaStar } from 'react-icons/fa'
 
@@ -30,12 +30,9 @@ const Stars = () => (
 )
 
 const ReviewCard = ({ text, author, ago }: Review) => (
-  <motion.a
-    href={GOOGLE_URL}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex w-72 md:w-80 flex-col justify-between rounded-xl bg-white shadow-lg shadow-primary/10 border border-white/60 p-4 hover:shadow-xl hover:shadow-primary/20 transition-all"
-    whileHover={{ scale: 1.04 }}
+  <motion.div
+    className="flex w-[260px] md:w-[300px] flex-col justify-between rounded-2xl bg-white shadow-lg shadow-primary/10 border border-white/70 p-5 hover:shadow-xl hover:shadow-primary/20 transition-all"
+    whileHover={{ scale: 1.06 }}
   >
     <div className="flex items-start justify-between gap-2 mb-2">
       <div>
@@ -45,12 +42,13 @@ const ReviewCard = ({ text, author, ago }: Review) => (
       <span className="text-xs font-semibold text-primary">Google</span>
     </div>
     <Stars />
-    <p className="mt-3 text-sm text-slate-700 leading-relaxed">{text}</p>
-  </motion.a>
+    <p className="mt-3 text-sm text-slate-700 leading-relaxed line-clamp-3">{text}</p>
+  </motion.div>
 )
 
 const ReviewsBar = () => {
   const controls = useAnimationControls()
+  const [highlighted, setHighlighted] = useState<Review | null>(null)
 
   const startScroll = () => {
     controls.start({
@@ -88,15 +86,57 @@ const ReviewsBar = () => {
 
         <div className="mt-6 relative overflow-hidden">
           <motion.div
-            className="flex gap-4 pr-4"
+            className="flex gap-5 pr-5"
             animate={controls}
             onHoverStart={() => controls.stop()}
             onHoverEnd={() => startScroll()}
           >
             {[...REVIEWS, ...REVIEWS].map((review, idx) => (
-              <ReviewCard key={`${review.author}-${idx}`} {...review} />
+              <motion.button
+                key={`${review.author}-${idx}`}
+                type="button"
+                onClick={() => setHighlighted(review)}
+                className="focus:outline-none"
+                whileHover={{ scale: 1.04 }}
+              >
+                <ReviewCard {...review} />
+              </motion.button>
             ))}
           </motion.div>
+          {highlighted && (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 20 }}
+              className="pointer-events-auto mt-6 rounded-2xl bg-white shadow-2xl shadow-primary/20 border border-primary/20 p-5 md:p-6 relative"
+            >
+              <div className="absolute -top-3 left-10 h-6 w-6 rotate-45 bg-white border-l border-t border-primary/20" aria-hidden="true" />
+              <div className="flex items-start justify-between gap-3">
+                <div>
+                  <p className="text-base font-semibold text-slate-900">{highlighted.author}</p>
+                  {highlighted.ago && <p className="text-xs text-slate-500">{highlighted.ago}</p>}
+                </div>
+                <button
+                  onClick={() => setHighlighted(null)}
+                  className="text-sm font-semibold text-primary hover:text-primary/80"
+                >
+                  Chiudi
+                </button>
+              </div>
+              <div className="mt-2"><Stars /></div>
+              <p className="mt-3 text-sm md:text-base text-slate-700 leading-relaxed">{highlighted.text}</p>
+              <div className="mt-3">
+                <a
+                  href={GOOGLE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm font-semibold text-primary underline underline-offset-4 decoration-primary/60 hover:decoration-primary"
+                >
+                  Leggi su Google
+                </a>
+              </div>
+            </motion.div>
+          )}
         </div>
       </div>
     </section>
