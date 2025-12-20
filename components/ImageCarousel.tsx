@@ -2,7 +2,7 @@
 
 import Image from 'next/image'
 import { motion, useAnimationControls } from 'framer-motion'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import logoSrc from '@/public/images/logo.svg'
 import slide1 from '@/public/images/carousel-1.svg'
 import slide2 from '@/public/images/carousel-2.svg'
@@ -18,6 +18,20 @@ const slides = [
 const ImageCarousel = () => {
   const controls = useAnimationControls()
 
+  // Normalizza i link di Google per richiedere risoluzioni maggiori
+  const getSizedUrl = (url: string, size: number) => {
+    // sostituisce pattern tipo s680-w680-h510-rw o s680 con s{size}
+    return url
+      .replace(/s\d+-w\d+-h\d+-rw/g, `s${size}`)
+      .replace(/s\d+(?!-)/g, `s${size}`)
+  }
+
+  // Crea srcSet multiplo per schermi ad alta densità
+  const buildSrcSet = (url: string) => {
+    const sizes = [800, 1200, 1600]
+    return sizes.map((s) => `${getSizedUrl(url, s)} ${s}w`).join(', ')
+  }
+
   const startScroll = () => {
     controls.start({
       x: ['0%', '-50%'],
@@ -31,6 +45,9 @@ const ImageCarousel = () => {
   }, [controls])
 
   const externalSlides = CAROUSEL_LINKS.filter(Boolean)
+
+  // Gestione logo centrale: prova PNG in /public/images, fallback a SVG
+  const [pngLogoOk, setPngLogoOk] = useState(true)
 
   return (
     <section className="bg-white py-14" id="carousel">
@@ -53,13 +70,15 @@ const ImageCarousel = () => {
                 ? [...externalSlides, ...externalSlides]
                 : [...slides, ...slides]
             ).map((item: any, idx: number) => (
-              <div key={`slide-${idx}`} className="relative h-64 sm:h-72 md:h-80 w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] flex-shrink-0 overflow-hidden rounded-2xl">
+              <div key={`slide-${idx}`} className="relative w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] flex-shrink-0 overflow-hidden rounded-2xl aspect-[4/3]">
                 {externalSlides.length ? (
                   <img
-                    src={item}
+                    src={getSizedUrl(item as string, 1200)}
                     alt={`Carrozzeria Milano - lavoro ${idx+1}`}
                     className="w-full h-full object-cover"
                     loading={idx === 0 ? 'eager' : 'lazy'}
+                    srcSet={buildSrcSet(item as string)}
+                    sizes="(max-width: 768px) 80vw, (max-width: 1024px) 60vw, 30vw"
                   />
                 ) : (
                   <Image
@@ -77,19 +96,29 @@ const ImageCarousel = () => {
 
           {/* Logo overlay in primo piano */}
           <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-            <div className="relative w-40 sm:w-52 md:w-64 lg:w-72 opacity-70 drop-shadow-lg">
-              <Image
-                src={logoSrc}
-                alt="Carrozzeria Milano"
-                fill
-                sizes="(max-width: 768px) 40vw, (max-width: 1024px) 30vw, 20vw"
-                className="object-contain"
-                priority
-              />
+            <div className="relative w-40 sm:w-52 md:w-64 lg:w-72 opacity-80 drop-shadow-lg">
+              {/* Tenta PNG personalizzato se presente in /public/images/carrozzeriamilano.png */}
+              {pngLogoOk ? (
+                <img
+                  src="/images/carrozzeriamilano.png"
+                  alt="Carrozzeria Milano"
+                  className="w-full h-full object-contain"
+                  onError={() => setPngLogoOk(false)}
+                />
+              ) : (
+                <Image
+                  src={logoSrc}
+                  alt="Carrozzeria Milano"
+                  fill
+                  sizes="(max-width: 768px) 40vw, (max-width: 1024px) 30vw, 20vw"
+                  className="object-contain"
+                  priority
+                />
+              )}
             </div>
           </div>
         </div>
-        <p className="text-xs text-slate-500 mt-3">Per usare foto esterne, incolla i link in [data/carousel/links.ts](data/carousel/links.ts). In assenza di link, vengono mostrati i placeholder locali.</p>
+        <p className="text-xs text-slate-500 mt-3">Per foto esterne, incolla i link in [data/carousel/links.ts](data/carousel/links.ts). I link Google vengono richiesti in alta risoluzione. Inserisci il logo personalizzato in public/images/carrozzeriamilano.png per mostrarlo al centro.</p>
       </div>
     </section>
   )
