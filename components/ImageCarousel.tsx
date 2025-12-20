@@ -48,7 +48,11 @@ const ImageCarousel = () => {
             onHoverStart={() => controls.stop()}
             onHoverEnd={() => startScroll()}
           >
-            {(externalSlides.length ? externalSlides : [...slides, ...slides]).map((item: any, idx: number) => (
+            {(
+              externalSlides.length
+                ? [...externalSlides, ...externalSlides]
+                : [...slides, ...slides]
+            ).map((item: any, idx: number) => (
               <div key={`slide-${idx}`} className="relative h-64 sm:h-72 md:h-80 w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] flex-shrink-0 overflow-hidden rounded-2xl">
                 {externalSlides.length ? (
                   <img

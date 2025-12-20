@@ -2,5 +2,5 @@
 // Esempio: 'https://example.com/foto1.jpg'
 export const CAROUSEL_LINKS: string[] = [
   // Incolla qui i tuoi link, uno per riga tra apici
-  // 'https://...',
+  'https://lh3.googleusercontent.com/p/AF1QipONNV2jPqO1l3f6SFt9_6XXcehRPVEqBk3Z0pka=s680-w680-h510-rw',
 ];
