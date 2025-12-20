@@ -78,15 +78,7 @@ const BackgroundCarousel = ({ intervalMs = 3000, maxWidth = 1920 }: BackgroundCa
       {/* Velo/gradiente per leggibilità e brand */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/35 to-[#DC143C]/40" />
 
-      {/* Logo semitrasparente in primo piano */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-        <div
-          className="relative w-52 sm:w-64 md:w-80 h-28 sm:h-36 md:h-44 opacity-45 drop-shadow-2xl"
-          style={{ clipPath: 'ellipse(60% 45% at 50% 50%)' }}
-        >
-          <NextImage src={logoPng} alt="Carrozzeria Milano - Logo" fill className="object-cover" priority />
-        </div>
-      </div>
+      {/* Nessun logo sovrapposto: il focus è sulla scritta centrale dell'Hero */}
     </div>
   )
 }
