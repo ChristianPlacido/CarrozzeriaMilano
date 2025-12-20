@@ -2,9 +2,9 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { FaBars, FaTimes, FaPhone, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
-import DynamicLogo from './DynamicLogo'
 import WhatsAppButton from './WhatsAppButton'
 
 const Navbar = () => {
@@ -49,9 +49,13 @@ const Navbar = () => {
 
       <div className={`container mx-auto px-4 ${scrolled ? 'py-3' : 'py-4'}`}>
         <div className="flex justify-between items-center">
-          {/* Logo */}
+          {/* Logo PNG */}
           <Link href="/" className="flex items-center">
-            <DynamicLogo className="w-32 md:w-40" />
+            <img 
+              src="/images/carrozzeriamilano.png" 
+              alt="Carrozzeria Milano" 
+              className="w-32 md:w-40 h-auto"
+            />
           </Link>
 
           {/* Desktop Menu */}
