@@ -1,19 +1,10 @@
 import Hero from '@/components/Hero'
-import ReviewsBar from '@/components/ReviewsBar'
-import Services from '@/components/Services'
-import About from '@/components/About'
-import Gallery from '@/components/Gallery'
-import Contact from '@/components/Contact'
+// Home minimale ispirata allo stile di codecar: solo Hero full-screen
 
 export default function Home() {
   return (
     <>
       <Hero />
-      <ReviewsBar />
-      <Services />
-      <About />
-      <Gallery />
-      <Contact />
     </>
   )
 }
