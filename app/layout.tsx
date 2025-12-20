@@ -1,10 +1,11 @@
 import type { Metadata } from 'next'
 import { Inter, Montserrat } from 'next/font/google'
 import Link from 'next/link'
+import Image from 'next/image'
 import './globals.css'
 import Navbar from '@/components/Navbar'
 import Footer from '@/components/Footer'
-import DynamicLogo from '@/components/DynamicLogo'
+import logoPng from '@/public/images/carrozzeriamilano.png'
 
 const inter = Inter({ 
   subsets: ['latin'],
@@ -36,7 +37,9 @@ export default function RootLayout({
           aria-label="Torna alla home"
         >
           <div className="rounded-full bg-white shadow-lg shadow-primary/20 border border-primary/20 p-3 hover:shadow-primary/40 transition-transform hover:scale-105">
-            <DynamicLogo className="w-20" />
+            <div className="relative w-20 h-10">
+              <Image src={logoPng} alt="Carrozzeria Milano" fill className="object-contain" priority />
+            </div>
           </div>
         </Link>
         <Navbar />

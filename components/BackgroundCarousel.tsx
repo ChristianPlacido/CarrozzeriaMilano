@@ -3,6 +3,8 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { CAROUSEL_LINKS } from '@/data/carousel/links'
 import { motion } from 'framer-motion'
+import NextImage from 'next/image'
+import logoPng from '@/public/images/carrozzeriamilano.png'
 
 // Sostituisce i parametri di dimensione dei link googleusercontent per avere risoluzioni più alte
 const getSizedUrl = (url: string, size: number) => {
@@ -26,8 +28,10 @@ const BackgroundCarousel = ({ intervalMs = 3000, maxWidth = 1920 }: BackgroundCa
   useEffect(() => {
     if (!images.length) return
     const next = (index + 1) % images.length
-    const img = new Image()
-    img.src = getSizedUrl(images[next], maxWidth)
+    if (typeof window !== 'undefined') {
+      const preImg = new window.Image()
+      preImg.src = getSizedUrl(images[next], maxWidth)
+    }
   }, [index, images, maxWidth])
 
   useEffect(() => {
@@ -76,11 +80,9 @@ const BackgroundCarousel = ({ intervalMs = 3000, maxWidth = 1920 }: BackgroundCa
 
       {/* Logo semitrasparente in primo piano */}
       <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10">
-        <img
-          src="/images/carrozzeriamilano.png"
-          alt="Carrozzeria Milano - Logo"
-          className="w-48 sm:w-64 md:w-80 h-auto opacity-40 drop-shadow-2xl"
-        />
+        <div className="relative w-48 sm:w-64 md:w-80 h-24 sm:h-32 md:h-40 opacity-40 drop-shadow-2xl">
+          <NextImage src={logoPng} alt="Carrozzeria Milano - Logo" fill className="object-contain" priority />
+        </div>
       </div>
     </div>
   )
