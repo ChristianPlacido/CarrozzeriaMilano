@@ -48,7 +48,7 @@ const BackgroundCarousel = ({ intervalMs = 3000, maxWidth = 1920 }: BackgroundCa
   const previous = prevIndex !== null ? getSizedUrl(images[prevIndex], maxWidth) : null
 
   return (
-    <div className="absolute inset-0 -z-10 overflow-hidden">
+    <div className="absolute inset-0 z-0 overflow-hidden">
       {/* Crossfade: immagine precedente e corrente */}
       {previous && (
         <motion.img
