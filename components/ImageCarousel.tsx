@@ -7,6 +7,7 @@ import logoSrc from '@/public/images/logo.svg'
 import slide1 from '@/public/images/carousel-1.svg'
 import slide2 from '@/public/images/carousel-2.svg'
 import slide3 from '@/public/images/carousel-3.svg'
+import { CAROUSEL_LINKS } from '@/data/carousel/links'
 
 const slides = [
   { src: slide1, alt: 'Carrozzeria Milano - lavoro 1' },
@@ -29,6 +30,8 @@ const ImageCarousel = () => {
     return () => controls.stop()
   }, [controls])
 
+  const externalSlides = CAROUSEL_LINKS.filter(Boolean)
+
   return (
     <section className="bg-white py-14" id="carousel">
       <div className="container mx-auto px-4">
@@ -45,16 +48,25 @@ const ImageCarousel = () => {
             onHoverStart={() => controls.stop()}
             onHoverEnd={() => startScroll()}
           >
-            {[...slides, ...slides].map((slide, idx) => (
-              <div key={`${slide.src}-${idx}`} className="relative h-64 sm:h-72 md:h-80 w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] flex-shrink-0 overflow-hidden rounded-2xl">
-                <Image
-                  src={slide.src}
-                  alt={slide.alt}
-                  fill
-                  sizes="(max-width: 768px) 80vw, (max-width: 1024px) 60vw, 30vw"
-                  className="object-cover"
-                  priority={idx === 0}
-                />
+            {(externalSlides.length ? externalSlides : [...slides, ...slides]).map((item: any, idx: number) => (
+              <div key={`slide-${idx}`} className="relative h-64 sm:h-72 md:h-80 w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] flex-shrink-0 overflow-hidden rounded-2xl">
+                {externalSlides.length ? (
+                  <img
+                    src={item}
+                    alt={`Carrozzeria Milano - lavoro ${idx+1}`}
+                    className="w-full h-full object-cover"
+                    loading={idx === 0 ? 'eager' : 'lazy'}
+                  />
+                ) : (
+                  <Image
+                    src={(item as {src:any}).src || item}
+                    alt={(item as {alt?:string}).alt || `Carrozzeria Milano - lavoro ${idx+1}`}
+                    fill
+                    sizes="(max-width: 768px) 80vw, (max-width: 1024px) 60vw, 30vw"
+                    className="object-cover"
+                    priority={idx === 0}
+                  />
+                )}
               </div>
             ))}
           </motion.div>
@@ -73,7 +85,7 @@ const ImageCarousel = () => {
             </div>
           </div>
         </div>
-        <p className="text-xs text-slate-500 mt-3">Sostituisci i file in /public/images/carousel-*.svg con le foto reali.</p>
+        <p className="text-xs text-slate-500 mt-3">Per usare foto esterne, incolla i link in [data/carousel/links.ts](data/carousel/links.ts). In assenza di link, vengono mostrati i placeholder locali.</p>
       </div>
     </section>
   )
