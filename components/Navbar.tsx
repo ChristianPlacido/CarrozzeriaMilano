@@ -31,11 +31,11 @@ const Navbar = () => {
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
       <div className="hidden lg:block bg-white/80 backdrop-blur border-b border-white/40 text-sm text-gray-700">
-        <div className="container mx-auto px-4 py-2 flex items-center justify-between">
-          <div className="flex items-center gap-3 text-primary">
-            <a href="https://facebook.com" aria-label="Facebook" className="hover:opacity-80"><FaFacebook /></a>
-            <a href="https://instagram.com" aria-label="Instagram" className="hover:opacity-80"><FaInstagram /></a>
-            <a href="https://linkedin.com" aria-label="LinkedIn" className="hover:opacity-80"><FaLinkedin /></a>
+        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
+          <div className="flex items-center gap-4 text-primary">
+            <a href="https://facebook.com" aria-label="Facebook" className="hover:opacity-80 transition-transform hover:scale-110"><FaFacebook className="text-xl" /></a>
+            <a href="https://instagram.com" aria-label="Instagram" className="hover:opacity-80 transition-transform hover:scale-110"><FaInstagram className="text-xl" /></a>
+            <a href="https://linkedin.com" aria-label="LinkedIn" className="hover:opacity-80 transition-transform hover:scale-110"><FaLinkedin className="text-xl" /></a>
           </div>
           <div className="flex items-center gap-4">
             <a href="tel:+390362238800" className="flex items-center gap-2 font-semibold text-primary hover:opacity-80">
@@ -50,9 +50,9 @@ const Navbar = () => {
 
       <div className={`container mx-auto px-4 ${scrolled ? 'py-3' : 'py-4'}`}>
         <div className="flex justify-between items-center">
-          {/* Logo PNG */}
-          <Link href="/" className="flex items-center">
-            <div className="relative w-32 md:w-40 h-10">
+          {/* Logo PNG più grande */}
+          <Link href="/" className="flex items-center hover:opacity-90 transition-opacity">
+            <div className="relative w-44 md:w-56 lg:w-64 h-14 md:h-16">
               <Image src={logoPng} alt="Carrozzeria Milano" fill className="object-contain" priority />
             </div>
           </Link>
