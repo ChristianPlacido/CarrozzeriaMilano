@@ -75,8 +75,8 @@ const BackgroundCarousel = ({ intervalMs = 3000, maxWidth = 1920 }: BackgroundCa
         className="absolute inset-0 w-full h-full object-cover"
       />
 
-      {/* Velo/gradiente per leggibilità e brand */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/35 to-[#DC143C]/40" />
+      {/* Velo/gradiente intensificato per massima leggibilità della scritta */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/50" />
 
       {/* Nessun logo sovrapposto: il focus è sulla scritta centrale dell'Hero */}
     </div>
