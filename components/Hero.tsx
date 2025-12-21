@@ -14,20 +14,26 @@ const Hero = () => {
     >
       {/* Carosello a tutta larghezza come sfondo */}
       <BackgroundCarousel />
-      {/* Hero minimale: solo scritta centrale */}
+      {/* Hero minimale: solo scritta centrale con effetto dinamico */}
       <div className="relative z-10 flex items-center justify-center w-full h-full text-center px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="space-y-2"
-        >
-          <h1 className={`${displayFont.className} text-white text-6xl sm:text-7xl md:text-8xl tracking-tight drop-shadow-xl`}>CARROZZERIA</h1>
-          <h2 className={`${displayFont.className} text-primary-light text-5xl sm:text-6xl md:text-7xl tracking-tight drop-shadow-xl`}>MILANO</h2>
-          <p className="text-white/80 text-lg sm:text-xl max-w-2xl mx-auto drop-shadow-md">
-            Eccellenza artigianale e affidabilità moderna a Seregno.
-          </p>
-        </motion.div>
+        <div className="space-y-2">
+          <motion.h1 
+            className={`${displayFont.className} text-white text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight drop-shadow-2xl`}
+            initial={{ opacity: 0, y: -50, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+          >
+            CARROZZERIA
+          </motion.h1>
+          <motion.h2 
+            className={`${displayFont.className} text-primary-light text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight drop-shadow-2xl`}
+            initial={{ opacity: 0, y: 50, scale: 0.8 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+          >
+            MILANO
+          </motion.h2>
+        </div>
       </div>
 
       {/* Scroll Indicator */}
