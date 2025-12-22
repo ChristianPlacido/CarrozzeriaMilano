@@ -29,25 +29,26 @@ const Navbar = () => {
   ]
 
   return (
-    <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
-      <div className="hidden lg:block bg-white/80 backdrop-blur border-b border-white/40 text-sm text-gray-700">
-        <div className="container mx-auto px-4 py-3 flex items-center justify-end">
-          <div className="flex items-center gap-4">
-            <a href="tel:+390362328901" className="flex items-center gap-2 font-semibold text-primary hover:opacity-80">
-              <FaPhone /> 0362 328901
+    <nav className="fixed w-full z-50 transition-all duration-300 bg-black/80 backdrop-blur shadow-lg">
+      <div className="bg-primary text-white text-sm">
+        <div className="container mx-auto px-4 py-2 flex items-center justify-between">
+          <div></div>
+          <div className="flex items-center gap-6">
+            <a href="tel:+390362328901" className="flex items-center gap-2 font-semibold text-white hover:opacity-80">
+              <FaPhone className="text-lg" /> 0362 328901
             </a>
-            <a href="https://wa.me/393331234567" className="flex items-center gap-2 text-green-600 hover:opacity-80">
-              <FaWhatsapp /> WhatsApp
+            <a href="https://wa.me/393331234567" className="flex items-center gap-2 text-white hover:opacity-80">
+              <FaWhatsapp className="text-lg" /> WhatsApp
             </a>
           </div>
         </div>
       </div>
 
-      <div className={`container mx-auto px-4 ${scrolled ? 'py-3' : 'py-4'}`}>
+      <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
-          {/* Logo PNG più grande */}
+          {/* Logo PNG */}
           <Link href="/" className="flex items-center hover:opacity-90 transition-opacity">
-            <div className="relative w-44 md:w-56 lg:w-64 h-14 md:h-16">
+            <div className="relative w-40 md:w-48 h-12">
               <Image src={logoPng} alt="Carrozzeria Milano" fill className="object-contain" priority />
             </div>
           </Link>
@@ -58,14 +59,13 @@ const Navbar = () => {
               <a
                 key={item.href}
                 href={item.href}
-                className={`font-medium transition-colors hover:text-primary ${
-                  scrolled ? 'text-gray-700' : 'text-white hover:text-gray-200'
-                }`}
+                className="font-medium text-white transition-all duration-300 hover:text-gray-200 relative group"
               >
                 {item.label}
+                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center space-x-3">
               <a
                 href="tel:+390362328901"
                 className="btn-primary flex items-center space-x-2"
@@ -83,12 +83,12 @@ const Navbar = () => {
           {/* Mobile Menu Button */}
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden text-2xl z-50"
+            className="lg:hidden text-2xl z-50 text-white"
           >
             {isOpen ? (
-              <FaTimes className="text-primary" />
+              <FaTimes className="text-white" />
             ) : (
-              <FaBars className={scrolled ? 'text-primary' : 'text-white'} />
+              <FaBars className="text-white" />
             )}
           </button>
         </div>
