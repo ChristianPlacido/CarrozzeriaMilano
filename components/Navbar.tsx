@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import logoPng from '@/public/images/carrozzeriamilano.png'
-import { FaBars, FaTimes, FaPhone, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaWhatsapp } from 'react-icons/fa'
+import { FaBars, FaTimes, FaPhone, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
 import WhatsAppButton from './WhatsAppButton'
 
@@ -31,15 +31,10 @@ const Navbar = () => {
   return (
     <nav className={`fixed w-full z-50 transition-all duration-300 ${scrolled ? 'bg-white shadow-lg' : 'bg-transparent'}`}>
       <div className="hidden lg:block bg-white/80 backdrop-blur border-b border-white/40 text-sm text-gray-700">
-        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-4 text-primary">
-            <a href="https://facebook.com" aria-label="Facebook" className="hover:opacity-80 transition-transform hover:scale-110"><FaFacebook className="text-xl" /></a>
-            <a href="https://instagram.com" aria-label="Instagram" className="hover:opacity-80 transition-transform hover:scale-110"><FaInstagram className="text-xl" /></a>
-            <a href="https://linkedin.com" aria-label="LinkedIn" className="hover:opacity-80 transition-transform hover:scale-110"><FaLinkedin className="text-xl" /></a>
-          </div>
+        <div className="container mx-auto px-4 py-3 flex items-center justify-end">
           <div className="flex items-center gap-4">
             <a href="tel:+390362328901" className="flex items-center gap-2 font-semibold text-primary hover:opacity-80">
-              <FaPhone /> 0362 328 901
+              <FaPhone /> 0362 328901
             </a>
             <a href="https://wa.me/393331234567" className="flex items-center gap-2 text-green-600 hover:opacity-80">
               <FaWhatsapp /> WhatsApp

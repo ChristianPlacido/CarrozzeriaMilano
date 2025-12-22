@@ -107,7 +107,7 @@ const Footer = () => {
               <li className="flex items-start space-x-3">
                 <FaPhone className="text-primary mt-1 flex-shrink-0" />
                 <div className="text-gray-400">
-                  <div>0362 328 901</div>
+                  <div>0362 328901</div>
                 </div>
               </li>
               <li className="flex items-start space-x-3">
