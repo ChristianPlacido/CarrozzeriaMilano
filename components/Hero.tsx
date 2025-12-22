@@ -15,36 +15,51 @@ const Hero = () => {
       {/* Carosello a tutta larghezza come sfondo */}
       <BackgroundCarousel />
 
-      {/* Hero: scritta centrale con bordo marcato senza riquadro - meno visibile dietro il logo */}
-      <div className="relative z-10 flex items-center justify-center w-full h-full text-center px-4">
-        <div className="space-y-2 opacity-60">
+      {/* Hero: scritta centrale con bordo rosso marcato e sovraimpressione */}
+      <div className="absolute z-20 inset-0 flex items-center justify-center w-full h-full text-center px-4">
+        <motion.div 
+          className="space-y-0 px-8 md:px-12 py-8 rounded-xl"
+          style={{
+            border: '4px solid #DC143C',
+            background: 'rgba(0, 0, 0, 0.3)',
+            backdropFilter: 'blur(5px)'
+          }}
+          initial={{ opacity: 0, scale: 0.8, borderColor: 'rgba(220, 20, 60, 0)' }}
+          animate={{ opacity: 1, scale: 1, borderColor: '#DC143C' }}
+          transition={{ duration: 1, ease: "easeOut" }}
+        >
+          {/* CARROZZERIA - Grigio con bordo nero */}
           <motion.h1 
-            className={`${displayFont.className} text-white text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight`}
+            className={`${displayFont.className} text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight font-bold`}
             style={{ 
-              textShadow: '0 0 30px rgba(0,0,0,0.95), 0 0 15px rgba(0,0,0,0.9), 3px 3px 6px rgba(0,0,0,1)',
-              WebkitTextStroke: '2px rgba(0,0,0,0.8)',
+              color: '#C0C0C0',
+              textShadow: '0 0 30px rgba(0,0,0,0.8), 2px 2px 4px rgba(0,0,0,0.9)',
+              WebkitTextStroke: '3px #000000',
               paintOrder: 'stroke fill'
             }}
-            initial={{ opacity: 0, y: -50, scale: 0.8 }}
+            initial={{ opacity: 0, y: -60, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
           >
             CARROZZERIA
           </motion.h1>
+          
+          {/* MILANO - Rosso brillante con bordo nero */}
           <motion.h2 
-            className={`${displayFont.className} text-primary-light text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight`}
+            className={`${displayFont.className} text-5xl sm:text-6xl md:text-7xl lg:text-8xl tracking-tight font-bold`}
             style={{ 
-              textShadow: '0 0 30px rgba(0,0,0,0.95), 0 0 15px rgba(0,0,0,0.9), 3px 3px 6px rgba(0,0,0,1)',
-              WebkitTextStroke: '2px rgba(0,0,0,0.8)',
+              color: '#DC143C',
+              textShadow: '0 0 30px rgba(220,20,60,0.8), 2px 2px 4px rgba(0,0,0,0.9)',
+              WebkitTextStroke: '3px #000000',
               paintOrder: 'stroke fill'
             }}
-            initial={{ opacity: 0, y: 50, scale: 0.8 }}
+            initial={{ opacity: 0, y: 60, scale: 0.8 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            transition={{ duration: 1, delay: 0.3, ease: "easeOut" }}
+            transition={{ duration: 1, delay: 0.4, ease: "easeOut" }}
           >
             MILANO
           </motion.h2>
-        </div>
+        </motion.div>
       </div>
 
       {/* Scroll Indicator */}

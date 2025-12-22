@@ -34,13 +34,52 @@ const AnimatedLogo = ({ width, height, className = '' }: AnimatedLogoProps) => {
         }}
         transition={{ duration: 0.3 }}
       >
-        <div className="relative" style={{ width, height }}>
+        {/* SVG mask to remove white background and keep only red oval */}
+        <svg
+          width={width}
+          height={height}
+          viewBox="0 0 400 160"
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            pointerEvents: 'none'
+          }}
+        >
+          <defs>
+            <mask id="ovalMask">
+              {/* White ellipse shape to isolate the red oval area */}
+              <rect width="400" height="160" fill="white" />
+              <ellipse cx="200" cy="80" rx="140" ry="65" fill="black" />
+            </mask>
+          </defs>
+        </svg>
+        
+        <div 
+          className="relative overflow-hidden" 
+          style={{ 
+            width, 
+            height,
+            borderRadius: '50%',
+            background: 'rgba(0, 0, 0, 0.95)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center'
+          }}
+        >
           <Image
             src={carrozzeriaLogo}
             alt="Carrozzeria Milano"
-            fill
+            width={width}
+            height={height}
             className="object-contain"
             priority
+            style={{
+              filter: 'brightness(1.1) contrast(1.2)',
+              mixBlendMode: 'screen'
+            }}
           />
         </div>
       </motion.div>
