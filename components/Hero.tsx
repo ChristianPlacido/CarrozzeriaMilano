@@ -15,19 +15,9 @@ const Hero = () => {
       {/* Carosello a tutta larghezza come sfondo */}
       <BackgroundCarousel />
 
-      {/* Hero: scritta centrale con bordo rosso marcato e sovraimpressione */}
+      {/* Hero: scritta centrale in sovraimpressione clean senza riquadro */}
       <div className="absolute z-20 inset-0 flex items-center justify-center w-full h-full text-center px-4">
-        <motion.div 
-          className="space-y-0 px-8 md:px-12 py-8 rounded-xl"
-          style={{
-            border: '4px solid #DC143C',
-            background: 'rgba(0, 0, 0, 0.3)',
-            backdropFilter: 'blur(5px)'
-          }}
-          initial={{ opacity: 0, scale: 0.8, borderColor: 'rgba(220, 20, 60, 0)' }}
-          animate={{ opacity: 1, scale: 1, borderColor: '#DC143C' }}
-          transition={{ duration: 1, ease: "easeOut" }}
-        >
+        <div className="space-y-0">
           {/* CARROZZERIA - Grigio con bordo nero */}
           <motion.h1 
             className={`${displayFont.className} text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight font-bold`}
@@ -59,7 +49,7 @@ const Hero = () => {
           >
             MILANO
           </motion.h2>
-        </motion.div>
+        </div>
       </div>
 
       {/* Scroll Indicator */}
