@@ -58,12 +58,11 @@ const Navbar = () => {
               <a
                 key={item.href}
                 href={item.href}
-                className={`font-medium transition-all duration-300 hover:text-primary relative ${
+                className={`font-medium transition-colors hover:text-primary ${
                   scrolled ? 'text-gray-700' : 'text-white hover:text-gray-200'
                 }`}
               >
                 {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
               </a>
             ))}
             <div className="flex items-center space-x-2">
