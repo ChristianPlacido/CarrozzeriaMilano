@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 160" width="400" height="160">
+  <!-- Bordo rosso arrotondato -->
+  <rect x="10" y="10" width="380" height="140" rx="12" ry="12" fill="none" stroke="#DC143C" stroke-width="3"/>
+  
+  <!-- Testo CARROZZERIA in bianco con effetto sovraimpressione -->
+  <defs>
+    <style>
+      .carrozzeria-text {
+        font-family: 'Arial', 'Helvetica', sans-serif;
+        font-weight: bold;
+        font-size: 48px;
+        fill: white;
+        letter-spacing: 2px;
+        text-anchor: middle;
+      }
+      .milano-text {
+        font-family: 'Arial', 'Helvetica', sans-serif;
+        font-weight: 600;
+        font-size: 22px;
+        fill: white;
+        letter-spacing: 3px;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+  
+  <!-- CARROZZERIA -->
+  <text x="200" y="85" class="carrozzeria-text">CARROZZERIA</text>
+  
+  <!-- MILANO -->
+  <text x="200" y="125" class="milano-text">MILANO</text>
+</svg>

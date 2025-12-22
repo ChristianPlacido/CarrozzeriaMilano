@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaClock } from 'react-icons/fa'
-import logoPng from '@/public/images/logo-carrozzeria-oval.svg'
+import logoPng from '@/public/images/logo-text-bordered.svg'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -16,7 +16,7 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <Link href="/" className="inline-block mb-6">
-              <div className="relative w-32 h-20">
+              <div className="relative w-40 h-24">
                 <Image src={logoPng} alt="Carrozzeria Milano" fill className="object-contain" />
               </div>
             </Link>

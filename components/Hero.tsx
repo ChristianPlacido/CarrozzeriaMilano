@@ -2,6 +2,8 @@
 
 import { motion } from 'framer-motion'
 import { Bebas_Neue } from 'next/font/google'
+import Image from 'next/image'
+import logoPng from '@/public/images/logo-text-bordered.svg'
 import BackgroundCarousel from './BackgroundCarousel'
 
 const displayFont = Bebas_Neue({ subsets: ['latin'], weight: '400' })
@@ -14,9 +16,28 @@ const Hero = () => {
     >
       {/* Carosello a tutta larghezza come sfondo */}
       <BackgroundCarousel />
-      {/* Hero: scritta centrale con bordo marcato senza riquadro */}
+      
+      {/* Logo con bordo rosso in sovraimpressione - posizionato sopra il testo */}
+      <motion.div
+        className="absolute z-20 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 md:w-[500px] lg:w-[600px] h-auto"
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1.2, ease: "easeOut" }}
+      >
+        <div className="relative w-full h-[240px] md:h-[300px] lg:h-[360px]">
+          <Image 
+            src={logoPng} 
+            alt="Carrozzeria Milano" 
+            fill 
+            className="object-contain" 
+            priority 
+          />
+        </div>
+      </motion.div>
+
+      {/* Hero: scritta centrale con bordo marcato senza riquadro - meno visibile dietro il logo */}
       <div className="relative z-10 flex items-center justify-center w-full h-full text-center px-4">
-        <div className="space-y-2">
+        <div className="space-y-2 opacity-60">
           <motion.h1 
             className={`${displayFont.className} text-white text-6xl sm:text-7xl md:text-8xl lg:text-9xl tracking-tight`}
             style={{ 
