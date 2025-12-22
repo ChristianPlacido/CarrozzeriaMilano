@@ -2,11 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
-import logoPng from '@/public/images/logo-text-bordered.svg'
 import { FaBars, FaTimes, FaPhone, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
 import WhatsAppButton from './WhatsAppButton'
+import AnimatedLogo from './AnimatedLogo'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
@@ -34,10 +33,8 @@ const Navbar = () => {
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link href="/" className="flex items-center hover:opacity-90 transition-opacity z-10">
-            <div className="relative w-48 md:w-56 lg:w-64 h-24">
-              <Image src={logoPng} alt="Carrozzeria Milano" fill className="object-contain" priority />
-            </div>
+          <Link href="/" className="flex items-center z-10">
+            <AnimatedLogo width={200} height={80} />
           </Link>
 
           {/* Desktop Menu */}

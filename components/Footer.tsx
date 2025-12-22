@@ -1,9 +1,8 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaClock } from 'react-icons/fa'
-import logoPng from '@/public/images/logo-text-bordered.svg'
+import AnimatedLogo from './AnimatedLogo'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -16,9 +15,7 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <Link href="/" className="inline-block mb-6">
-              <div className="relative w-40 h-24">
-                <Image src={logoPng} alt="Carrozzeria Milano" fill className="object-contain" />
-              </div>
+              <AnimatedLogo width={160} height={80} />
             </Link>
             <p className="text-gray-400 mb-6">
               Da oltre 40 anni al servizio della tua auto. Qualità, professionalità e attenzione ai dettagli sono la nostra firma.
