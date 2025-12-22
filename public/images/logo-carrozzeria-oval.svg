@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 200" width="300" height="200">
+  <!-- Red oval/ellipse background -->
+  <ellipse cx="150" cy="100" rx="140" ry="90" fill="#DC143C"/>
+  
+  <!-- White horizontal lines for design -->
+  <line x1="50" y1="75" x2="250" y2="75" stroke="white" stroke-width="2" opacity="0.6"/>
+  <line x1="50" y1="85" x2="250" y2="85" stroke="white" stroke-width="1.5" opacity="0.4"/>
+  
+  <!-- Main text: CARROZZERIA -->
+  <text x="150" y="105" font-family="Arial, Helvetica, sans-serif" font-size="32" font-weight="bold" fill="white" text-anchor="middle" letter-spacing="1">
+    CARROZZERIA
+  </text>
+  
+  <!-- Subtext: MILANO -->
+  <text x="150" y="135" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="600" fill="white" text-anchor="middle" letter-spacing="2">
+    MILANO
+  </text>
+</svg>

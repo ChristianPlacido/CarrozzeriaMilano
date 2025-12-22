@@ -1,8 +1,9 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { FaPhone, FaEnvelope, FaMapMarkerAlt, FaFacebook, FaInstagram, FaLinkedin, FaClock } from 'react-icons/fa'
-import DynamicLogo from './DynamicLogo'
+import logoPng from '@/public/images/logo-carrozzeria-oval.svg'
 
 const Footer = () => {
   const currentYear = new Date().getFullYear()
@@ -15,7 +16,9 @@ const Footer = () => {
           {/* Company Info */}
           <div>
             <Link href="/" className="inline-block mb-6">
-              <DynamicLogo className="w-40" />
+              <div className="relative w-32 h-20">
+                <Image src={logoPng} alt="Carrozzeria Milano" fill className="object-contain" />
+              </div>
             </Link>
             <p className="text-gray-400 mb-6">
               Da oltre 40 anni al servizio della tua auto. Qualità, professionalità e attenzione ai dettagli sono la nostra firma.

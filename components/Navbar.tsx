@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import logoPng from '@/public/images/logo-carrozzeria.svg'
+import logoPng from '@/public/images/logo-carrozzeria-oval.svg'
 import { FaBars, FaTimes, FaPhone, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
 import WhatsAppButton from './WhatsAppButton'
@@ -33,9 +33,9 @@ const Navbar = () => {
     <nav className="fixed w-full z-50 transition-all duration-300 bg-black/80 backdrop-blur shadow-lg">
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
-          {/* Logo PNG */}
+          {/* Logo */}
           <Link href="/" className="flex items-center hover:opacity-90 transition-opacity">
-            <div className="relative w-56 md:w-64 lg:w-80 h-20">
+            <div className="relative w-32 md:w-40 lg:w-48 h-20">
               <Image src={logoPng} alt="Carrozzeria Milano" fill className="object-contain" priority />
             </div>
           </Link>
