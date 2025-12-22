@@ -68,7 +68,9 @@ const Services = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className="group relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300"
+              className={`group relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border-4 border-primary ${
+                index >= 3 ? 'lg:col-span-1' : ''
+              } ${index === 3 ? 'lg:col-start-2' : ''} ${index === 4 ? 'lg:col-start-2' : ''}`}
             >
               <img
                 src={service.image}
