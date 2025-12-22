@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1024 400" width="1024" height="400">
+  <!-- Car silhouette outline -->
+  <path d="M 150 180 Q 180 140 250 130 L 750 130 Q 820 140 850 180 L 880 220 Q 900 240 880 260 L 850 280 L 170 280 L 140 260 Q 120 240 140 220 Z" fill="none" stroke="#333" stroke-width="8"/>
+  
+  <!-- Windows outline -->
+  <rect x="280" y="155" width="140" height="70" fill="none" stroke="#333" stroke-width="4"/>
+  <rect x="550" y="155" width="140" height="70" fill="none" stroke="#333" stroke-width="4"/>
+  
+  <!-- Main text: CARROZZERIA -->
+  <text x="512" y="340" font-family="Arial, sans-serif" font-size="120" font-weight="bold" fill="#DC143C" text-anchor="middle" font-style="italic" letter-spacing="-2">
+    CARROZZERIA
+  </text>
+  
+  <!-- Subtext: MILANO -->
+  <text x="850" y="375" font-family="Arial, sans-serif" font-size="60" font-weight="bold" fill="#DC143C" font-style="italic">
+    MILANO
+  </text>
+</svg>
