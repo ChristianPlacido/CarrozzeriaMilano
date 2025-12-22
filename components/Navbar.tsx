@@ -38,8 +38,8 @@ const Navbar = () => {
             <a href="https://linkedin.com" aria-label="LinkedIn" className="hover:opacity-80 transition-transform hover:scale-110"><FaLinkedin className="text-xl" /></a>
           </div>
           <div className="flex items-center gap-4">
-            <a href="tel:+390362238800" className="flex items-center gap-2 font-semibold text-primary hover:opacity-80">
-              <FaPhone /> 0362 238 800
+            <a href="tel:+390362328901" className="flex items-center gap-2 font-semibold text-primary hover:opacity-80">
+              <FaPhone /> 0362 328 901
             </a>
             <a href="https://wa.me/393331234567" className="flex items-center gap-2 text-green-600 hover:opacity-80">
               <FaWhatsapp /> WhatsApp
@@ -72,7 +72,7 @@ const Navbar = () => {
             ))}
             <div className="flex items-center space-x-2">
               <a
-                href="tel:+390362238800"
+                href="tel:+390362328901"
                 className="btn-primary flex items-center space-x-2"
               >
                 <FaPhone />
@@ -122,7 +122,7 @@ const Navbar = () => {
               ))}
               <div className="flex flex-col items-center space-y-4 mt-8">
                 <a
-                  href="tel:+390362238800"
+                  href="tel:+390362328901"
                   className="btn-primary flex items-center space-x-2"
                 >
                   <FaPhone />
@@ -135,7 +135,7 @@ const Navbar = () => {
               </div>
               <div className="flex items-center space-x-2 text-gray-600 mt-4">
                 <FaMapMarkerAlt className="text-primary" />
-                <span>Seregno, MB</span>
+                <span>Via Copenhagen 22/24, Seregno (MB)</span>
               </div>
             </div>
           </motion.div>

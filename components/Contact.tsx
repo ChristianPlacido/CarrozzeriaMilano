@@ -76,7 +76,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg mb-1">Indirizzo</h4>
-                  <p className="text-gray-600">Zona Centro</p>
+                  <p className="text-gray-600">Via Copenhagen, 22/24</p>
                   <p className="text-gray-600">20831 Seregno (MB)</p>
                 </div>
               </div>
@@ -87,8 +87,7 @@ const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg mb-1">Telefono</h4>
-                  <p className="text-gray-600">0362 238 800</p>
-                  <p className="text-gray-600">+39 333 123 4567 (WhatsApp)</p>
+                  <p className="text-gray-600">0362 328 901</p>
                 </div>
               </div>
 
@@ -116,14 +115,18 @@ const Contact = () => {
               </div>
             </div>
 
-            {/* Map Placeholder */}
+            {/* Google Map Embed */}
             <div className="rounded-xl overflow-hidden shadow-lg">
-              <div className="aspect-video bg-gradient-to-br from-primary-dark to-primary flex items-center justify-center">
-                <div className="text-white text-center p-8">
-                  <FaMapMarkerAlt className="text-6xl mx-auto mb-4" />
-                  <p className="text-xl font-bold">Carrozzeria Milano</p>
-                  <p>Seregno, MB</p>
-                </div>
+              <div className="aspect-video">
+                <iframe
+                  src="https://www.google.com/maps?q=Via+Copenhagen+22%2F24,+20831+Seregno+MB&hl=it&z=16&output=embed"
+                  width="100%"
+                  height="100%"
+                  style={{ border: 0 }}
+                  loading="lazy"
+                  allowFullScreen
+                  referrerPolicy="no-referrer-when-downgrade"
+                ></iframe>
               </div>
             </div>
 

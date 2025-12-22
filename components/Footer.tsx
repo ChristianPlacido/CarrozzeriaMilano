@@ -100,15 +100,14 @@ const Footer = () => {
               <li className="flex items-start space-x-3">
                 <FaMapMarkerAlt className="text-primary mt-1 flex-shrink-0" />
                 <span className="text-gray-400">
-                  Zona Centro<br />
+                  Via Copenhagen, 22/24<br />
                   20831 Seregno (MB)
                 </span>
               </li>
               <li className="flex items-start space-x-3">
                 <FaPhone className="text-primary mt-1 flex-shrink-0" />
                 <div className="text-gray-400">
-                  <div>0362 238 800</div>
-                  <div>+39 333 123 4567</div>
+                  <div>0362 328 901</div>
                 </div>
               </li>
               <li className="flex items-start space-x-3">
