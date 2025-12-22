@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400" width="1200" height="400">
+  <defs>
+    <style>
+      @keyframes drawStroke {
+        from {
+          stroke-dashoffset: 1000;
+        }
+        to {
+          stroke-dashoffset: 0;
+        }
+      }
+      
+      @keyframes glow {
+        0%, 100% {
+          filter: drop-shadow(0 0 10px rgba(255,255,255,0.5));
+        }
+        50% {
+          filter: drop-shadow(0 0 25px rgba(255,255,255,0.8)) drop-shadow(0 0 35px rgba(220,20,60,0.4));
+        }
+      }
+      
+      @keyframes pulse {
+        0%, 100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.9;
+        }
+      }
+      
+      .car-line {
+        stroke: white;
+        stroke-width: 3;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 1000;
+        animation: drawStroke 4s ease-in-out forwards;
+      }
+      
+      .text-line {
+        stroke: white;
+        stroke-width: 2.5;
+        fill: none;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        stroke-dasharray: 800;
+        stroke-dashoffset: 800;
+        animation: drawStroke 3.5s ease-in-out forwards;
+        animation-delay: 1s;
+      }
+      
+      .logo-group:hover .car-line,
+      .logo-group:hover .text-line {
+        animation: drawStroke 2s ease-in-out forwards;
+      }
+      
+      .logo-group {
+        animation: glow 3s ease-in-out infinite;
+      }
+      
+      .logo-group:hover {
+        animation: glow 1.5s ease-in-out infinite;
+      }
+    </style>
+  </defs>
+
+  <g class="logo-group">
+    <!-- Silhouette Auto Stilizzata -->
+    <g class="car-body">
+      <!-- Cofano -->
+      <path class="car-line" d="M 150 220 Q 200 180 280 170 L 300 180 Q 310 190 310 210" stroke-dasharray="500" stroke-dashoffset="500" style="animation: drawStroke 2s ease-in-out forwards;"/>
+      
+      <!-- Tetto -->
+      <path class="car-line" d="M 310 210 L 350 190 Q 420 160 520 160 Q 600 160 650 190 L 680 210" stroke-dasharray="600" stroke-dashoffset="600" style="animation: drawStroke 2.2s ease-in-out forwards; animation-delay: 0.2s;"/>
+      
+      <!-- Cofano posteriore -->
+      <path class="car-line" d="M 680 210 L 700 180 L 750 170 Q 850 180 920 220" stroke-dasharray="500" stroke-dashoffset="500" style="animation: drawStroke 2s ease-in-out forwards; animation-delay: 0.4s;"/>
+      
+      <!-- Linea bassa auto -->
+      <path class="car-line" d="M 150 220 L 200 260 L 920 260 L 950 230" stroke-dasharray="800" stroke-dashoffset="800" style="animation: drawStroke 2.5s ease-in-out forwards; animation-delay: 0.3s;"/>
+      
+      <!-- Ruota anteriore -->
+      <circle class="car-line" cx="280" cy="270" r="35" stroke-dasharray="220" stroke-dashoffset="220" style="animation: drawStroke 1.5s ease-in-out forwards; animation-delay: 1.5s;"/>
+      
+      <!-- Ruota posteriore -->
+      <circle class="car-line" cx="800" cy="270" r="35" stroke-dasharray="220" stroke-dashoffset="220" style="animation: drawStroke 1.5s ease-in-out forwards; animation-delay: 1.7s;"/>
+      
+      <!-- Cerchio interno ruota anteriore -->
+      <circle class="car-line" cx="280" cy="270" r="20" stroke-dasharray="125" stroke-dashoffset="125" style="animation: drawStroke 1s ease-in-out forwards; animation-delay: 2.2s;"/>
+      
+      <!-- Cerchio interno ruota posteriore -->
+      <circle class="car-line" cx="800" cy="270" r="20" stroke-dasharray="125" stroke-dashoffset="125" style="animation: drawStroke 1s ease-in-out forwards; animation-delay: 2.4s;"/>
+      
+      <!-- Finestrino anteriore -->
+      <path class="car-line" d="M 320 210 L 340 175 Q 360 165 400 165" stroke-dasharray="150" stroke-dashoffset="150" style="animation: drawStroke 1.2s ease-in-out forwards; animation-delay: 0.8s;"/>
+      
+      <!-- Finestrino posteriore -->
+      <path class="car-line" d="M 640 165 Q 680 165 700 210 L 680 210" stroke-dasharray="150" stroke-dashoffset="150" style="animation: drawStroke 1.2s ease-in-out forwards; animation-delay: 1s;"/>
+    </g>
+
+    <!-- Testo CARROZZERIA -->
+    <g class="text-group">
+      <text x="100" y="330" font-family="'Arial Black', Arial, sans-serif" font-size="72" font-weight="900" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" letter-spacing="2">
+        <tspan class="text-line" style="stroke-dasharray: 900; stroke-dashoffset: 900; animation: drawStroke 3.5s ease-in-out forwards; animation-delay: 2.8s;">CARROZZERIA</tspan>
+      </text>
+      
+      <!-- Testo MILANO -->
+      <text x="950" y="360" font-family="'Arial Black', Arial, sans-serif" font-size="44" font-weight="900" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" letter-spacing="3" text-anchor="end">
+        <tspan class="text-line" style="stroke-dasharray: 450; stroke-dashoffset: 450; animation: drawStroke 2s ease-in-out forwards; animation-delay: 4s;">MILANO</tspan>
+      </text>
+    </g>
+  </g>
+
+  <!-- Effetto luce aggiuntivo -->
+  <defs>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+</svg>
