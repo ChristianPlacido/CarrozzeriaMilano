@@ -11,6 +11,7 @@ import WhatsAppButton from './WhatsAppButton'
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const [activeMenu, setActiveMenu] = useState('#home')
 
   useEffect(() => {
     const handleScroll = () => {
@@ -30,20 +31,6 @@ const Navbar = () => {
 
   return (
     <nav className="fixed w-full z-50 transition-all duration-300 bg-black/80 backdrop-blur shadow-lg">
-      <div className="bg-primary text-white text-sm">
-        <div className="container mx-auto px-4 py-2 flex items-center justify-between">
-          <div></div>
-          <div className="flex items-center gap-6">
-            <a href="tel:+390362328901" className="flex items-center gap-2 font-semibold text-white hover:opacity-80">
-              <FaPhone className="text-lg" /> 0362 328901
-            </a>
-            <a href="https://wa.me/393331234567" className="flex items-center gap-2 text-white hover:opacity-80">
-              <FaWhatsapp className="text-lg" /> WhatsApp
-            </a>
-          </div>
-        </div>
-      </div>
-
       <div className="container mx-auto px-4 py-3">
         <div className="flex justify-between items-center">
           {/* Logo PNG */}
@@ -59,10 +46,22 @@ const Navbar = () => {
               <a
                 key={item.href}
                 href={item.href}
-                className="font-medium text-white transition-all duration-300 hover:text-gray-200 relative group"
+                onClick={() => setActiveMenu(item.href)}
+                className={`font-medium transition-all duration-300 relative group ${ 
+                  activeMenu === item.href ? 'text-primary' : 'text-white hover:text-gray-200'
+                }`}
               >
-                {item.label}
-                <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-white transition-all duration-300 group-hover:w-full" />
+                <motion.span
+                  initial={{ scale: 0.95 }}
+                  animate={activeMenu === item.href ? { scale: 1, color: '#DC143C' } : { scale: 1, color: '#ffffff' }}
+                  transition={{ duration: 0.3 }}
+                  className="inline-block"
+                >
+                  {item.label}
+                </motion.span>
+                <span className={`absolute bottom-0 left-0 h-0.5 transition-all duration-300 ${
+                  activeMenu === item.href ? 'w-full bg-primary' : 'w-0 bg-primary group-hover:w-full'
+                }`} />
               </a>
             ))}
             <div className="flex items-center space-x-3">
