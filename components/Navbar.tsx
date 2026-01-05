@@ -6,11 +6,13 @@ import { FaBars, FaTimes, FaPhone, FaMapMarkerAlt, FaWhatsapp } from 'react-icon
 import { motion, AnimatePresence } from 'framer-motion'
 import WhatsAppButton from './WhatsAppButton'
 import AnimatedLogo from './AnimatedLogo'
+import InsuranceFlow from './InsuranceFlow'
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const [activeMenu, setActiveMenu] = useState('#home')
+  const [insuranceFlowOpen, setInsuranceFlowOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -62,17 +64,30 @@ const Navbar = () => {
               </a>
             ))}
             <div className="flex items-center space-x-3">
+              <motion.button
+                onClick={() => setInsuranceFlowOpen(true)}
+                className="bg-primary hover:bg-primary/90 text-white px-5 py-2.5 rounded-full font-semibold text-sm transition-all shadow-md hover:shadow-lg"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                HAI UN SINISTRO?
+              </motion.button>
               <a
                 href="tel:+390362328901"
-                className="btn-primary flex items-center space-x-2"
+                className="w-10 h-10 flex items-center justify-center bg-white hover:bg-gray-100 text-primary rounded-full transition-all shadow-md hover:shadow-lg"
+                aria-label="Chiama la carrozzeria"
               >
-                <FaPhone />
-                <span>Chiamaci</span>
+                <FaPhone className="text-lg" />
               </a>
-              <WhatsAppButton 
-                phoneNumber="+393331234567" 
-                variant="icon"
-              />
+              <a
+                href="https://wa.me/393331234567"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 flex items-center justify-center bg-[#25D366] hover:bg-[#20BA5A] text-white rounded-full transition-all shadow-md hover:shadow-lg"
+                aria-label="Contattaci su WhatsApp"
+              >
+                <FaWhatsapp className="text-xl" />
+              </a>
             </div>
           </div>
 
@@ -99,7 +114,18 @@ const Navbar = () => {
             exit={{ opacity: 0, x: '100%' }}
             transition={{ duration: 0.3 }}
             className="fixed inset-0 bg-white lg:hidden pt-20"
-          >
+          >motion.button
+                  onClick={() => {
+                    setInsuranceFlowOpen(true)
+                    setIsOpen(false)
+                  }}
+                  className="bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-full font-semibold transition-all shadow-md hover:shadow-lg"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  HAI UN SINISTRO?
+                </motion.button>
+                <
             <div className="flex flex-col items-center space-y-6 p-8">
               {menuItems.map((item) => (
                 <a
