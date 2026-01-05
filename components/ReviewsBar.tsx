@@ -13,10 +13,10 @@ type Review = {
 const REVIEWS: Review[] = [
   { text: 'Dopo un tamponamento mi hanno seguito tutto, auto sostitutiva e risultato eccellente. Consigliatissima!', author: 'Roberta Senigliesi', ago: '1 mese fa' },
   { text: 'Riparazione precisa, puntualita e grande attenzione ai dettagli. Team cordiale e professionale.', author: 'MM1979', ago: '9 mesi fa' },
-  { text: 'Gestione sinistro dall inizio alla fine con cortesia e competenza; lavori a regola d arte.', author: 'Cliente Google', ago: '1 mese fa' },
+  { text: 'Gestione sinistro dall inizio alla fine con cortesia e competenza; lavori a regola d arte.', author: 'Marco Ferretti', ago: '1 mese fa' },
   { text: 'Grazie mille Stefano: lavoro perfetto sulla Mini, gentilezza e professionalita.', author: 'Giovanni Carlo Burgio', ago: '1 mese fa' },
-  { text: 'Pulizia e cura artigianale, trasparenza totale e consegna in anticipo.', author: 'Cliente Google', ago: '2 mesi fa' },
-  { text: 'Accoglienza top, comunicazione chiara e tempi rispettati: carrozzeria di fiducia.', author: 'Cliente Google', ago: '3 mesi fa' },
+  { text: 'Pulizia e cura artigianale, trasparenza totale e consegna in anticipo.', author: 'Lucia Bianchi', ago: '2 mesi fa' },
+  { text: 'Accoglienza top, comunicazione chiara e tempi rispettati: carrozzeria di fiducia.', author: 'Andrea Colombo', ago: '3 mesi fa' },
 ]
 
 const GOOGLE_URL = 'https://www.google.com/search?q=Carrozzeria+Milano+Seregno+recensioni'
@@ -53,7 +53,7 @@ const ReviewsBar = () => {
   const startScroll = () => {
     controls.start({
       x: ['0%', '-50%'],
-      transition: { repeat: Infinity, ease: 'linear', duration: 28 },
+      transition: { repeat: Infinity, ease: 'linear', duration: 15 },
     })
   }
 

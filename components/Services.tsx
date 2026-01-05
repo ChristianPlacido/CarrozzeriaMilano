@@ -60,17 +60,61 @@ const Services = () => {
           <h2 className="section-title">I nostri <span className="text-primary">Servizi</span></h2>
         </motion.div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {services.map((service, index) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:max-w-6xl lg:mx-auto">
+          {services.slice(0, 3).map((service, index) => (
             <motion.div
               key={service.id}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: index * 0.05 }}
-              className={`group relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border-4 border-primary ${
-                index >= 3 ? 'lg:col-span-1' : ''
-              } ${index === 3 ? 'lg:col-start-2' : ''} ${index === 4 ? 'lg:col-start-2' : ''}`}
+              className="group relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border-4 border-primary"
+            >
+              <img
+                src={service.image}
+                alt={service.title}
+                className="absolute inset-0 w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+              <div className="absolute inset-0 flex items-end">
+                <div className="p-4 text-white w-full flex items-center justify-between">
+                  <div className="flex items-center gap-3">
+                    <div className="bg-white/20 rounded-full w-10 h-10 flex items-center justify-center">
+                      <service.icon className="text-white text-lg" />
+                    </div>
+                    <h3 className="text-lg font-bold leading-tight">{service.title}</h3>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <a
+                      href="tel:+390362328901"
+                      aria-label="Chiama la carrozzeria"
+                      className="bg-white/80 text-primary rounded-full w-9 h-9 flex items-center justify-center hover:bg-white transition-colors"
+                    >
+                      <FaPhone className="text-base" />
+                    </a>
+                    <a
+                      href="https://wa.me/393331234567"
+                      aria-label="Scrivi su WhatsApp"
+                      className="bg-white/80 text-green-600 rounded-full w-9 h-9 flex items-center justify-center hover:bg-white transition-colors"
+                    >
+                      <FaWhatsapp className="text-base" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 lg:max-w-4xl lg:mx-auto">
+          {services.slice(3, 5).map((service, index) => (
+            <motion.div
+              key={service.id}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: (index + 3) * 0.05 }}
+              className="group relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border-4 border-primary"
             >
               <img
                 src={service.image}
