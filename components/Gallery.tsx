@@ -4,14 +4,14 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 
 const galleryImages = [
-  { id: 1, title: 'Riparazione Paraurti', category: 'riparazione' },
-  { id: 2, title: 'Verniciatura Completa', category: 'verniciatura' },
-  { id: 3, title: 'Restauro Auto d\'Epoca', category: 'restauro' },
-  { id: 4, title: 'Detailing Professionale', category: 'detailing' },
-  { id: 5, title: 'Riparazione Fiancata', category: 'riparazione' },
-  { id: 6, title: 'Lucidatura', category: 'detailing' },
-  { id: 7, title: 'Verniciatura Sportiva', category: 'verniciatura' },
-  { id: 8, title: 'Restauro Classica', category: 'restauro' },
+  { id: 1, title: 'Riparazione Paraurti', category: 'riparazione', image: 'https://images.unsplash.com/photo-1487730116645-74489c95b41b?w=500&h=500&fit=crop' },
+  { id: 2, title: 'Verniciatura Completa', category: 'verniciatura', image: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=500&h=500&fit=crop' },
+  { id: 3, title: 'Restauro Auto d\'Epoca', category: 'restauro', image: 'https://images.unsplash.com/photo-1464207687429-7505649dae38?w=500&h=500&fit=crop' },
+  { id: 4, title: 'Detailing Professionale', category: 'detailing', image: 'https://images.unsplash.com/photo-1492162535529-3fb2e449eca6?w=500&h=500&fit=crop' },
+  { id: 5, title: 'Riparazione Fiancata', category: 'riparazione', image: 'https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=500&h=500&fit=crop' },
+  { id: 6, title: 'Lucidatura Auto', category: 'detailing', image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?w=500&h=500&fit=crop' },
+  { id: 7, title: 'Verniciatura Sportiva', category: 'verniciatura', image: 'https://images.unsplash.com/photo-1549399542-7e3f8b83ad38?w=500&h=500&fit=crop' },
+  { id: 8, title: 'Restauro Classica', category: 'restauro', image: 'https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=500&h=500&fit=crop' },
 ]
 
 const categories = [
@@ -82,13 +82,12 @@ const Gallery = () => {
               whileHover={{ scale: 1.05 }}
               className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg aspect-square"
             >
-              {/* Placeholder Image with Red Gradient */}
-              <div className="w-full h-full bg-gradient-to-br from-primary-dark via-primary to-primary-light flex items-center justify-center">
-                <div className="text-white text-center p-4">
-                  <div className="text-4xl mb-2">🚗</div>
-                  <p className="text-sm font-medium">{image.title}</p>
-                </div>
-              </div>
+              {/* Image */}
+              <img
+                src={image.image}
+                alt={image.title}
+                className="w-full h-full object-cover"
+              />
               
               {/* Overlay */}
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">

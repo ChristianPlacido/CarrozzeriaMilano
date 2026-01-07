@@ -10,7 +10,7 @@ const services = [
     title: 'Carrozzeria & Riparazioni',
     description: 'Riparazioni professionali della carrozzeria per danni da sinistri, ammaccature e graffi. Interventi completi su tutte le marche e modelli con massima precisione.',
     features: ['Riparazioni post-sinistro', 'Sostituzione parti', 'Lavorazione metallo'],
-    image: 'https://tse1.mm.bing.net/th/id/OIP.BYi5UDhgv9DijZZlru0RsgHaE8?cb=ucfimg2&ucfimg=1&w=474&h=379&c=7&p=0'
+    image: 'https://images.unsplash.com/photo-1487730116645-74489c95b41b?w=600&h=600&fit=crop'
   },
   {
     id: 2,
@@ -18,7 +18,7 @@ const services = [
     title: 'Verniciatura & Finiture',
     description: 'Verniciatura professionale con abbinamento perfetto dei colori. Finiture di alta qualità e duratura nel tempo.',
     features: ['Abbinamento colori preciso', 'Finiture uniformi', 'Verniciatura completa'],
-    image: 'https://tse1.mm.bing.net/th/id/OIP.AJ1soM7raEW_162DC1K7GwHaE7?cb=ucfimg2&ucfimg=1&w=474&h=379&c=7&p=0'
+    image: 'https://images.unsplash.com/photo-1558769132-cb1aea458c5e?w=600&h=600&fit=crop'
   },
   {
     id: 3,
@@ -26,7 +26,7 @@ const services = [
     title: 'Cristalli & Componenti',
     description: 'Sostituzione e riparazione di cristalli anteriori, posteriori e laterali. Fornitura e montaggio di componenti di qualità originale.',
     features: ['Sostituzione cristalli', 'Componenti originali', 'Montaggio professionale'],
-    image: 'https://tse3.mm.bing.net/th/id/OIP.1ro3Q_gSyhWsw46ewHh5pgHaFh?cb=ucfimg2&ucfimg=1&w=474&h=379&c=7&p=0'
+    image: 'https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=600&fit=crop'
   },
   {
     id: 4,
@@ -34,7 +34,7 @@ const services = [
     title: 'Assistenza e Gestione Sinistri',
     description: 'Supporto completo nella gestione di sinistri assicurativi. Coordinamento con le compagnie e supporto peritale per pratiche rapide.',
     features: ['Pratiche assicurative', 'Supporto peritale', 'Coordinamento compagnie'],
-    image: 'https://tse1.mm.bing.net/th/id/OIP.-n9-ASy7T7fv82ZObLzafQHaEO?cb=ucfimg2&ucfimg=1&w=474&h=379&c=7&p=0'
+    image: 'https://images.unsplash.com/photo-1454496522488-7a8e488e8606?w=600&h=600&fit=crop'
   },
   {
     id: 5,
@@ -42,7 +42,7 @@ const services = [
     title: 'Servizi di Cortesia Cliente',
     description: 'Servizi aggiuntivi per il comfort del cliente: autonoleggio sostitutivo, assistenza amministrativa e consulenza personalizzata.',
     features: ['Autonoleggio sostitutivo', 'Assistenza amministrativa', 'Consulenza personalizzata'],
-    image: 'https://tse2.mm.bing.net/th/id/OIP.uu_Ee8MAYmjD0hEdV6nCqgHaE6?cb=ucfimg2&ucfimg=1&w=474&h=379&c=7&p=0'
+    image: 'https://images.unsplash.com/photo-1507950547859-a74f3f12a36a?w=600&h=600&fit=crop'
   },
 ]
 
