@@ -29,10 +29,11 @@ const Stars = () => (
   </div>
 )
 
-const ReviewCard = ({ text, author, ago }: Review) => (
+const ReviewCard = ({ text, author, ago, isHovered }: Review & { isHovered?: boolean }) => (
   <motion.div
-    className="flex w-[260px] md:w-[300px] flex-col justify-between rounded-2xl bg-white shadow-lg shadow-primary/10 border border-white/70 p-5 hover:shadow-xl hover:shadow-primary/20 transition-all"
-    whileHover={{ scale: 1.06 }}
+    className="flex w-[260px] md:w-[300px] h-[180px] flex-col justify-between rounded-2xl bg-white shadow-lg shadow-primary/10 border border-white/70 p-5 hover:shadow-2xl hover:shadow-primary/30 transition-all overflow-hidden relative"
+    whileHover={{ scale: 1.15, zIndex: 50 }}
+    transition={{ duration: 0.3 }}
   >
     <div className="flex items-start justify-between gap-2 mb-2">
       <div>
@@ -42,13 +43,15 @@ const ReviewCard = ({ text, author, ago }: Review) => (
       <span className="text-xs font-semibold text-primary">Google</span>
     </div>
     <Stars />
-    <p className="mt-3 text-sm text-slate-700 leading-relaxed line-clamp-3">{text}</p>
+    <p className={`mt-3 text-sm text-slate-700 leading-relaxed ${isHovered ? '' : 'line-clamp-3'} overflow-y-auto`}>
+      {text}
+    </p>
   </motion.div>
 )
 
 const ReviewsBar = () => {
   const controls = useAnimationControls()
-  const [highlighted, setHighlighted] = useState<Review | null>(null)
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
 
   const startScroll = () => {
     controls.start({
@@ -92,49 +95,19 @@ const ReviewsBar = () => {
             onHoverEnd={() => startScroll()}
           >
             {[...REVIEWS, ...REVIEWS].map((review, idx) => (
-              <motion.div
+              <div
                 key={`${review.author}-${idx}`}
-                onMouseEnter={() => setHighlighted(review)}
-                onMouseLeave={() => setHighlighted(null)}
-                onFocus={() => setHighlighted(review)}
-                onBlur={() => setHighlighted(null)}
+                onMouseEnter={() => setHoveredIndex(idx)}
+                onMouseLeave={() => setHoveredIndex(null)}
+                onFocus={() => setHoveredIndex(idx)}
+                onBlur={() => setHoveredIndex(null)}
                 tabIndex={0}
                 className="focus:outline-none"
-                whileHover={{ scale: 1.06 }}
               >
-                <ReviewCard {...review} />
-              </motion.div>
+                <ReviewCard {...review} isHovered={hoveredIndex === idx} />
+              </div>
             ))}
           </motion.div>
-          {highlighted && (
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: 20 }}
-              className="pointer-events-auto mt-6 rounded-2xl bg-white shadow-2xl shadow-primary/20 border border-primary/20 p-5 md:p-6 relative"
-            >
-              <div className="absolute -top-3 left-10 h-6 w-6 rotate-45 bg-white border-l border-t border-primary/20" aria-hidden="true" />
-              <div className="flex items-start justify-between gap-3">
-                <div>
-                  <p className="text-base font-semibold text-slate-900">{highlighted.author}</p>
-                  {highlighted.ago && <p className="text-xs text-slate-500">{highlighted.ago}</p>}
-                </div>
-                <span className="text-sm font-semibold text-primary">In evidenza</span>
-              </div>
-              <div className="mt-2"><Stars /></div>
-              <p className="mt-3 text-sm md:text-base text-slate-700 leading-relaxed">{highlighted.text}</p>
-              <div className="mt-3">
-                <a
-                  href={GOOGLE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-sm font-semibold text-primary underline underline-offset-4 decoration-primary/60 hover:decoration-primary"
-                >
-                  Leggi su Google
-                </a>
-              </div>
-            </motion.div>
-          )}
         </div>
       </div>
     </section>
