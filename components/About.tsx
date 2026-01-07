@@ -2,6 +2,7 @@
 
 import { motion } from 'framer-motion'
 import Image from 'next/image'
+import getConfig from 'next/config'
 import { FaAward, FaUsers, FaHandshake, FaClock } from 'react-icons/fa'
 
 const stats = [
@@ -70,14 +71,21 @@ const About = () => {
             {/* Immagine reale con didascalia in riquadro */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl mb-8">
               <div className="relative aspect-[4/3]">
-                <Image
-                  src="/images/mani-giuste.jpg"
-                  alt="Consegna chiavi in officina - Carrozzeria Milano"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  priority
-                />
+                {(() => {
+                  const { publicRuntimeConfig } = getConfig() || {}
+                  const basePath = (publicRuntimeConfig && publicRuntimeConfig.basePath) ? publicRuntimeConfig.basePath : ''
+                  const src = `${basePath}/images/mani-giuste.jpg`
+                  return (
+                    <Image
+                      src={src}
+                      alt="Consegna chiavi in officina - Carrozzeria Milano"
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority
+                    />
+                  )
+                })()}
                 {/* Gradient per leggibilità */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
                 {/* Riquadro con la frase sopra l'immagine */}
