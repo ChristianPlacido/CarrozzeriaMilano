@@ -8,6 +8,9 @@ const nextConfig = {
     unoptimized: true, // Richiesto per static export
   },
   trailingSlash: true, // Migliora compatibilità con GitHub Pages
+  publicRuntimeConfig: {
+    basePath: '/CarrozzeriaMilano',
+  },
 }
 
 module.exports = nextConfig
