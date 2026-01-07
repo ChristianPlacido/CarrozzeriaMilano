@@ -31,16 +31,16 @@ const Stars = () => (
 
 const ReviewCard = ({ text, author, ago, isHovered }: Review & { isHovered?: boolean }) => (
   <motion.div
-    className="flex w-[260px] md:w-[300px] h-[180px] flex-col justify-between rounded-2xl bg-white shadow-lg shadow-primary/10 border border-white/70 p-5 transition-all overflow-hidden relative"
+    className="flex w-[260px] md:w-[300px] h-[180px] flex-col justify-between rounded-2xl bg-white shadow-lg shadow-primary/10 border border-white/70 p-5 overflow-hidden relative"
+    initial={{ scale: 1 }}
     whileHover={{ 
-      scale: 2.0, 
+      scale: 2.5, 
       zIndex: 50,
-      boxShadow: "0 25px 50px -12px rgba(0, 0, 0, 0.25)"
+      boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.3)"
     }}
     transition={{ 
-      type: "spring",
-      stiffness: 300,
-      damping: 25
+      duration: 0.4,
+      ease: [0.25, 0.1, 0.25, 1.0]
     }}
   >
     <div className="flex items-start justify-between gap-2 mb-2">
