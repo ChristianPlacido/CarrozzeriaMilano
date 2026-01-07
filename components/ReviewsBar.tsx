@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useState } from 'react'
+import { useEffect, useState, useRef } from 'react'
 import { motion, useAnimationControls } from 'framer-motion'
 import { FaStar } from 'react-icons/fa'
 
@@ -29,18 +29,18 @@ const Stars = () => (
   </div>
 )
 
-const ReviewCard = ({ text, author, ago, isHovered }: Review & { isHovered?: boolean }) => (
+const ReviewCard = ({ text, author, ago, isHovered, isZoomed }: Review & { isHovered?: boolean, isZoomed?: boolean }) => (
   <motion.div
-    className="flex w-[260px] md:w-[300px] h-[200px] flex-col rounded-2xl bg-white shadow-lg shadow-primary/10 border border-white/70 p-5 overflow-visible relative"
-    initial={{ scale: 1 }}
-    whileHover={{ 
-      scale: 1.8, 
-      zIndex: 50,
-      boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.3)"
+    className="flex w-[280px] md:w-[320px] h-[220px] flex-col rounded-2xl bg-white shadow-lg shadow-primary/10 border border-white/70 p-6 relative flex-shrink-0"
+    animate={{ 
+      scale: isZoomed ? 2.2 : 1,
+      zIndex: isZoomed ? 50 : 1,
+      boxShadow: isZoomed ? "0 30px 60px -15px rgba(0, 0, 0, 0.35)" : "0 10px 25px -5px rgba(0, 0, 0, 0.1)"
     }}
     transition={{ 
-      duration: 0.4,
-      ease: [0.25, 0.1, 0.25, 1.0]
+      duration: 0.5,
+      ease: [0.25, 0.1, 0.25, 1.0],
+      delay: isZoomed ? 0.3 : 0
     }}
   >
     <div className="flex items-start justify-between gap-2 mb-2 flex-shrink-0">
@@ -51,8 +51,8 @@ const ReviewCard = ({ text, author, ago, isHovered }: Review & { isHovered?: boo
       <span className="text-xs font-semibold text-primary">Google</span>
     </div>
     <div className="mb-2 flex-shrink-0"><Stars /></div>
-    <div className="flex-1 overflow-hidden">
-      <p className={`text-sm text-slate-700 leading-relaxed ${isHovered ? '' : 'line-clamp-4'}`}>
+    <div className="flex-1 overflow-auto">
+      <p className={`text-sm text-slate-700 leading-relaxed ${isZoomed ? '' : 'line-clamp-4'}`}>
         {text}
       </p>
     </div>
@@ -62,11 +62,14 @@ const ReviewCard = ({ text, author, ago, isHovered }: Review & { isHovered?: boo
 const ReviewsBar = () => {
   const controls = useAnimationControls()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
+  const [isZoomed, setIsZoomed] = useState(false)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([])
 
   const startScroll = () => {
     controls.start({
       x: ['0%', '-50%'],
-      transition: { repeat: Infinity, ease: 'linear', duration: 15 },
+      transition: { repeat: Infinity, ease: 'linear', duration: 20 },
     })
   }
 
@@ -75,9 +78,48 @@ const ReviewsBar = () => {
     return () => controls.stop()
   }, [controls])
 
+  const handleMouseEnter = async (idx: number) => {
+    setHoveredIndex(idx)
+    controls.stop()
+    
+    // Calcola la posizione per centrare la card
+    const container = containerRef.current
+    const card = cardRefs.current[idx]
+    
+    if (container && card) {
+      const containerRect = container.getBoundingClientRect()
+      const cardRect = card.getBoundingClientRect()
+      const cardCenter = cardRect.left + cardRect.width / 2
+      const containerCenter = containerRect.left + containerRect.width / 2
+      const offset = cardCenter - containerCenter
+      
+      // Ottieni la posizione x corrente
+      const currentX = parseFloat(getComputedStyle(card.parentElement!).transform.split(',')[4] || '0')
+      
+      // Anima verso il centro
+      await controls.start({
+        x: currentX - offset,
+        transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] }
+      })
+      
+      // Dopo lo scroll, attiva lo zoom
+      setIsZoomed(true)
+    }
+  }
+
+  const handleMouseLeave = () => {
+    setIsZoomed(false)
+    setHoveredIndex(null)
+    
+    // Riprendi lo scroll dopo un breve delay
+    setTimeout(() => {
+      startScroll()
+    }, 500)
+  }
+
   return (
-    <section className="relative overflow-hidden bg-gradient-to-b from-white to-slate-50 text-slate-900 select-none">
-      <div className="container mx-auto px-4 py-10 md:py-12">
+    <section className="relative bg-gradient-to-b from-white to-slate-50 text-slate-900 select-none py-10 md:py-16">
+      <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
           <div>
             <p className="text-xs uppercase tracking-[0.1em] text-primary font-semibold">Recensioni Google</p>
@@ -97,24 +139,27 @@ const ReviewsBar = () => {
           </div>
         </div>
 
-        <div className="mt-6 relative overflow-hidden">
+        <div ref={containerRef} className="mt-8 relative overflow-hidden py-32">
           <motion.div
-            className="flex gap-5 pr-5"
+            className="flex gap-6"
             animate={controls}
-            onHoverStart={() => controls.stop()}
-            onHoverEnd={() => startScroll()}
           >
             {[...REVIEWS, ...REVIEWS].map((review, idx) => (
               <div
                 key={`${review.author}-${idx}`}
-                onMouseEnter={() => setHoveredIndex(idx)}
-                onMouseLeave={() => setHoveredIndex(null)}
-                onFocus={() => setHoveredIndex(idx)}
-                onBlur={() => setHoveredIndex(null)}
+                ref={(el) => { cardRefs.current[idx] = el }}
+                onMouseEnter={() => handleMouseEnter(idx)}
+                onMouseLeave={handleMouseLeave}
+                onFocus={() => handleMouseEnter(idx)}
+                onBlur={handleMouseLeave}
                 tabIndex={0}
                 className="focus:outline-none"
               >
-                <ReviewCard {...review} isHovered={hoveredIndex === idx} />
+                <ReviewCard 
+                  {...review} 
+                  isHovered={hoveredIndex === idx} 
+                  isZoomed={hoveredIndex === idx && isZoomed}
+                />
               </div>
             ))}
           </motion.div>
