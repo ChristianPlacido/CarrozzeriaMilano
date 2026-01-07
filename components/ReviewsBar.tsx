@@ -157,7 +157,7 @@ const ReviewsBar = () => {
               >
                 <motion.div
                   animate={{ 
-                    scale: hoveredIndex === idx ? 2.2 : 1,
+                    scale: hoveredIndex === idx ? 2.0 : 1,
                     zIndex: hoveredIndex === idx ? 50 : 1,
                     boxShadow: hoveredIndex === idx ? "0 30px 60px -15px rgba(0, 0, 0, 0.35)" : "0 10px 25px -5px rgba(0, 0, 0, 0.1)"
                   }}
