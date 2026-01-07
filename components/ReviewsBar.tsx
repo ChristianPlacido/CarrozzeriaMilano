@@ -62,8 +62,8 @@ const ReviewCard = ({ text, author, ago, isHovered, isZoomed }: Review & { isHov
 const ReviewsBar = () => {
   const controls = useAnimationControls()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-  const [isZoomed, setIsZoomed] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const motionDivRef = useRef<HTMLDivElement>(null)
   const cardRefs = useRef<(HTMLDivElement | null)[]>([])
 
   const startScroll = () => {
@@ -83,38 +83,37 @@ const ReviewsBar = () => {
     controls.stop()
     
     // Calcola la posizione per centrare la card
-    const container = containerRef.current
+    const motionDiv = motionDivRef.current
     const card = cardRefs.current[idx]
     
-    if (container && card) {
-      const containerRect = container.getBoundingClientRect()
+    if (motionDiv && card) {
+      const containerRect = containerRef.current?.getBoundingClientRect()
       const cardRect = card.getBoundingClientRect()
-      const cardCenter = cardRect.left + cardRect.width / 2
-      const containerCenter = containerRect.left + containerRect.width / 2
-      const offset = cardCenter - containerCenter
       
-      // Ottieni la posizione x corrente
-      const currentX = parseFloat(getComputedStyle(card.parentElement!).transform.split(',')[4] || '0')
-      
-      // Anima verso il centro
-      await controls.start({
-        x: currentX - offset,
-        transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] }
-      })
-      
-      // Dopo lo scroll, attiva lo zoom
-      setIsZoomed(true)
+      if (containerRect) {
+        const cardCenter = cardRect.left + cardRect.width / 2
+        const containerCenter = containerRect.left + containerRect.width / 2
+        const offset = cardCenter - containerCenter
+        
+        // Ottieni la posizione x corrente dalla motion div
+        const transform = motionDiv.style.transform
+        const match = transform.match(/translateX\(([^px]*)px\)/)
+        const currentX = match ? parseFloat(match[1]) : 0
+        
+        // Anima verso il centro
+        await controls.start({
+          x: currentX - offset,
+          transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] }
+        })
+      }
     }
   }
 
   const handleMouseLeave = () => {
-    setIsZoomed(false)
     setHoveredIndex(null)
     
-    // Riprendi lo scroll dopo un breve delay
-    setTimeout(() => {
-      startScroll()
-    }, 500)
+    // Riprendi lo scroll velocemente
+    startScroll()
   }
 
   return (
@@ -139,8 +138,9 @@ const ReviewsBar = () => {
           </div>
         </div>
 
-        <div ref={containerRef} className="mt-8 relative overflow-hidden py-32">
+        <div ref={containerRef} className="mt-8 relative overflow-visible py-40">
           <motion.div
+            ref={motionDivRef}
             className="flex gap-6"
             animate={controls}
           >
@@ -155,11 +155,23 @@ const ReviewsBar = () => {
                 tabIndex={0}
                 className="focus:outline-none"
               >
-                <ReviewCard 
-                  {...review} 
-                  isHovered={hoveredIndex === idx} 
-                  isZoomed={hoveredIndex === idx && isZoomed}
-                />
+                <motion.div
+                  animate={{ 
+                    scale: hoveredIndex === idx ? 2.2 : 1,
+                    zIndex: hoveredIndex === idx ? 50 : 1,
+                    boxShadow: hoveredIndex === idx ? "0 30px 60px -15px rgba(0, 0, 0, 0.35)" : "0 10px 25px -5px rgba(0, 0, 0, 0.1)"
+                  }}
+                  transition={{ 
+                    duration: 0.5,
+                    ease: [0.25, 0.1, 0.25, 1.0]
+                  }}
+                >
+                  <ReviewCard 
+                    {...review} 
+                    isHovered={hoveredIndex === idx} 
+                    isZoomed={hoveredIndex === idx}
+                  />
+                </motion.div>
               </div>
             ))}
           </motion.div>
