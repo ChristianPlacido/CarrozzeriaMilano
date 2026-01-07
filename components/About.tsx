@@ -75,6 +75,7 @@ const About = () => {
                   const { publicRuntimeConfig } = getConfig() || {}
                   const basePath = (publicRuntimeConfig && publicRuntimeConfig.basePath) ? publicRuntimeConfig.basePath : ''
                   const src = `${basePath}/images/mani-giuste.jpg`
+                  const fallbackSrc = `${basePath}/images/carrozzeriamilano.png`
                   return (
                     <Image
                       src={src}
@@ -83,6 +84,13 @@ const About = () => {
                       className="object-cover"
                       sizes="(max-width: 1024px) 100vw, 50vw"
                       priority
+                      onError={(e) => {
+                        // Fallback al logo se l'immagine specificata non esiste
+                        // Funziona perché immagini sono servite non ottimizzate (static export)
+                        // e il componente Image rende un <img>
+                        // @ts-ignore
+                        if (e.currentTarget && fallbackSrc) e.currentTarget.src = fallbackSrc
+                      }}
                     />
                   )
                 })()}
