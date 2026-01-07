@@ -1,6 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { FaAward, FaUsers, FaHandshake, FaClock } from 'react-icons/fa'
 
 const stats = [
@@ -66,16 +67,27 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            {/* Image Placeholder with Red Overlay */}
+            {/* Immagine reale con didascalia in riquadro */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl mb-8">
-              <div className="aspect-[4/3] bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center">
-                <div className="text-white text-center p-8">
-                  <div className="text-6xl mb-4">🏎️</div>
-                  <p className="text-2xl font-bold">La Tua Auto</p>
-                  <p className="text-xl">Nelle Mani Giuste</p>
+              <div className="relative aspect-[4/3]">
+                <Image
+                  src="/images/mani-giuste.jpg"
+                  alt="Consegna chiavi in officina - Carrozzeria Milano"
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  priority
+                />
+                {/* Gradient per leggibilità */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                {/* Riquadro con la frase sopra l'immagine */}
+                <div className="absolute top-4 left-1/2 -translate-x-1/2">
+                  <div className="bg-white/90 border border-gray-200 rounded-lg px-4 py-2 shadow-md text-gray-900 text-center backdrop-blur-sm">
+                    <p className="text-2xl font-bold leading-tight">La Tua Auto</p>
+                    <p className="text-xl leading-tight">Nelle Mani Giuste</p>
+                  </div>
                 </div>
               </div>
-              <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
             </div>
 
             {/* Stats Grid */}
