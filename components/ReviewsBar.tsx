@@ -31,10 +31,10 @@ const Stars = () => (
 
 const ReviewCard = ({ text, author, ago, isHovered }: Review & { isHovered?: boolean }) => (
   <motion.div
-    className="flex w-[260px] md:w-[300px] h-[180px] flex-col justify-between rounded-2xl bg-white shadow-lg shadow-primary/10 border border-white/70 p-5 overflow-hidden relative"
+    className="flex w-[260px] md:w-[300px] h-[200px] flex-col rounded-2xl bg-white shadow-lg shadow-primary/10 border border-white/70 p-5 overflow-visible relative"
     initial={{ scale: 1 }}
     whileHover={{ 
-      scale: 2.5, 
+      scale: 1.8, 
       zIndex: 50,
       boxShadow: "0 30px 60px -15px rgba(0, 0, 0, 0.3)"
     }}
@@ -43,17 +43,19 @@ const ReviewCard = ({ text, author, ago, isHovered }: Review & { isHovered?: boo
       ease: [0.25, 0.1, 0.25, 1.0]
     }}
   >
-    <div className="flex items-start justify-between gap-2 mb-2">
+    <div className="flex items-start justify-between gap-2 mb-2 flex-shrink-0">
       <div>
         <p className="text-sm font-semibold text-slate-900">{author}</p>
         {ago && <p className="text-xs text-slate-500">{ago}</p>}
       </div>
       <span className="text-xs font-semibold text-primary">Google</span>
     </div>
-    <Stars />
-    <p className={`mt-3 text-sm text-slate-700 leading-relaxed ${isHovered ? '' : 'line-clamp-3'} overflow-y-auto`}>
-      {text}
-    </p>
+    <div className="mb-2 flex-shrink-0"><Stars /></div>
+    <div className="flex-1 overflow-hidden">
+      <p className={`text-sm text-slate-700 leading-relaxed ${isHovered ? '' : 'line-clamp-4'}`}>
+        {text}
+      </p>
+    </div>
   </motion.div>
 )
 
