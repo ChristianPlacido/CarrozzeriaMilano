@@ -1,6 +1,6 @@
 'use client'
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import { FaBars, FaTimes, FaPhone, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -8,18 +8,47 @@ import WhatsAppButton from './WhatsAppButton'
 import AnimatedLogo from './AnimatedLogo'
 import InsuranceFlow from './InsuranceFlow'
 
+const MENU_ITEMS = [
+  { href: '#home', label: 'Home' },
+  { href: '#servizi', label: 'Servizi' },
+  { href: '#chi-siamo', label: 'Chi Siamo' },
+  { href: '#gallery', label: 'Gallery' },
+  { href: '#contatti', label: 'Contatti' },
+]
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [activeMenu, setActiveMenu] = useState('#home')
   const [insuranceFlowOpen, setInsuranceFlowOpen] = useState(false)
+  const menuItems = MENU_ITEMS
 
-  const menuItems = [
-    { href: '#home', label: 'Home' },
-    { href: '#servizi', label: 'Servizi' },
-    { href: '#chi-siamo', label: 'Chi Siamo' },
-    { href: '#gallery', label: 'Gallery' },
-    { href: '#contatti', label: 'Contatti' },
-  ]
+  useEffect(() => {
+    const sectionSelector = menuItems.map((item) => item.href.replace('#', '')).join(', ')
+    const sections = document.querySelectorAll<HTMLElement>(`section#${sectionSelector.split(', ').join(', section#')}`)
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntry = entries
+          .filter((entry) => entry.isIntersecting)
+          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0]
+
+        if (visibleEntry) {
+          setActiveMenu(`#${visibleEntry.target.id}`)
+        }
+      },
+      {
+        threshold: [0.25, 0.5, 0.75],
+        rootMargin: '-20% 0px -30% 0px',
+      }
+    )
+
+    sections.forEach((section) => observer.observe(section))
+
+    return () => {
+      sections.forEach((section) => observer.unobserve(section))
+      observer.disconnect()
+    }
+  }, [])
 
   return (
     <>
@@ -96,9 +125,16 @@ const Navbar = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-[140] bg-black/90 lg:hidden pt-20 text-white backdrop-blur"
+              className="fixed inset-0 z-[140] bg-black/90 backdrop-blur lg:hidden text-white pt-20"
             >
-              <div className="flex flex-col items-center space-y-6 p-8">
+              <button
+                onClick={() => setIsOpen(false)}
+                className="absolute top-6 right-6 text-white text-3xl hover:text-primary transition-colors z-[150]"
+                aria-label="Chiudi menu"
+              >
+                <FaTimes />
+              </button>
+              <div className="flex flex-col items-center justify-center h-full space-y-6 p-8">
                 {menuItems.map((item) => (
                   <a
                     key={item.href}
