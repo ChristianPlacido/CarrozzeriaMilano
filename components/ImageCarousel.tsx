@@ -60,7 +60,7 @@ const ImageCarousel = () => {
         </div>
         <div className="relative overflow-hidden rounded-2xl shadow-xl border border-slate-100">
           <motion.div
-            className="flex gap-4 justify-center"
+            className="flex gap-4 px-[10vw] md:px-0"
             animate={controls}
             onHoverStart={() => controls.stop()}
             onHoverEnd={() => startScroll()}
@@ -70,7 +70,7 @@ const ImageCarousel = () => {
                 ? [...externalSlides, ...externalSlides]
                 : [...slides, ...slides]
             ).map((item: any, idx: number) => (
-              <div key={`slide-${idx}`} className="relative w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] flex-shrink-0 overflow-hidden rounded-2xl aspect-[4/3]">
+              <div key={`slide-${idx}`} className="relative w-[80vw] sm:w-[60vw] md:w-[45vw] lg:w-[30vw] flex-shrink-0 overflow-hidden rounded-2xl aspect-[4/3] snap-center">
                 {externalSlides.length ? (
                   <img
                     src={getSizedUrl(item as string, 1200)}
