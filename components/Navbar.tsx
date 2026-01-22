@@ -96,7 +96,7 @@ const Navbar = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-[110] bg-white lg:hidden pt-20"
+              className="fixed inset-0 z-[140] bg-black/90 lg:hidden pt-20 text-white backdrop-blur"
             >
               <div className="flex flex-col items-center space-y-6 p-8">
                 {menuItems.map((item) => (
@@ -104,7 +104,7 @@ const Navbar = () => {
                     key={item.href}
                     href={item.href}
                     onClick={() => setIsOpen(false)}
-                    className="text-2xl font-medium text-gray-700 hover:text-primary transition-colors"
+                    className="text-2xl font-medium text-white hover:text-primary transition-colors"
                   >
                     {item.label}
                   </a>
@@ -127,7 +127,7 @@ const Navbar = () => {
                   </a>
                   <WhatsAppButton phoneNumber="+393331234567" message="Ciao, vorrei informazioni" />
                 </div>
-                <div className="flex items-center space-x-2 text-gray-600 mt-4">
+                <div className="flex items-center space-x-2 text-white/80 mt-4">
                   <FaMapMarkerAlt className="text-primary" />
                   <span>Via Copenhagen 22/24, Seregno (MB)</span>
                 </div>
