@@ -60,7 +60,7 @@ const ImageCarousel = () => {
         </div>
         <div className="relative overflow-hidden rounded-2xl shadow-xl border border-slate-100">
           <motion.div
-            className="flex gap-4"
+            className="flex gap-4 justify-center"
             animate={controls}
             onHoverStart={() => controls.stop()}
             onHoverEnd={() => startScroll()}

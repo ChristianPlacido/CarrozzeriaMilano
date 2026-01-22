@@ -23,8 +23,8 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className="fixed w-full z-50 transition-all duration-300 bg-black/80 backdrop-blur shadow-lg">
-        <div className="container mx-auto px-4 py-3">
+      <nav className="fixed inset-x-0 top-0 w-full z-[120] transition-all duration-300 bg-black/80 backdrop-blur shadow-lg">
+        <div className="container mx-auto px-4 py-3 relative z-[130]">
           <div className="flex justify-between items-center">
             <Link href="/" className="flex items-center z-10">
               <AnimatedLogo width={200} height={80} />
@@ -83,7 +83,7 @@ const Navbar = () => {
               </div>
             </div>
 
-            <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden text-2xl z-50 text-white">
+            <button onClick={() => setIsOpen(!isOpen)} className="lg:hidden text-2xl relative z-[140] text-white">
               {isOpen ? <FaTimes className="text-white" /> : <FaBars className="text-white" />}
             </button>
           </div>
@@ -96,7 +96,7 @@ const Navbar = () => {
               animate={{ opacity: 1, x: 0 }}
               exit={{ opacity: 0, x: '100%' }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 bg-white lg:hidden pt-20"
+              className="fixed inset-0 z-[110] bg-white lg:hidden pt-20"
             >
               <div className="flex flex-col items-center space-y-6 p-8">
                 {menuItems.map((item) => (
