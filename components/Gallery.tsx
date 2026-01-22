@@ -89,7 +89,7 @@ const Gallery = () => {
               onClick={() => scrollCarousel('left')}
               className="h-12 w-12 rounded-full bg-white shadow-lg border border-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200 flex items-center justify-center"
             >
-              <
+              {'<'}
             </button>
           </div>
           <div className="hidden md:flex items-center gap-3 absolute inset-y-0 right-2">
@@ -98,7 +98,7 @@ const Gallery = () => {
               onClick={() => scrollCarousel('right')}
               className="h-12 w-12 rounded-full bg-white shadow-lg border border-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200 flex items-center justify-center"
             >
-              >
+              {'>'}
             </button>
           </div>
         </div>
