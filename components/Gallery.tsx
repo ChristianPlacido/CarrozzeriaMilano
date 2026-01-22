@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { useRef } from 'react'
 
 const galleryImages = [
   { id: 1, title: 'Riparazione Paraurti', category: 'riparazione' },
@@ -14,20 +14,19 @@ const galleryImages = [
   { id: 8, title: 'Restauro Classica', category: 'restauro' },
 ]
 
-const categories = [
-  { id: 'all', label: 'Tutti' },
-  { id: 'riparazione', label: 'Riparazione' },
-  { id: 'verniciatura', label: 'Verniciatura' },
-  { id: 'restauro', label: 'Restauro' },
-  { id: 'detailing', label: 'Detailing' },
-]
-
 const Gallery = () => {
-  const [activeCategory, setActiveCategory] = useState('all')
+  const carouselRef = useRef<HTMLDivElement>(null)
 
-  const filteredImages = activeCategory === 'all'
-    ? galleryImages
-    : galleryImages.filter(img => img.category === activeCategory)
+  const scrollCarousel = (direction: 'left' | 'right') => {
+    const node = carouselRef.current
+    if (!node) return
+
+    const scrollAmount = node.clientWidth * 0.8
+    node.scrollBy({
+      left: direction === 'left' ? -scrollAmount : scrollAmount,
+      behavior: 'smooth',
+    })
+  }
 
   return (
     <section id="gallery" className="py-20 bg-gray-50">
@@ -47,58 +46,61 @@ const Gallery = () => {
           </p>
         </motion.div>
 
-        {/* Category Filter */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="flex flex-wrap justify-center gap-4 mb-12"
-        >
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setActiveCategory(category.id)}
-              className={`px-6 py-3 rounded-full font-medium transition-all duration-300 ${
-                activeCategory === category.id
-                  ? 'bg-primary text-white shadow-lg'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
-              }`}
-            >
-              {category.label}
-            </button>
-          ))}
-        </motion.div>
+        {/* Carousel */}
+        <div className="relative">
+          <motion.div
+            ref={carouselRef}
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.15 }}
+            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 px-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {galleryImages.map((image, index) => (
+              <motion.div
+                key={image.id}
+                initial={{ opacity: 0, scale: 0.92 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: index * 0.05 }}
+                whileHover={{ scale: 1.03 }}
+                className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg aspect-square min-w-[260px] sm:min-w-[300px] lg:min-w-[320px] snap-center"
+              >
+                <div className="w-full h-full bg-gradient-to-br from-primary-dark via-primary to-primary-light flex items-center justify-center">
+                  <div className="text-white text-center p-4">
+                    <div className="text-4xl mb-2">🚗</div>
+                    <p className="text-sm font-medium">{image.title}</p>
+                  </div>
+                </div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {filteredImages.map((image, index) => (
-            <motion.div
-              key={image.id}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.05 }}
-              whileHover={{ scale: 1.05 }}
-              className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg aspect-square"
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                  <div className="p-6 w-full">
+                    <h3 className="text-white font-bold text-lg mb-1">{image.title}</h3>
+                    <p className="text-gray-300 text-sm capitalize">{image.category}</p>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          <div className="hidden md:flex items-center gap-3 absolute inset-y-0 left-2">
+            <button
+              aria-label="Scorri indietro"
+              onClick={() => scrollCarousel('left')}
+              className="h-12 w-12 rounded-full bg-white shadow-lg border border-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200 flex items-center justify-center"
             >
-              {/* Placeholder Image with Red Gradient */}
-              <div className="w-full h-full bg-gradient-to-br from-primary-dark via-primary to-primary-light flex items-center justify-center">
-                <div className="text-white text-center p-4">
-                  <div className="text-4xl mb-2">🚗</div>
-                  <p className="text-sm font-medium">{image.title}</p>
-                </div>
-              </div>
-              
-              {/* Overlay */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                <div className="p-6 w-full">
-                  <h3 className="text-white font-bold text-lg mb-1">{image.title}</h3>
-                  <p className="text-gray-300 text-sm capitalize">{image.category}</p>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              <
+            </button>
+          </div>
+          <div className="hidden md:flex items-center gap-3 absolute inset-y-0 right-2">
+            <button
+              aria-label="Scorri avanti"
+              onClick={() => scrollCarousel('right')}
+              className="h-12 w-12 rounded-full bg-white shadow-lg border border-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200 flex items-center justify-center"
+            >
+              >
+            </button>
+          </div>
         </div>
 
         <motion.div
