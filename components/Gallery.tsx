@@ -1,21 +1,23 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import { useRef } from 'react'
+import { useRef, useEffect, useState } from 'react'
+import Image from 'next/image'
 
 const galleryImages = [
-  { id: 1, title: 'Riparazione Paraurti', category: 'riparazione' },
-  { id: 2, title: 'Verniciatura Completa', category: 'verniciatura' },
-  { id: 3, title: 'Restauro Auto d\'Epoca', category: 'restauro' },
-  { id: 4, title: 'Detailing Professionale', category: 'detailing' },
-  { id: 5, title: 'Riparazione Fiancata', category: 'riparazione' },
-  { id: 6, title: 'Lucidatura', category: 'detailing' },
-  { id: 7, title: 'Verniciatura Sportiva', category: 'verniciatura' },
-  { id: 8, title: 'Restauro Classica', category: 'restauro' },
+  { id: 1, title: 'Riparazione Paraurti', category: 'riparazione', image: '/images/riparazione-paraurti.jpg' },
+  { id: 2, title: 'Verniciatura Completa', category: 'verniciatura', image: null },
+  { id: 3, title: 'Restauro Auto d\'Epoca', category: 'restauro', image: null },
+  { id: 4, title: 'Detailing Professionale', category: 'detailing', image: null },
+  { id: 5, title: 'Riparazione Fiancata', category: 'riparazione', image: null },
+  { id: 6, title: 'Lucidatura', category: 'detailing', image: null },
+  { id: 7, title: 'Verniciatura Sportiva', category: 'verniciatura', image: null },
+  { id: 8, title: 'Restauro Classica', category: 'restauro', image: null },
 ]
 
 const Gallery = () => {
   const carouselRef = useRef<HTMLDivElement>(null)
+  const [isPaused, setIsPaused] = useState(false)
 
   const scrollCarousel = (direction: 'left' | 'right') => {
     const node = carouselRef.current
@@ -27,6 +29,26 @@ const Gallery = () => {
       behavior: 'smooth',
     })
   }
+
+  useEffect(() => {
+    const node = carouselRef.current
+    if (!node) return
+
+    const autoScroll = setInterval(() => {
+      if (isPaused) return
+
+      const maxScroll = node.scrollWidth - node.clientWidth
+      const currentScroll = node.scrollLeft
+
+      if (currentScroll >= maxScroll - 10) {
+        node.scrollTo({ left: 0, behavior: 'smooth' })
+      } else {
+        node.scrollBy({ left: 340, behavior: 'smooth' })
+      }
+    }, 3000)
+
+    return () => clearInterval(autoScroll)
+  }, [isPaused])
 
   return (
     <section id="gallery" className="py-20 bg-gray-50">
@@ -54,6 +76,8 @@ const Gallery = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
             className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 px-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {galleryImages.map((image, index) => (
@@ -66,12 +90,22 @@ const Gallery = () => {
                 whileHover={{ scale: 1.03 }}
                 className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg aspect-square min-w-[260px] sm:min-w-[300px] lg:min-w-[320px] snap-center"
               >
-                <div className="w-full h-full bg-gradient-to-br from-primary-dark via-primary to-primary-light flex items-center justify-center">
-                  <div className="text-white text-center p-4">
-                    <div className="text-4xl mb-2">🚗</div>
-                    <p className="text-sm font-medium">{image.title}</p>
+                {image.image ? (
+                  <Image
+                    src={image.image}
+                    alt={image.title}
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 640px) 260px, (max-width: 1024px) 300px, 320px"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-gradient-to-br from-primary-dark via-primary to-primary-light flex items-center justify-center">
+                    <div className="text-white text-center p-4">
+                      <div className="text-4xl mb-2">🚗</div>
+                      <p className="text-sm font-medium">{image.title}</p>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                   <div className="p-6 w-full">
