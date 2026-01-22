@@ -1,7 +1,7 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useRef, useEffect, useState } from 'react'
+import { motion, useAnimationControls } from 'framer-motion'
+import { useEffect } from 'react'
 import Image from 'next/image'
 
 const galleryImages = [
@@ -16,39 +16,19 @@ const galleryImages = [
 ]
 
 const Gallery = () => {
-  const carouselRef = useRef<HTMLDivElement>(null)
-  const [isPaused, setIsPaused] = useState(false)
+  const controls = useAnimationControls()
 
-  const scrollCarousel = (direction: 'left' | 'right') => {
-    const node = carouselRef.current
-    if (!node) return
-
-    const scrollAmount = node.clientWidth * 0.8
-    node.scrollBy({
-      left: direction === 'left' ? -scrollAmount : scrollAmount,
-      behavior: 'smooth',
+  const startMarquee = () => {
+    controls.start({
+      x: ['0%', '-50%'],
+      transition: { repeat: Infinity, ease: 'linear', duration: 30 },
     })
   }
 
   useEffect(() => {
-    const node = carouselRef.current
-    if (!node) return
-
-    const autoScroll = setInterval(() => {
-      if (isPaused) return
-
-      const maxScroll = node.scrollWidth - node.clientWidth
-      const currentScroll = node.scrollLeft
-
-      if (currentScroll >= maxScroll - 10) {
-        node.scrollTo({ left: 0, behavior: 'smooth' })
-      } else {
-        node.scrollBy({ left: 340, behavior: 'smooth' })
-      }
-    }, 3000)
-
-    return () => clearInterval(autoScroll)
-  }, [isPaused])
+    startMarquee()
+    return () => controls.stop()
+  }, [controls])
 
   return (
     <section id="gallery" className="py-20 bg-gray-50">
@@ -69,26 +49,28 @@ const Gallery = () => {
         </motion.div>
 
         {/* Carousel */}
-        <div className="relative">
+        <div className="relative overflow-hidden pb-6">
           <motion.div
-            ref={carouselRef}
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.15 }}
-            onMouseEnter={() => setIsPaused(true)}
-            onMouseLeave={() => setIsPaused(false)}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-6 px-1 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            animate={controls}
+            onHoverStart={() => controls.stop()}
+            onHoverEnd={() => startMarquee()}
+            onTouchStart={() => controls.stop()}
+            onTouchEnd={() => startMarquee()}
+            className="flex gap-6 px-1"
           >
-            {galleryImages.map((image, index) => (
+            {[...galleryImages, ...galleryImages].map((image, index) => (
               <motion.div
-                key={image.id}
+                key={`${image.id}-${index}`}
                 initial={{ opacity: 0, scale: 0.92 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.05 }}
+                transition={{ duration: 0.5, delay: (index % galleryImages.length) * 0.05 }}
                 whileHover={{ scale: 1.03 }}
-                className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg aspect-square min-w-[260px] sm:min-w-[300px] lg:min-w-[320px] snap-center"
+                className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg aspect-square min-w-[260px] sm:min-w-[300px] lg:min-w-[320px] flex-shrink-0"
               >
                 {image.image ? (
                   <Image
@@ -117,24 +99,6 @@ const Gallery = () => {
             ))}
           </motion.div>
 
-          <div className="hidden md:flex items-center gap-3 absolute inset-y-0 left-2">
-            <button
-              aria-label="Scorri indietro"
-              onClick={() => scrollCarousel('left')}
-              className="h-12 w-12 rounded-full bg-white shadow-lg border border-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200 flex items-center justify-center"
-            >
-              {'<'}
-            </button>
-          </div>
-          <div className="hidden md:flex items-center gap-3 absolute inset-y-0 right-2">
-            <button
-              aria-label="Scorri avanti"
-              onClick={() => scrollCarousel('right')}
-              className="h-12 w-12 rounded-full bg-white shadow-lg border border-gray-100 text-gray-700 hover:bg-primary hover:text-white transition-colors duration-200 flex items-center justify-center"
-            >
-              {'>'}
-            </button>
-          </div>
         </div>
 
         <motion.div
