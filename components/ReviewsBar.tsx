@@ -33,14 +33,14 @@ const ReviewCard = ({ text, author, ago }: Review) => (
   <div className="flex w-[280px] md:w-[320px] h-[220px] flex-col rounded-2xl bg-white shadow-lg shadow-primary/10 border border-white/70 p-6 relative flex-shrink-0">
     <div className="flex items-start justify-between gap-2 mb-2 flex-shrink-0">
       <div>
-        <p className="text-sm font-semibold text-slate-900">{author}</p>
-        {ago && <p className="text-xs text-slate-500">{ago}</p>}
+        <p className="text-base font-semibold text-slate-900">{author}</p>
+        {ago && <p className="text-sm text-slate-500">{ago}</p>}
       </div>
       <span className="text-xs font-semibold text-primary">Google</span>
     </div>
     <div className="mb-2 flex-shrink-0"><Stars /></div>
     <div className="flex-1 overflow-hidden">
-      <p className="text-sm text-slate-700 leading-relaxed line-clamp-4">
+      <p className="text-base text-slate-700 leading-relaxed line-clamp-4">
         {text}
       </p>
     </div>

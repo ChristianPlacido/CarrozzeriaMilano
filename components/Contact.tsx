@@ -67,7 +67,7 @@ const Contact = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.8 }}
           >
-            <h3 className="text-3xl font-bold mb-8">Informazioni di Contatto</h3>
+            <h3 className="text-4xl font-bold mb-8">Informazioni di Contatto</h3>
             
             <div className="space-y-6 mb-12">
               <div className="flex items-start space-x-4">
@@ -75,9 +75,9 @@ const Contact = () => {
                   <FaMapMarkerAlt className="text-2xl text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-1">Indirizzo</h4>
-                  <p className="text-gray-600">Via Copenhagen, 22/24</p>
-                  <p className="text-gray-600">20831 Seregno (MB)</p>
+                  <h4 className="font-bold text-xl mb-1">Indirizzo</h4>
+                  <p className="text-lg text-gray-600">Via Copenhagen, 22/24</p>
+                  <p className="text-lg text-gray-600">20831 Seregno (MB)</p>
                 </div>
               </div>
 
@@ -86,8 +86,8 @@ const Contact = () => {
                   <FaPhone className="text-2xl text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-1">Telefono</h4>
-                  <p className="text-gray-600">0362 328901</p>
+                  <h4 className="font-bold text-xl mb-1">Telefono</h4>
+                  <p className="text-lg text-gray-600">0362 328901</p>
                 </div>
               </div>
 
@@ -96,8 +96,8 @@ const Contact = () => {
                   <FaEnvelope className="text-2xl text-primary" />
                 </div>
                 <div>
-                  <h4 className="font-bold text-lg mb-1">Email</h4>
-                  <p className="text-gray-600">info@carrozzeriamilano.it</p>
+                  <h4 className="font-bold text-xl mb-1">Email</h4>
+                  <p className="text-lg text-gray-600">info@carrozzeriamilano.it</p>
                   <p className="text-gray-600">preventivi@carrozzeriamilano.it</p>
                 </div>
               </div>
@@ -132,8 +132,8 @@ const Contact = () => {
 
             {/* WhatsApp Quick Contact */}
             <div className="mt-6 bg-gradient-to-r from-[#25D366]/10 to-[#25D366]/5 rounded-xl p-6 border border-[#25D366]/20">
-              <h4 className="font-bold text-lg mb-3 text-gray-900">Contatto Rapido</h4>
-              <p className="text-gray-600 mb-4">Scrivici direttamente su WhatsApp per una risposta immediata!</p>
+              <h4 className="font-bold text-xl mb-3 text-gray-900">Contatto Rapido</h4>
+              <p className="text-lg text-gray-600 mb-4">Scrivici direttamente su WhatsApp per una risposta immediata!</p>
               <WhatsAppButton 
                 phoneNumber="+393331234567"
                 message="Ciao, ho bisogno di informazioni"
@@ -150,7 +150,7 @@ const Contact = () => {
             transition={{ duration: 0.8 }}
           >
             <div className="bg-gray-50 rounded-2xl p-8 shadow-xl">
-              <h3 className="text-3xl font-bold mb-6">Richiedi un Preventivo</h3>
+              <h3 className="text-4xl font-bold mb-6">Richiedi un Preventivo</h3>
               
               {submitted ? (
                 <motion.div
@@ -167,7 +167,7 @@ const Contact = () => {
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="name" className="block text-base font-medium text-gray-700 mb-2">
                       Nome e Cognome *
                     </label>
                     <input
@@ -177,14 +177,14 @@ const Contact = () => {
                       required
                       value={formData.name}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-base"
                       placeholder="Mario Rossi"
                     />
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                     <div>
-                      <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="email" className="block text-base font-medium text-gray-700 mb-2">
                         Email *
                       </label>
                       <input
@@ -194,13 +194,13 @@ const Contact = () => {
                         required
                         value={formData.email}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-base"
                         placeholder="mario.rossi@email.it"
                       />
                     </div>
 
                     <div>
-                      <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-2">
+                      <label htmlFor="phone" className="block text-base font-medium text-gray-700 mb-2">
                         Telefono *
                       </label>
                       <input
@@ -210,14 +210,14 @@ const Contact = () => {
                         required
                         value={formData.phone}
                         onChange={handleChange}
-                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                        className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-base"
                         placeholder="+39 333 123 4567"
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label htmlFor="service" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="service" className="block text-base font-medium text-gray-700 mb-2">
                       Servizio Richiesto *
                     </label>
                     <select
@@ -226,7 +226,7 @@ const Contact = () => {
                       required
                       value={formData.service}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all text-base"
                     >
                       <option value="">Seleziona un servizio</option>
                       <option value="riparazione">Riparazione Carrozzeria</option>
@@ -240,7 +240,7 @@ const Contact = () => {
                   </div>
 
                   <div>
-                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-2">
+                    <label htmlFor="message" className="block text-base font-medium text-gray-700 mb-2">
                       Messaggio *
                     </label>
                     <textarea
@@ -250,7 +250,7 @@ const Contact = () => {
                       value={formData.message}
                       onChange={handleChange}
                       rows={5}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none"
+                      className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent transition-all resize-none text-base"
                       placeholder="Descrivi la tua richiesta..."
                     />
                   </div>

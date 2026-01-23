@@ -90,7 +90,7 @@ const NavbarClean = () => {
                   key={item.href}
                   href={item.href}
                   onClick={() => setActiveMenu(item.href)}
-                  className={`font-medium transition-all duration-300 relative group ${
+                  className={`font-semibold text-lg transition-all duration-300 relative group ${
                     activeMenu === item.href ? 'text-primary' : 'text-white hover:text-gray-200'
                   }`}
                 >
@@ -195,7 +195,7 @@ const NavbarClean = () => {
                               setIsOpen(false)
                               setActiveMenu(item.href)
                             }}
-                            className={`block w-full rounded-xl px-4 py-3 text-xl font-semibold transition-all duration-200 ${
+                            className={`block w-full rounded-xl px-4 py-3 text-2xl font-bold transition-all duration-200 ${
                               activeMenu === item.href
                                 ? 'bg-white text-slate-900 shadow-lg'
                                 : 'text-white hover:bg-white/10'
