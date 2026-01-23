@@ -84,29 +84,26 @@ const NavbarClean = () => {
               <AnimatedLogo width={200} height={80} />
             </Link>
 
-            <div className="hidden lg:flex items-center space-x-8">
+            <div className="hidden lg:flex items-center space-x-2">
               {menuItems.map((item) => (
                 <a
                   key={item.href}
                   href={item.href}
                   onClick={() => setActiveMenu(item.href)}
-                  className={`font-semibold text-lg transition-all duration-300 relative group ${
-                    activeMenu === item.href ? 'text-primary' : 'text-white hover:text-gray-200'
+                  className={`font-bold text-lg px-4 py-2 rounded-full transition-all duration-300 ${
+                    activeMenu === item.href 
+                      ? 'bg-primary text-white shadow-lg' 
+                      : 'text-white hover:bg-white/10'
                   }`}
                 >
                   <motion.span
                     initial={{ scale: 0.95 }}
-                    animate={activeMenu === item.href ? { scale: 1, color: '#DC143C' } : { scale: 1, color: '#ffffff' }}
+                    animate={activeMenu === item.href ? { scale: 1 } : { scale: 1 }}
                     transition={{ duration: 0.3 }}
                     className="inline-block"
                   >
                     {item.label}
                   </motion.span>
-                  <span
-                    className={`absolute bottom-0 left-0 h-0.5 transition-all duration-300 ${
-                      activeMenu === item.href ? 'w-full bg-primary' : 'w-0 bg-primary group-hover:w-full'
-                    }`}
-                  />
                 </a>
               ))}
               <div className="flex items-center space-x-3">

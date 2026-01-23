@@ -12,10 +12,15 @@
   html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    font-size: 16px;
   }
   
   body {
-    @apply bg-white text-gray-900 overflow-x-hidden;
+    @apply bg-white text-gray-900 overflow-x-hidden text-base;
+  }
+  
+  p {
+    @apply text-lg;
   }
 }
 
@@ -29,10 +34,10 @@
   }
   
   .section-title {
-    @apply text-5xl md:text-6xl font-bold text-gray-900 mb-4;
+    @apply text-6xl md:text-7xl font-bold text-gray-900 mb-4;
   }
   
   .section-subtitle {
-    @apply text-lg md:text-xl text-gray-600 mb-12;
+    @apply text-xl md:text-2xl text-gray-600 mb-12;
   }
 }

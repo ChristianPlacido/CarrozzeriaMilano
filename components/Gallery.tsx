@@ -105,9 +105,20 @@ const Gallery = () => {
                   </div>
                 )}
 
-                {/* Overlay titolo permanente in basso - semitrasparente */}
-                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-4 py-4 flex items-center justify-center">
-                  <h3 className="text-white font-semibold text-base text-center leading-tight">{image.title}</h3>
+                {/* Overlay titolo permanente in basso - semitrasparente con effetto shiny */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent px-4 py-5 flex items-center justify-center">
+                  <motion.h3 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    className="text-white font-bold text-lg text-center leading-tight uppercase tracking-wider"
+                    style={{
+                      textShadow: '0 2px 8px rgba(0,0,0,0.6), 0 0 20px rgba(220,20,60,0.3)',
+                      letterSpacing: '0.08em',
+                    }}
+                  >
+                    {image.title}
+                  </motion.h3>
                 </div>
 
                 {/* Overlay hover originale */}
