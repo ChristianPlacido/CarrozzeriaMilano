@@ -2,27 +2,8 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaTimes, FaPhone, FaWhatsapp, FaCheckCircle } from 'react-icons/fa'
-
-// Lista completa delle compagnie assicurative italiane
-const insuranceCompanies = [
-  { id: 1, name: 'Allianz', logo: '🛡️', partnered: true },
-  { id: 2, name: 'Generali', logo: '🦁', partnered: true },
-  { id: 3, name: 'UnipolSai', logo: '🏛️', partnered: true },
-  { id: 4, name: 'Zurich', logo: '🏔️', partnered: true },
-  { id: 5, name: 'AXA', logo: '💙', partnered: false },
-  { id: 6, name: 'Reale Mutua', logo: '👑', partnered: true },
-  { id: 7, name: 'Cattolica', logo: '⛪', partnered: false },
-  { id: 8, name: 'Sara', logo: '🌟', partnered: true },
-  { id: 9, name: 'HDI', logo: '🔷', partnered: false },
-  { id: 10, name: 'Linear', logo: '📱', partnered: true },
-  { id: 11, name: 'ConTe.it', logo: '💻', partnered: false },
-  { id: 12, name: 'Direct Line', logo: '📞', partnered: true },
-  { id: 13, name: 'Vittoria', logo: '🏆', partnered: true },
-  { id: 14, name: 'Verti', logo: '🚗', partnered: false },
-  { id: 15, name: 'Itas', logo: '🏔️', partnered: true },
-  { id: 16, name: 'Groupama', logo: '🌾', partnered: false },
-]
+import { FaTimes, FaPhone, FaWhatsapp, FaCheckCircle, FaArrowLeft } from 'react-icons/fa'
+import { INSURANCE_COMPANIES } from '@/data/insurance-companies'
 
 type InsuranceFlowProps = {
   isOpen: boolean
