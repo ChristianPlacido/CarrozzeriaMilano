@@ -134,13 +134,55 @@ const About = () => {
             </motion.div>
 
             <div className="mt-10 grid grid-cols-2 gap-6">
-              <div className="bg-primary/5 rounded-lg p-5 border-l-4 border-primary">
-                <h4 className="font-bold text-gray-900 mb-2 text-xl">La Nostra Missione</h4>
-                <p className="text-lg text-gray-700">Lavorare bene, sempre: qualità, trasparenza, rispetto dei tempi</p>
+              <div className="bg-primary/5 rounded-lg p-4 border-l-4 border-primary">
+                <div className="relative inline-block overflow-hidden mb-2">
+                  <h4 className="font-bold text-gray-900 text-base relative">
+                    La Nostra Missione
+                    <motion.span
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                      style={{
+                        backgroundSize: '200% 100%',
+                        maskImage: 'linear-gradient(90deg, transparent, white, transparent)',
+                        WebkitMaskImage: 'linear-gradient(90deg, transparent, white, transparent)',
+                      }}
+                      animate={{
+                        backgroundPosition: ['-200% 0', '200% 0'],
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: 'linear',
+                        repeatDelay: 1.5,
+                      }}
+                    />
+                  </h4>
+                </div>
+                <p className="text-sm text-gray-600">Lavorare bene, sempre: qualità, trasparenza, rispetto dei tempi</p>
               </div>
-              <div className="bg-primary/5 rounded-lg p-5 border-l-4 border-primary">
-                <h4 className="font-bold text-gray-900 mb-2 text-xl">I Nostri Valori</h4>
-                <p className="text-lg text-gray-700">
+              <div className="bg-primary/5 rounded-lg p-4 border-l-4 border-primary">
+                <div className="relative inline-block overflow-hidden mb-2">
+                  <h4 className="font-bold text-gray-900 text-base relative">
+                    I Nostri Valori
+                    <motion.span
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/50 to-transparent"
+                      style={{
+                        backgroundSize: '200% 100%',
+                        maskImage: 'linear-gradient(90deg, transparent, white, transparent)',
+                        WebkitMaskImage: 'linear-gradient(90deg, transparent, white, transparent)',
+                      }}
+                      animate={{
+                        backgroundPosition: ['-200% 0', '200% 0'],
+                      }}
+                      transition={{
+                        duration: 2.5,
+                        repeat: Infinity,
+                        ease: 'linear',
+                        repeatDelay: 1.5,
+                      }}
+                    />
+                  </h4>
+                </div>
+                <p className="text-sm text-gray-600">
                   Professionalità, affidabilità moderna, attenzione autentica al risultato finale
                 </p>
               </div>
