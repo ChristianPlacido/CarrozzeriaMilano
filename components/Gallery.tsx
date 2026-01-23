@@ -130,6 +130,7 @@ const Gallery = () => {
                 initial={{ opacity: 0, scale: 0.92 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 viewport={{ once: true }}
+                animate={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5, delay: (index % galleryImages.length) * 0.05 }}
                 whileHover={{ scale: 1.03 }}
                 className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg aspect-square min-w-[260px] sm:min-w-[300px] lg:min-w-[320px] flex-shrink-0"
