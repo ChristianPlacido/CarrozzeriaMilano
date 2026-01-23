@@ -1,6 +1,7 @@
 'use client'
 
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import Link from 'next/link'
 import { FaBars, FaTimes, FaPhone, FaMapMarkerAlt, FaWhatsapp } from 'react-icons/fa'
 import { motion, AnimatePresence } from 'framer-motion'
@@ -147,88 +148,94 @@ const NavbarClean = () => {
         </div>
 
         <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-0 z-[190] bg-black/70 backdrop-blur lg:hidden"
-            >
-              <motion.div
-                initial={{ y: -24, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
-                exit={{ y: -24, opacity: 0 }}
-                transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute inset-x-4 top-4 bottom-4 bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-black/90 border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
-              >
-                <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.16em] text-primary font-semibold">Menu</p>
-                    <p className="text-sm text-white/70">Naviga rapidamente</p>
-                  </div>
-                  <button
-                    onClick={() => setIsOpen(false)}
-                    className="h-11 w-11 rounded-full bg-white/10 border border-white/15 text-white flex items-center justify-center hover:bg-white/15 transition"
-                    aria-label="Chiudi menu"
-                  >
-                    <FaTimes />
-                  </button>
-                </div>
-
-                <motion.ul
-                  variants={listVariants}
-                  initial="hidden"
-                  animate="visible"
-                  className="flex-1 flex flex-col items-center text-center gap-4 px-6 py-8 overflow-y-auto w-full"
+          {isOpen && typeof document !== 'undefined' &&
+            createPortal(
+              (
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.2 }}
+                  className="fixed inset-0 z-[1000] bg-black/70 backdrop-blur lg:hidden"
+                  role="dialog"
+                  aria-modal="true"
                 >
-                  {menuItems.map((item) => (
-                    <motion.li key={item.href} variants={itemVariants} className="w-full">
-                      <a
-                        href={item.href}
-                        onClick={() => {
-                          setIsOpen(false)
-                          setActiveMenu(item.href)
-                        }}
-                        className={`block w-full rounded-xl px-4 py-3 text-xl font-semibold transition-all duration-200 ${
-                          activeMenu === item.href
-                            ? 'bg-white text-slate-900 shadow-lg'
-                            : 'text-white hover:bg-white/10'
-                        }`}
-                      >
-                        {item.label}
-                      </a>
-                    </motion.li>
-                  ))}
-                </motion.ul>
-
-                <div className="px-6 pb-6 space-y-4">
-                  <motion.button
-                    onClick={() => {
-                      setInsuranceFlowOpen(true)
-                      setIsOpen(false)
-                    }}
-                    className="w-full bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg"
-                    whileHover={{ scale: 1.02 }}
-                    whileTap={{ scale: 0.97 }}
+                  <motion.div
+                    initial={{ y: -24, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    exit={{ y: -24, opacity: 0 }}
+                    transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
+                    className="absolute inset-x-4 top-4 bottom-4 bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-black/90 border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
                   >
-                    HAI UN SINISTRO?
-                  </motion.button>
-                  <div className="grid grid-cols-2 gap-3">
-                    <a href="tel:+390362328901" className="flex items-center justify-center gap-2 rounded-xl bg-white text-slate-900 font-semibold py-3 shadow-md hover:shadow-lg transition">
-                      <FaPhone />
-                      <span>Chiamaci</span>
-                    </a>
-                    <WhatsAppButton phoneNumber="+393331234567" message="Ciao, vorrei informazioni" />
-                  </div>
-                  <div className="flex items-center justify-center gap-2 text-white/80 text-sm">
-                    <FaMapMarkerAlt className="text-primary" />
-                    <span>Via Copenhagen 22/24, Seregno (MB)</span>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
-          )}
+                    <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
+                      <div>
+                        <p className="text-xs uppercase tracking-[0.16em] text-primary font-semibold">Menu</p>
+                        <p className="text-sm text-white/70">Naviga rapidamente</p>
+                      </div>
+                      <button
+                        onClick={() => setIsOpen(false)}
+                        className="h-11 w-11 rounded-full bg-white/10 border border-white/15 text-white flex items-center justify-center hover:bg-white/15 transition"
+                        aria-label="Chiudi menu"
+                      >
+                        <FaTimes />
+                      </button>
+                    </div>
+
+                    <motion.ul
+                      variants={listVariants}
+                      initial="hidden"
+                      animate="visible"
+                      className="flex-1 flex flex-col items-center text-center gap-4 px-6 py-8 overflow-y-auto w-full"
+                    >
+                      {menuItems.map((item) => (
+                        <motion.li key={item.href} variants={itemVariants} className="w-full">
+                          <a
+                            href={item.href}
+                            onClick={() => {
+                              setIsOpen(false)
+                              setActiveMenu(item.href)
+                            }}
+                            className={`block w-full rounded-xl px-4 py-3 text-xl font-semibold transition-all duration-200 ${
+                              activeMenu === item.href
+                                ? 'bg-white text-slate-900 shadow-lg'
+                                : 'text-white hover:bg-white/10'
+                            }`}
+                          >
+                            {item.label}
+                          </a>
+                        </motion.li>
+                      ))}
+                    </motion.ul>
+
+                    <div className="px-6 pb-6 space-y-4">
+                      <motion.button
+                        onClick={() => {
+                          setInsuranceFlowOpen(true)
+                          setIsOpen(false)
+                        }}
+                        className="w-full bg-primary hover:bg-primary/90 text-white px-6 py-3 rounded-xl font-semibold transition-all shadow-md hover:shadow-lg"
+                        whileHover={{ scale: 1.02 }}
+                        whileTap={{ scale: 0.97 }}
+                      >
+                        HAI UN SINISTRO?
+                      </motion.button>
+                      <div className="grid grid-cols-2 gap-3">
+                        <a href="tel:+390362328901" className="flex items-center justify-center gap-2 rounded-xl bg-white text-slate-900 font-semibold py-3 shadow-md hover:shadow-lg transition">
+                          <FaPhone />
+                          <span>Chiamaci</span>
+                        </a>
+                        <WhatsAppButton phoneNumber="+393331234567" message="Ciao, vorrei informazioni" />
+                      </div>
+                      <div className="flex items-center justify-center gap-2 text-white/80 text-sm">
+                        <FaMapMarkerAlt className="text-primary" />
+                        <span>Via Copenhagen 22/24, Seregno (MB)</span>
+                      </div>
+                    </div>
+                  </motion.div>
+                </motion.div>
+              ),
+              document.body
+            )}
         </AnimatePresence>
       </nav>
 
