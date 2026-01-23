@@ -6,7 +6,7 @@ import Image from 'next/image'
 
 const galleryImages = [
   { id: 1, title: 'Riparazione Paraurti', category: 'riparazione', image: 'https://images.unsplash.com/photo-1486262715619-f8ddc090c5e4?w=600&h=600&fit=crop' },
-  { id: 2, title: 'Verniciatura Completa', category: 'verniciatura', image: 'https://images.unsplash.com/photo-1487754180144-351b8e29fbdf?w=600&h=600&fit=crop' },
+  { id: 2, title: 'Verniciatura Completa', category: 'verniciatura', image: '/CarrozzeriaMilano/images/verniciaturacompleta.webp' },
   { id: 3, title: 'Restauro Auto d\'Epoca', category: 'restauro', image: 'https://images.unsplash.com/photo-1464207687429-7505649dae38?w=600&h=600&fit=crop' },
   { id: 4, title: 'Detailing Professionale', category: 'detailing', image: 'https://images.unsplash.com/photo-1551894416-1a1b5f2e4bc7?w=600&h=600&fit=crop' },
   { id: 5, title: 'Riparazione Fiancata', category: 'riparazione', image: 'https://images.unsplash.com/photo-1486262715619-f8ddc090c5e4?w=600&h=600&fit=crop' },
