@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaTimes, FaPhone, FaWhatsapp, FaCheckCircle, FaArrowLeft } from 'react-icons/fa'
+import { FaTimes, FaPhone, FaWhatsapp, FaCheckCircle, FaArrowLeftLong } from 'react-icons/fa'
 import { INSURANCE_COMPANIES } from '@/data/insurance-companies'
 
 type InsuranceFlowProps = {
@@ -63,7 +63,7 @@ const InsuranceFlow = ({ isOpen, onClose }: InsuranceFlowProps) => {
                 className="absolute top-4 left-4 z-10 flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full font-semibold text-sm transition-colors"
                 aria-label="Torna indietro"
               >
-                <FaArrowLeft className="text-base" />
+                <FaArrowLeftLong className="text-base" />
                 <span>Indietro</span>
               </button>
             )}
