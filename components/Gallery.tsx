@@ -87,6 +87,39 @@ const Gallery = () => {
           </p>
         </motion.div>
 
+        {/* Titolo grande CARROZZERIA MILANO */}
+        <motion.div
+          initial={{ opacity: 0, y: -40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="text-center mb-16 relative"
+        >
+          <div className="relative inline-block overflow-hidden">
+            <h3 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-[0.15em] uppercase text-gray-900 relative">
+              CARROZZERIA MILANO
+              {/* Effetto shiny animato */}
+              <motion.span
+                className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent"
+                style={{
+                  backgroundSize: '200% 100%',
+                  maskImage: 'linear-gradient(90deg, transparent, white, transparent)',
+                  WebkitMaskImage: 'linear-gradient(90deg, transparent, white, transparent)',
+                }}
+                animate={{
+                  backgroundPosition: ['-200% 0', '200% 0'],
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  ease: 'linear',
+                  repeatDelay: 2,
+                }}
+              />
+            </h3>
+          </div>
+        </motion.div>
+
         {/* Carousel */}
         <div className="relative overflow-hidden pb-6">
           <motion.div

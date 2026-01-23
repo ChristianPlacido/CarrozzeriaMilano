@@ -116,17 +116,17 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
 
 const Services = () => {
   return (
-    <section id="servizi" className="py-16 bg-white">
+    <section id="servizi" className="py-20 bg-white">
       <div className="container mx-auto px-4">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
           <h2 className="section-title">I nostri <span className="text-primary">Servizi</span></h2>
-          <p className="text-gray-600 text-sm mt-2">Clicca su un servizio per zoommare e scopri di più</p>
+          <p className="text-gray-600 text-sm mt-3">Clicca su un servizio per zoommare e scopri di più</p>
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:max-w-6xl lg:mx-auto">
