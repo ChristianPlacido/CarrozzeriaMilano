@@ -1,9 +1,10 @@
 'use client'
 
-import { motion } from 'framer-motion'
+import { motion, animate } from 'framer-motion'
+import { useEffect, useRef } from 'react'
 import Image from 'next/image'
 import getConfig from 'next/config'
-import { FaAward, FaUsers, FaHandshake, FaClock } from 'react-icons/fa'
+import { FaAward, FaUsers, FaHandshake, FaClock, FaStar } from 'react-icons/fa'
 
 const stats = [
   { icon: FaClock, number: '40+', label: 'Anni di Esperienza' },
@@ -11,6 +12,31 @@ const stats = [
   { icon: FaHandshake, number: '100%', label: 'Garanzia Qualità' },
   { icon: FaAward, number: '20+', label: 'Premi e Riconoscimenti' },
 ]
+
+const GOOGLE_REVIEWS_URL = 'https://www.google.com/search?q=Carrozzeria+Milano+Seregno+recensioni'
+const GOOGLE_SCORE = 4.9
+const GOOGLE_REVIEWS_COUNT = 241
+const CLIENTS_COUNT = 5000
+
+const AnimatedNumber = ({ value, decimals = 0 }: { value: number; decimals?: number }) => {
+  const ref = useRef<HTMLSpanElement>(null)
+
+  useEffect(() => {
+    const controls = animate(0, value, {
+      duration: 1.6,
+      ease: 'easeOut',
+      onUpdate: (v) => {
+        if (!ref.current) return
+        const formatted = decimals > 0 ? v.toFixed(decimals) : Math.round(v).toLocaleString('it-IT')
+        ref.current.textContent = formatted
+      },
+    })
+
+    return () => controls.stop()
+  }, [value, decimals])
+
+  return <span ref={ref}>0</span>
+}
 
 const About = () => {
   return (
@@ -46,6 +72,66 @@ const About = () => {
               </p>
             </div>
 
+            {/* Barra social proof Google con numeri animati e stelle riempite */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+              className="mt-8 rounded-2xl bg-gradient-to-r from-gray-900 via-black to-primary p-6 text-white shadow-2xl border border-white/10"
+            >
+              <div className="flex flex-wrap items-center justify-between gap-6">
+                <div className="space-y-1">
+                  <p className="text-xs uppercase tracking-[0.3em] text-white/70">Recensioni Google</p>
+                  <div className="flex items-baseline gap-2 leading-none">
+                    <span className="text-5xl font-black"><AnimatedNumber value={GOOGLE_SCORE} decimals={1} /></span>
+                    <span className="text-2xl font-semibold">/5</span>
+                  </div>
+                  <p className="text-sm text-white/80">
+                    <AnimatedNumber value={GOOGLE_REVIEWS_COUNT} /> recensioni verificate
+                  </p>
+                </div>
+
+                {/* Stelle con riempimento animato */}
+                <div className="relative h-10 flex items-center" aria-label="Valutazione 5 stelle su 5">
+                  <div className="flex text-white/25 text-3xl gap-1">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <FaStar key={`bg-${i}`} />
+                    ))}
+                  </div>
+                  <motion.div
+                    className="absolute inset-0 overflow-hidden"
+                    initial={{ width: 0 }}
+                    whileInView={{ width: `${(GOOGLE_SCORE / 5) * 100}%` }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.2, ease: 'easeOut', delay: 0.2 }}
+                  >
+                    <div className="flex text-yellow-400 text-3xl gap-1 drop-shadow-[0_4px_12px_rgba(0,0,0,0.35)]">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <FaStar key={`fg-${i}`} />
+                      ))}
+                    </div>
+                  </motion.div>
+                </div>
+              </div>
+
+              <div className="mt-5 flex flex-wrap items-center gap-4 text-sm">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-3xl font-bold leading-none"><AnimatedNumber value={CLIENTS_COUNT} /></span>
+                  <span className="text-white/80">clienti soddisfatti</span>
+                </div>
+                <div className="hidden sm:block h-4 w-px bg-white/20" aria-hidden />
+                <a
+                  href={GOOGLE_REVIEWS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-white hover:text-primary-50 underline underline-offset-4 decoration-white/50 hover:decoration-white"
+                >
+                  Vedi le recensioni Google →
+                </a>
+              </div>
+            </motion.div>
+
             <div className="mt-10 grid grid-cols-2 gap-6">
               <div className="bg-primary/5 rounded-lg p-5 border-l-4 border-primary">
                 <h4 className="font-bold text-gray-900 mb-2 text-xl">La Nostra Missione</h4>
@@ -68,16 +154,33 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            {/* Titolo esterno con animazione da sinistra */}
+            {/* Titolo esterno in maiuscolo con animazione a wipe da sinistra */}
             <motion.div
-              initial={{ opacity: 0, x: -40 }}
+              initial={{ opacity: 0, x: -60 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: 'easeOut' }}
               className="mb-4 text-left"
             >
-              <p className="text-sm font-semibold tracking-[0.3em] text-primary uppercase">La tua auto</p>
-              <p className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight">Nelle mani giuste</p>
+              <p className="text-[13px] font-semibold tracking-[0.35em] text-primary uppercase">Carrozzeria Milano</p>
+              <div className="relative inline-block overflow-hidden">
+                <motion.span
+                  initial={{ x: '-120%', opacity: 0 }}
+                  whileInView={{ x: '0%', opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
+                  className="block text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight uppercase tracking-tight"
+                >
+                  LA TUA AUTO NELLE MANI GIUSTE
+                </motion.span>
+                <motion.span
+                  className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent"
+                  initial={{ x: '-100%' }}
+                  whileInView={{ x: '120%' }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1.1, ease: 'easeInOut', delay: 0.1 }}
+                />
+              </div>
             </motion.div>
 
             {/* Immagine reale con didascalia minimal in basso */}
