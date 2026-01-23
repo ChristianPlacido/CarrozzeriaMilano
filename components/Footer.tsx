@@ -136,25 +136,19 @@ const Footer = () => {
             </p>
             
             {/* Powered By Apex AI - Centro */}
-            <div className="flex items-center space-x-2 py-2 px-4 bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-primary/20 rounded-lg">
+            <div className="flex items-center space-x-3 py-2 px-4 bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-primary/20 rounded-lg">
               <span className="text-gray-400 text-sm">Powered by</span>
               <a 
                 href="https://www.apexai.it" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center space-x-2 hover:opacity-90 transition-opacity group"
+                className="flex items-center hover:opacity-90 transition-opacity"
               >
-                <div className="relative h-6 w-6 flex items-center justify-center">
-                  <img 
-                    id="apex-logo"
-                    src="https://logos.brandfetch.com/apexai.it?c=tdFFFFFF&w=128&h=128" 
-                    alt="Apex AI Logo" 
-                    className="h-6 w-auto object-contain"
-                  />
-                </div>
-                <span className="bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent font-bold text-sm group-hover:from-blue-300 group-hover:to-purple-300 transition-colors">
-                  Apex AI
-                </span>
+                <img 
+                  src="/CarrozzeriaMilano/images/APEXLOGO.png" 
+                  alt="Apex AI Logo" 
+                  className="h-7 w-auto object-contain"
+                />
               </a>
             </div>
             
