@@ -92,7 +92,7 @@ const BackgroundCarousel = ({ intervalMs = 3500, maxWidth = 1920 }: BackgroundCa
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-      <AnimatePresence mode="wait">
+      <AnimatePresence mode="sync">
         {typeof currentSlide === 'string' ? (
           // IMMAGINE
           <motion.img
@@ -100,10 +100,10 @@ const BackgroundCarousel = ({ intervalMs = 3500, maxWidth = 1920 }: BackgroundCa
             src={getSizedUrl(currentSlide, maxWidth)}
             alt="Carrozzeria Milano"
             className="absolute inset-0 w-full h-full object-cover"
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1.0 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 1, ease: 'easeInOut' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
           />
         ) : (
           // VIDEO
@@ -123,10 +123,10 @@ const BackgroundCarousel = ({ intervalMs = 3500, maxWidth = 1920 }: BackgroundCa
             loop
             playsInline
             preload="auto"
-            initial={{ opacity: 0, scale: 1.05 }}
-            animate={{ opacity: 1, scale: 1.0 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            transition={{ duration: 1, ease: 'easeInOut' }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5, ease: 'easeInOut' }}
             style={{ pointerEvents: 'none' }}
           />
         )}
