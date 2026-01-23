@@ -92,7 +92,7 @@ const About = () => {
                   </p>
                 </div>
 
-                {/* Stelle che compaiono una a una */}
+                {/* Stelle che compaiono una a una con gonfiamento */}
                 <div className="relative h-10 flex items-center" aria-label="Valutazione 5 stelle su 5">
                   <div className="flex text-white/25 text-3xl gap-1">
                     {Array.from({ length: 5 }).map((_, i) => (
@@ -103,10 +103,22 @@ const About = () => {
                     {Array.from({ length: 5 }).map((_, i) => (
                       <motion.span
                         key={`fg-${i}`}
-                        initial={{ opacity: 0, scale: 0.6 }}
-                        whileInView={{ opacity: 1, scale: 1 }}
+                        initial={{ opacity: 0, scale: 0.3 }}
+                        whileInView={{
+                          opacity: 1,
+                          scale: [0.3, 1.4, 1],
+                        }}
                         viewport={{ once: true }}
-                        transition={{ duration: 0.45, delay: 0.15 * i, ease: 'easeOut' }}
+                        transition={{
+                          duration: 0.8,
+                          delay: 0.5 + 0.25 * i,
+                          ease: 'easeOut',
+                          scale: {
+                            duration: 0.8,
+                            times: [0, 0.6, 1],
+                            ease: [0.34, 1.56, 0.64, 1],
+                          },
+                        }}
                         className="inline-flex"
                       >
                         <FaStar />
