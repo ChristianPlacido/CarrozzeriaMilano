@@ -74,12 +74,12 @@ const About = () => {
                 {(() => {
                   const { publicRuntimeConfig } = getConfig() || {}
                   const basePath = (publicRuntimeConfig && publicRuntimeConfig.basePath) ? publicRuntimeConfig.basePath : ''
-                  const src = `${basePath}/images/mani-giuste.jpg`
+                  const src = `${basePath}/images/La tua auto nelle mani giuste.webp`
                   const fallbackSrc = `${basePath}/images/carrozzeriamilano.png`
                   return (
                     <Image
                       src={src}
-                      alt="Consegna chiavi in officina - Carrozzeria Milano"
+                      alt="La tua auto nelle mani giuste - Carrozzeria Milano"
                       fill
                       className="object-cover"
                       sizes="(max-width: 1024px) 100vw, 50vw"

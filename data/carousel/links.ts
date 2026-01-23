@@ -21,7 +21,16 @@ export const CAROUSEL_LINKS: CarouselSlide[] = [
   // 4. VIDEO 2 (Persone - 5 secondi)
   { type: 'video', src: '/CarrozzeriaMilano/videos/Creazione_video_pubblicitario_carrozzeria.mp4', durationMs: 5000 },
   
-  // 5-10. IMMAGINI
+  // 5. IMMAGINE - Auto posteriore
+  '/CarrozzeriaMilano/images/2025-08-28.jpg',
+  
+  // 6. IMMAGINE - Ferrari Roma
+  '/CarrozzeriaMilano/images/FerrariROma.webp',
+  
+  // 7. IMMAGINE - Porsche
+  '/CarrozzeriaMilano/images/unnamed.webp',
+  
+  // 8-13. IMMAGINI
   'https://lh3.googleusercontent.com/p/AF1QipP7_kXUzFjsmsSlPmdAyyb-XsxYOaDM9ZLooKva=s680-w680-h510-rw',
   'https://lh3.googleusercontent.com/p/AF1QipMcvzNrZ_Z2SynAV7PWf9uFNq_CqNiSbPoy4Viu=s680-w680-h510-rw',
   'https://lh3.googleusercontent.com/gps-cs-s/AG0ilSy5_2h6JGS0Xelj1BvMBSNd_7JIoMbX3LeqfdLNOeyJ44BVtctIy_S3rbzz8xTPmGak1ToMhK6_BVtNyUS7O5y7uWGMxdZFPZnThAAjT5Gzu3azdvpphzIcfghNi3Ri9Rs4jCRP=s680-w680-h510-rw',
