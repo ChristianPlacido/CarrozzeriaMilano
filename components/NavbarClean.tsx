@@ -160,7 +160,7 @@ const NavbarClean = () => {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -24, opacity: 0 }}
                 transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute inset-x-4 top-4 bottom-4 bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-black/90 border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
+                className="absolute inset-x-4 top-4 bottom-4 bg-gradient-to-b from-slate-900/95 via-slate-900/90 to-black/90 border border-white/10 rounded-2xl shadow-2xl overflow-hidden flex flex-col"
               >
                 <div className="flex items-center justify-between px-6 py-4 border-b border-white/10">
                   <div>
@@ -180,7 +180,7 @@ const NavbarClean = () => {
                   variants={listVariants}
                   initial="hidden"
                   animate="visible"
-                  className="flex flex-col items-center text-center gap-4 px-6 py-8 overflow-y-auto h-[calc(100%-150px)]"
+                  className="flex-1 flex flex-col items-center text-center gap-4 px-6 py-8 overflow-y-auto w-full"
                 >
                   {menuItems.map((item) => (
                     <motion.li key={item.href} variants={itemVariants} className="w-full">
