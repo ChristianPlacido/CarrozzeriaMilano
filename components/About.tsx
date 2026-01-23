@@ -92,26 +92,27 @@ const About = () => {
                   </p>
                 </div>
 
-                {/* Stelle con riempimento animato */}
+                {/* Stelle che compaiono una a una */}
                 <div className="relative h-10 flex items-center" aria-label="Valutazione 5 stelle su 5">
                   <div className="flex text-white/25 text-3xl gap-1">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <FaStar key={`bg-${i}`} />
                     ))}
                   </div>
-                  <motion.div
-                    className="absolute inset-0 overflow-hidden"
-                    initial={{ width: 0 }}
-                    whileInView={{ width: `${(GOOGLE_SCORE / 5) * 100}%` }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 1.2, ease: 'easeOut', delay: 0.2 }}
-                  >
-                    <div className="flex text-yellow-400 text-3xl gap-1 drop-shadow-[0_4px_12px_rgba(0,0,0,0.35)]">
-                      {Array.from({ length: 5 }).map((_, i) => (
-                        <FaStar key={`fg-${i}`} />
-                      ))}
-                    </div>
-                  </motion.div>
+                  <div className="absolute inset-0 flex text-yellow-400 text-3xl gap-1 drop-shadow-[0_4px_12px_rgba(0,0,0,0.35)]">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <motion.span
+                        key={`fg-${i}`}
+                        initial={{ opacity: 0, scale: 0.6 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.45, delay: 0.15 * i, ease: 'easeOut' }}
+                        className="inline-flex"
+                      >
+                        <FaStar />
+                      </motion.span>
+                    ))}
+                  </div>
                 </div>
               </div>
 
