@@ -20,7 +20,6 @@ const GOOGLE_REVIEWS = 187
 const GOOGLE_SCORE = 4.9
 const CLIENTI_SODDISFATTI = 5200
 const GOOGLE_REVIEWS_URL = 'https://www.google.com/maps/place/Carrozzeria+Milano+Seregno'
-const KEYWORDS = ['PROFESSIONALITÀ', 'PRECISIONE', 'CURA NEI DETTAGLI', 'CARROZZERIA MILANO']
 
 type CountUpProps = {
   target: number
@@ -48,7 +47,6 @@ const CountUp = ({ target, suffix = '', decimals = 0, duration = 1.8 }: CountUpP
 
 const Gallery = () => {
   const controls = useAnimationControls()
-  const [keywordIndex, setKeywordIndex] = useState(0)
 
   const startMarquee = () => {
     controls.start({
@@ -61,13 +59,6 @@ const Gallery = () => {
     startMarquee()
     return () => controls.stop()
   }, [controls])
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setKeywordIndex((i) => (i + 1) % KEYWORDS.length)
-    }, 2200)
-    return () => clearInterval(id)
-  }, [])
 
   return (
     <section id="gallery" className="py-20 bg-gray-50">
@@ -86,29 +77,6 @@ const Gallery = () => {
           <p className="section-subtitle">
             Alcuni esempi della qualità del nostro lavoro
           </p>
-        </motion.div>
-
-        {/* Loop parole chiave in dissolvenza - animazione sinistra destra */}
-        <motion.div
-          initial={{ opacity: 0, y: -40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: 'easeOut' }}
-          className="text-center mb-16 relative"
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={KEYWORDS[keywordIndex]}
-              initial={{ opacity: 0, x: -60 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: 60 }}
-              transition={{ duration: 0.6, ease: 'easeInOut' }}
-              className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight uppercase text-gray-900"
-              style={{ fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}
-            >
-              {KEYWORDS[keywordIndex]}
-            </motion.div>
-          </AnimatePresence>
         </motion.div>
 
         {/* Carousel */}

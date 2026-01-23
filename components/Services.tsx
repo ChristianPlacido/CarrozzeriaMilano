@@ -1,8 +1,10 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { useState } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { useState, useEffect } from 'react'
 import { FaCar, FaPaintRoller, FaTools, FaShieldAlt, FaCheckCircle, FaPhone, FaWhatsapp } from 'react-icons/fa'
+
+const KEYWORDS = ['PROFESSIONALITÀ', 'PRECISIONE', 'CURA NEI DETTAGLI', 'CARROZZERIA MILANO']
 
 const services = [
   {
@@ -112,9 +114,35 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => {
 }
 
 const Services = () => {
+  const [keywordIndex, setKeywordIndex] = useState(0)
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setKeywordIndex((i) => (i + 1) % KEYWORDS.length)
+    }, 2200)
+    return () => clearInterval(id)
+  }, [])
+
   return (
     <section id="servizi" className="py-20 bg-white">
       <div className="container mx-auto px-4">
+        {/* Loop parole chiave in dissolvenza sopra il titolo */}
+        <div className="text-center mb-12 relative">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={KEYWORDS[keywordIndex]}
+              initial={{ opacity: 0, x: -60 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 60 }}
+              transition={{ duration: 0.6, ease: 'easeInOut' }}
+              className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight uppercase text-gray-900"
+              style={{ fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}
+            >
+              {KEYWORDS[keywordIndex]}
+            </motion.div>
+          </AnimatePresence>
+        </div>
+
         <div className="text-center mb-16">
           <h2 className="section-title">I nostri <span className="text-primary">Servizi</span></h2>
           <p className="text-gray-600 text-sm mt-3">Clicca su un servizio per zoommare e scopri di più</p>
