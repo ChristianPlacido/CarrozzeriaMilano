@@ -110,14 +110,19 @@ const BackgroundCarousel = ({ intervalMs = 3500, maxWidth = 1920 }: BackgroundCa
           <motion.video
             key={`vid-${index}`}
             ref={(el) => {
-              if (el) videoRefs.current.set(index, el)
+              if (el) {
+                videoRefs.current.set(index, el)
+                el.muted = true
+                el.play().catch(() => {})
+              }
             }}
             src={currentSlide.src}
             className="absolute inset-0 w-full h-full object-cover"
+            autoPlay
             muted
             loop
             playsInline
-            preload="metadata"
+            preload="auto"
             initial={{ opacity: 0, scale: 1.05 }}
             animate={{ opacity: 1, scale: 1.0 }}
             exit={{ opacity: 0, scale: 0.95 }}

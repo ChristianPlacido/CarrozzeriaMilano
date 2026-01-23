@@ -136,18 +136,18 @@ const Footer = () => {
             </p>
             
             {/* Powered By Apex AI - Centro */}
-            <div className="flex items-center space-x-3 py-2 px-4 bg-gradient-to-r from-blue-900/20 to-purple-900/20 border border-primary/20 rounded-lg">
-              <span className="text-gray-400 text-sm">Powered by</span>
+            <div className="flex items-center space-x-2">
+              <span className="text-gray-500 text-xs font-light tracking-wide">Powered by</span>
               <a 
                 href="https://www.apexai.it" 
                 target="_blank" 
                 rel="noopener noreferrer"
-                className="flex items-center hover:opacity-90 transition-opacity"
+                className="flex items-center hover:opacity-80 transition-opacity"
               >
                 <img 
                   src="/CarrozzeriaMilano/images/APEXLOGO.png" 
                   alt="Apex AI Logo" 
-                  className="h-7 w-auto object-contain"
+                  className="h-6 w-auto object-contain"
                 />
               </a>
             </div>
