@@ -12,14 +12,14 @@ export const CAROUSEL_LINKS: CarouselSlide[] = [
   // 1. IMMAGINE
   'https://lh3.googleusercontent.com/p/AF1QipONNV2jPqO1l3f6SFt9_6XXcehRPVEqBk3Z0pka=s680-w680-h510-rw',
   
-  // 2. VIDEO 1 (Commercial Script - 4 secondi)
-  { type: 'video', src: '/CarrozzeriaMilano/videos/Commercial_Script_for_Carrozzeria_Milano.mp4', durationMs: 4000 },
+  // 2. VIDEO 1 (Commercial Script - 5 secondi)
+  { type: 'video', src: '/CarrozzeriaMilano/videos/Commercial_Script_for_Carrozzeria_Milano.mp4', durationMs: 5000 },
   
   // 3. IMMAGINE
   'https://lh3.googleusercontent.com/p/AF1QipN4gUNCE3dsmgTc_Ur7Gqz8y3TjxdHXNO7Nd55d=s680-w680-h510-rw',
   
-  // 4. VIDEO 2 (Persone - 6 secondi)
-  { type: 'video', src: '/CarrozzeriaMilano/videos/Creazione_video_pubblicitario_carrozzeria.mp4', durationMs: 6000 },
+  // 4. VIDEO 2 (Persone - 5 secondi)
+  { type: 'video', src: '/CarrozzeriaMilano/videos/Creazione_video_pubblicitario_carrozzeria.mp4', durationMs: 5000 },
   
   // 5-10. IMMAGINI
   'https://lh3.googleusercontent.com/p/AF1QipP7_kXUzFjsmsSlPmdAyyb-XsxYOaDM9ZLooKva=s680-w680-h510-rw',
