@@ -59,6 +59,25 @@ const Contact = () => {
           </p>
         </motion.div>
 
+        {/* Contatto Rapido - Centrato */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-2xl mx-auto mb-16"
+        >
+          <div className="bg-gradient-to-r from-[#25D366]/10 to-[#25D366]/5 rounded-xl p-8 border border-[#25D366]/20">
+            <h4 className="font-bold text-2xl mb-3 text-gray-900 text-center">Contatto Rapido</h4>
+            <p className="text-lg text-gray-600 mb-6 text-center">Scrivici direttamente su WhatsApp per una risposta immediata!</p>
+            <WhatsAppButton 
+              phoneNumber="+393331234567"
+              message="Ciao, ho bisogno di informazioni"
+              className="w-full justify-center"
+            />
+          </div>
+        </motion.div>
+
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Info */}
           <motion.div
@@ -128,17 +147,6 @@ const Contact = () => {
                   referrerPolicy="no-referrer-when-downgrade"
                 ></iframe>
               </div>
-            </div>
-
-            {/* WhatsApp Quick Contact */}
-            <div className="mt-6 bg-gradient-to-r from-[#25D366]/10 to-[#25D366]/5 rounded-xl p-6 border border-[#25D366]/20">
-              <h4 className="font-bold text-xl mb-3 text-gray-900">Contatto Rapido</h4>
-              <p className="text-lg text-gray-600 mb-4">Scrivici direttamente su WhatsApp per una risposta immediata!</p>
-              <WhatsAppButton 
-                phoneNumber="+393331234567"
-                message="Ciao, ho bisogno di informazioni"
-                className="w-full justify-center"
-              />
             </div>
           </motion.div>
 
