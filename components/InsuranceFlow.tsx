@@ -3,7 +3,26 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaTimes, FaPhone, FaWhatsapp, FaCheckCircle } from 'react-icons/fa'
-import { INSURANCE_COMPANIES } from '@/data/insurance-companies'
+
+// Lista completa delle compagnie assicurative italiane
+const insuranceCompanies = [
+  { id: 1, name: 'Allianz', logo: '🛡️', partnered: true },
+  { id: 2, name: 'Generali', logo: '🦁', partnered: true },
+  { id: 3, name: 'UnipolSai', logo: '🏛️', partnered: true },
+  { id: 4, name: 'Zurich', logo: '🏔️', partnered: true },
+  { id: 5, name: 'AXA', logo: '💙', partnered: false },
+  { id: 6, name: 'Reale Mutua', logo: '👑', partnered: true },
+  { id: 7, name: 'Cattolica', logo: '⛪', partnered: false },
+  { id: 8, name: 'Sara', logo: '🌟', partnered: true },
+  { id: 9, name: 'HDI', logo: '🔷', partnered: false },
+  { id: 10, name: 'Linear', logo: '📱', partnered: true },
+  { id: 11, name: 'ConTe.it', logo: '💻', partnered: false },
+  { id: 12, name: 'Direct Line', logo: '📞', partnered: true },
+  { id: 13, name: 'Vittoria', logo: '🏆', partnered: true },
+  { id: 14, name: 'Verti', logo: '🚗', partnered: false },
+  { id: 15, name: 'Itas', logo: '🏔️', partnered: true },
+  { id: 16, name: 'Groupama', logo: '🌾', partnered: false },
+]
 
 type InsuranceFlowProps = {
   isOpen: boolean
@@ -29,6 +48,15 @@ const InsuranceFlow = ({ isOpen, onClose }: InsuranceFlowProps) => {
 
   const whatsappMessage = encodeURIComponent('Ciao, ti contatto per la gestione di un sinistro.')
 
+  const handleBack = () => {
+    if (step === 3) {
+      setSelectedInsurance(null)
+      setStep(2)
+    } else if (step === 2) {
+      setStep(1)
+    }
+  }
+
   return (
     <AnimatePresence>
       {isOpen && (
@@ -36,7 +64,7 @@ const InsuranceFlow = ({ isOpen, onClose }: InsuranceFlowProps) => {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
+          className="fixed inset-0 z-[220] flex items-center justify-center bg-black/60 backdrop-blur-sm px-4"
           onClick={handleClose}
         >
           <motion.div
@@ -47,6 +75,18 @@ const InsuranceFlow = ({ isOpen, onClose }: InsuranceFlowProps) => {
             className="relative bg-white rounded-3xl shadow-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Back Button */}
+            {step > 1 && (
+              <button
+                onClick={handleBack}
+                className="absolute top-4 left-4 z-10 flex items-center gap-2 px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-full font-semibold text-sm transition-colors"
+                aria-label="Torna indietro"
+              >
+                <FaArrowLeft className="text-base" />
+                <span>Indietro</span>
+              </button>
+            )}
+
             {/* Close Button */}
             <button
               onClick={handleClose}
