@@ -3,26 +3,7 @@
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { FaTimes, FaPhone, FaWhatsapp, FaCheckCircle } from 'react-icons/fa'
-
-// Lista completa delle compagnie assicurative italiane
-const insuranceCompanies = [
-  { id: 1, name: 'Allianz', logo: '🛡️', partnered: true },
-  { id: 2, name: 'Generali', logo: '🦁', partnered: true },
-  { id: 3, name: 'UnipolSai', logo: '🏛️', partnered: true },
-  { id: 4, name: 'Zurich', logo: '🏔️', partnered: true },
-  { id: 5, name: 'AXA', logo: '💙', partnered: false },
-  { id: 6, name: 'Reale Mutua', logo: '👑', partnered: true },
-  { id: 7, name: 'Cattolica', logo: '⛪', partnered: false },
-  { id: 8, name: 'Sara', logo: '🌟', partnered: true },
-  { id: 9, name: 'HDI', logo: '🔷', partnered: false },
-  { id: 10, name: 'Linear', logo: '📱', partnered: true },
-  { id: 11, name: 'ConTe.it', logo: '💻', partnered: false },
-  { id: 12, name: 'Direct Line', logo: '📞', partnered: true },
-  { id: 13, name: 'Vittoria', logo: '🏆', partnered: true },
-  { id: 14, name: 'Verti', logo: '🚗', partnered: false },
-  { id: 15, name: 'Itas', logo: '🏔️', partnered: true },
-  { id: 16, name: 'Groupama', logo: '🌾', partnered: false },
-]
+import { INSURANCE_COMPANIES } from '@/data/insurance-companies'
 
 type InsuranceFlowProps = {
   isOpen: boolean
@@ -31,9 +12,9 @@ type InsuranceFlowProps = {
 
 const InsuranceFlow = ({ isOpen, onClose }: InsuranceFlowProps) => {
   const [step, setStep] = useState(1)
-  const [selectedInsurance, setSelectedInsurance] = useState<typeof insuranceCompanies[0] | null>(null)
+  const [selectedInsurance, setSelectedInsurance] = useState<typeof INSURANCE_COMPANIES[0] | null>(null)
 
-  const handleInsuranceSelect = (insurance: typeof insuranceCompanies[0]) => {
+  const handleInsuranceSelect = (insurance: typeof INSURANCE_COMPANIES[0]) => {
     setSelectedInsurance(insurance)
     setTimeout(() => setStep(3), 300)
   }
@@ -126,20 +107,47 @@ const InsuranceFlow = ({ isOpen, onClose }: InsuranceFlowProps) => {
                     </p>
                   </div>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                    {insuranceCompanies.map((insurance) => (
+                    {INSURANCE_COMPANIES.map((insurance) => (
                       <motion.button
                         key={insurance.id}
                         onClick={() => handleInsuranceSelect(insurance)}
-                        className="group relative bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 hover:border-primary rounded-2xl p-6 transition-all hover:shadow-lg"
+                        className="group relative bg-gradient-to-br from-gray-50 to-white border-2 border-gray-200 hover:border-primary rounded-2xl p-4 transition-all hover:shadow-lg flex flex-col items-center justify-center min-h-[120px]"
                         whileHover={{ scale: 1.05, y: -5 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <div className="text-4xl mb-2">{insurance.logo}</div>
-                        <p className="text-sm font-semibold text-gray-800 group-hover:text-primary transition-colors">
+                        <div className="w-16 h-16 mb-2 flex items-center justify-center">
+                          <img 
+                            src={insurance.logo} 
+                            alt={`Logo ${insurance.name}`}
+                            className="max-w-full max-h-full object-contain"
+                            loading="lazy"
+                          />
+                        </div>
+                        <p className="text-xs font-semibold text-gray-800 group-hover:text-primary transition-colors text-center">
                           {insurance.name}
                         </p>
+                        {insurance.partnered && (
+                          <span className="absolute top-2 right-2 w-2 h-2 bg-green-500 rounded-full" title="Convenzionati"></span>
+                        )}
                       </motion.button>
                     ))}
+                  </div>
+                  
+                  {/* Info Banner SEO-Friendly */}
+                  <div className="mt-8 bg-gradient-to-r from-blue-50 to-indigo-50 border border-blue-200 rounded-2xl p-6">
+                    <h3 className="font-bold text-gray-900 mb-3 text-center">
+                      🤝 Convenzioni con le Principali Compagnie Assicurative Italiane
+                    </h3>
+                    <p className="text-sm text-gray-700 text-center">
+                      <strong>Carrozzeria Milano</strong> è convenzionata con le maggiori compagnie di assicurazione auto in Italia 
+                      tra cui <strong>Allianz, Generali, UnipolSai, Zurich, Reale Mutua, Poste Italiane</strong> e molte altre. 
+                      Gestiamo sinistri stradali, riparazioni carrozzeria post-incidente e pratiche assicurative con 
+                      supporto peritale completo per tutte le assicurazioni RC Auto.
+                    </p>
+                    <div className="mt-4 flex items-center justify-center gap-2 text-xs text-gray-600">
+                      <span className="inline-block w-2 h-2 bg-green-500 rounded-full"></span>
+                      <span>Bollino verde = Convenzionati</span>
+                    </div>
                   </div>
                 </motion.div>
               )}
@@ -168,8 +176,14 @@ const InsuranceFlow = ({ isOpen, onClose }: InsuranceFlowProps) => {
                         Ottima notizia!
                       </h2>
                       <div className="bg-green-50 border-2 border-green-200 rounded-2xl p-6 mb-8">
-                        <div className="flex items-center justify-center gap-3 mb-3">
-                          <span className="text-4xl">{selectedInsurance.logo}</span>
+                        <div className="flex items-center justify-center gap-4 mb-3">
+                          <div className="w-16 h-16 flex items-center justify-center">
+                            <img 
+                              src={selectedInsurance.logo} 
+                              alt={`Logo ${selectedInsurance.name}`}
+                              className="max-w-full max-h-full object-contain"
+                            />
+                          </div>
                           <p className="text-xl font-bold text-gray-800">{selectedInsurance.name}</p>
                         </div>
                         <p className="text-lg text-gray-700">
@@ -228,8 +242,14 @@ const InsuranceFlow = ({ isOpen, onClose }: InsuranceFlowProps) => {
                         Nessun problema!
                       </h2>
                       <div className="bg-orange-50 border-2 border-orange-200 rounded-2xl p-6 mb-8">
-                        <div className="flex items-center justify-center gap-3 mb-3">
-                          <span className="text-4xl">{selectedInsurance.logo}</span>
+                        <div className="flex items-center justify-center gap-4 mb-3">
+                          <div className="w-16 h-16 flex items-center justify-center">
+                            <img 
+                              src={selectedInsurance.logo} 
+                              alt={`Logo ${selectedInsurance.name}`}
+                              className="max-w-full max-h-full object-contain"
+                            />
+                          </div>
                           <p className="text-xl font-bold text-gray-800">{selectedInsurance.name}</p>
                         </div>
                         <p className="text-lg text-gray-700">
