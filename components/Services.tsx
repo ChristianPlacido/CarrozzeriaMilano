@@ -53,14 +53,12 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
   return (
     <motion.div
       key={service.id}
-      initial={{ opacity: 0, y: 20, scale: 1 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true }}
-      animate={{ opacity: 1, y: 0, scale: isSelected ? 1.1 : 1, zIndex: isSelected ? 50 : 0 }}
-      transition={{ duration: 0.4, delay: index * 0.02 }}
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0, scale: isSelected ? 1.1 : 1 }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
       onClick={() => setIsSelected(!isSelected)}
-      onHoverStart={() => !isSelected && null}
       className="group relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border-4 border-primary cursor-pointer"
+      style={{ willChange: 'transform, box-shadow', backfaceVisibility: 'hidden' }}
     >
       <img
         src={service.image}

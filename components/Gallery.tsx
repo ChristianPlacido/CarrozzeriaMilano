@@ -72,12 +72,13 @@ const Gallery = () => {
   return (
     <section id="gallery" className="py-20 bg-gray-50">
       <div className="container mx-auto px-4">
+        {/* Titoli della sezione */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12"
+          className="text-center mb-16"
         >
           <h2 className="section-title">
             I Nostri <span className="text-primary">Lavori</span>
@@ -87,7 +88,7 @@ const Gallery = () => {
           </p>
         </motion.div>
 
-        {/* Loop parole chiave in dissolvenza - sostituisce il titolo statico */}
+        {/* Loop parole chiave in dissolvenza - animazione sinistra destra */}
         <motion.div
           initial={{ opacity: 0, y: -40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -98,10 +99,10 @@ const Gallery = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={KEYWORDS[keywordIndex]}
-              initial={{ opacity: 0, y: 30, scale: 0.8 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -30, scale: 0.8 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
+              initial={{ opacity: 0, x: -60 }}
+              animate={{ opacity: 1, x: 0 }}
+              exit={{ opacity: 0, x: 60 }}
+              transition={{ duration: 0.6, ease: 'easeInOut' }}
               className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight uppercase text-gray-900"
               style={{ fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}
             >
