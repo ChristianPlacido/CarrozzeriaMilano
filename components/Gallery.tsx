@@ -20,7 +20,7 @@ const GOOGLE_REVIEWS = 187
 const GOOGLE_SCORE = 4.9
 const CLIENTI_SODDISFATTI = 5200
 const GOOGLE_REVIEWS_URL = 'https://www.google.com/maps/place/Carrozzeria+Milano+Seregno'
-const KEYWORDS = ['PROFESSIONALITA', 'PRECISIONE', 'CURA NEI DETTAGLI', 'CARROZZERIA MILANO']
+const KEYWORDS = ['PROFESSIONALITÀ', 'PRECISIONE', 'CURA NEI DETTAGLI', 'CARROZZERIA MILANO']
 
 type CountUpProps = {
   target: number
@@ -284,11 +284,12 @@ const Gallery = () => {
           <AnimatePresence mode="wait">
             <motion.div
               key={KEYWORDS[keywordIndex]}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              transition={{ duration: 0.6, ease: 'easeOut' }}
-              className="text-2xl sm:text-3xl md:text-4xl font-black tracking-[0.08em] uppercase text-gray-900"
+              initial={{ opacity: 0, y: 30, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -30, scale: 0.8 }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+              className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight uppercase text-gray-900"
+              style={{ fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}
             >
               {KEYWORDS[keywordIndex]}
             </motion.div>
