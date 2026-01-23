@@ -1,8 +1,8 @@
 "use client"
 
 import { useEffect, useMemo, useRef, useState } from 'react'
-import { CAROUSEL_LINKS } from '@/data/carousel/links'
-import { motion } from 'framer-motion'
+import { CAROUSEL_LINKS, type CarouselSlide } from '@/data/carousel/links'
+import { motion, AnimatePresence } from 'framer-motion'
 
 // Sostituisce i parametri di dimensione dei link googleusercontent per avere risoluzioni più alte
 const getSizedUrl = (url: string, size: number) => {
@@ -16,64 +16,118 @@ type BackgroundCarouselProps = {
   maxWidth?: number
 }
 
-const BackgroundCarousel = ({ intervalMs = 3000, maxWidth = 1920 }: BackgroundCarouselProps) => {
-  const images = useMemo(() => (CAROUSEL_LINKS.length ? CAROUSEL_LINKS.filter(Boolean) : []), [])
+const BackgroundCarousel = ({ intervalMs = 3500, maxWidth = 1920 }: BackgroundCarouselProps) => {
+  const slides = useMemo(() => CAROUSEL_LINKS.filter(Boolean), [])
   const [index, setIndex] = useState(0)
-  const [nextIndex, setNextIndex] = useState(1)
+  const videoRefs = useRef<Map<number, HTMLVideoElement>>(new Map())
   const timerRef = useRef<number | null>(null)
 
-  // Preload dell'immagine successiva per ridurre flash
-  useEffect(() => {
-    if (!images.length || images.length < 2) return
-    const preloadIdx = (nextIndex + 1) % images.length
-    if (typeof window !== 'undefined') {
-      const preImg = new window.Image()
-      preImg.src = getSizedUrl(images[preloadIdx], maxWidth)
+  // Helper per capire se slide corrente è video
+  const currentSlide = slides[index]
+  const isVideo = typeof currentSlide === 'object' && currentSlide.type === 'video'
+  
+  // Durata dinamica: video usa durationMs, immagini usano intervalMs
+  const getCurrentDuration = () => {
+    if (isVideo && typeof currentSlide === 'object') {
+      return currentSlide.durationMs || 6000
     }
-  }, [nextIndex, images, maxWidth])
+    return intervalMs
+  }
 
+  // Pausa tutti i video tranne quello attivo
+  const pauseAllVideos = () => {
+    videoRefs.current.forEach((video, idx) => {
+      if (idx !== index) {
+        try {
+          video.pause()
+          video.currentTime = 0
+        } catch {}
+      }
+    })
+  }
+
+  // Play del video attivo (se presente)
+  const playActiveVideo = async () => {
+    if (!isVideo) return
+    const video = videoRefs.current.get(index)
+    if (!video) return
+    try {
+      video.muted = true
+      video.volume = 0
+      await video.play()
+    } catch {}
+  }
+
+  // Effect per gestire il timer e i video
   useEffect(() => {
-    if (!images.length || images.length < 2) return
-    timerRef.current && window.clearInterval(timerRef.current)
-    timerRef.current = window.setInterval(() => {
-      setNextIndex((i) => (i + 1) % images.length)
-      setTimeout(() => {
-        setIndex((i) => (i + 1) % images.length)
-      }, 1000) // Sincronizza con durata transizione
-    }, intervalMs)
+    if (!slides.length) return
+
+    pauseAllVideos()
+    playActiveVideo()
+
+    if (timerRef.current) clearTimeout(timerRef.current)
+    
+    timerRef.current = window.setTimeout(() => {
+      setIndex((i) => (i + 1) % slides.length)
+    }, getCurrentDuration())
+
     return () => {
-      if (timerRef.current) window.clearInterval(timerRef.current)
+      if (timerRef.current) clearTimeout(timerRef.current)
     }
-  }, [images.length, intervalMs])
+  }, [index, slides.length])
 
-  if (!images.length) return null
+  // Preload immagini successive
+  useEffect(() => {
+    if (!slides.length) return
+    const nextIdx = (index + 1) % slides.length
+    const nextSlide = slides[nextIdx]
+    
+    if (typeof nextSlide === 'string') {
+      const preImg = new window.Image()
+      preImg.src = getSizedUrl(nextSlide, maxWidth)
+    }
+  }, [index, slides, maxWidth])
 
-  const currentImg = getSizedUrl(images[index], maxWidth)
-  const nextImg = images.length > 1 ? getSizedUrl(images[nextIndex % images.length], maxWidth) : currentImg
+  if (!slides.length) return null
 
   return (
-    <div className="absolute inset-0 z-0 overflow-hidden">
-      {/* Layer base: sempre visibile */}
-      <img
-        key={`base-${index}`}
-        src={currentImg}
-        alt="Carrozzeria Milano - sfondo"
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      {/* Layer top: crossfade continuo per loop senza pause */}
-      {images.length > 1 && (
-        <motion.img
-          key={`top-${nextIndex}`}
-          src={nextImg}
-          alt=""
-          initial={{ opacity: 0, scale: 1.05 }}
-          animate={{ opacity: 1, scale: 1.0 }}
-          transition={{ duration: 1, ease: 'easeInOut' }}
-          className="absolute inset-0 w-full h-full object-cover"
-        />
-      )}
+    <div className="absolute inset-0 z-0 overflow-hidden bg-black">
+      <AnimatePresence mode="wait">
+        {typeof currentSlide === 'string' ? (
+          // IMMAGINE
+          <motion.img
+            key={`img-${index}`}
+            src={getSizedUrl(currentSlide, maxWidth)}
+            alt="Carrozzeria Milano"
+            className="absolute inset-0 w-full h-full object-cover"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1.0 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 1, ease: 'easeInOut' }}
+          />
+        ) : (
+          // VIDEO
+          <motion.video
+            key={`vid-${index}`}
+            ref={(el) => {
+              if (el) videoRefs.current.set(index, el)
+            }}
+            src={currentSlide.src}
+            className="absolute inset-0 w-full h-full object-cover"
+            muted
+            loop
+            playsInline
+            preload="metadata"
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1.0 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 1, ease: 'easeInOut' }}
+            style={{ pointerEvents: 'none' }}
+          />
+        )}
+      </AnimatePresence>
 
-      {/* Velo/gradiente intensificato per massima leggibilità della scritta */}
+      {/* Velo/gradiente per leggibilità testo */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/50" />
     </div>
   )
