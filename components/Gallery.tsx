@@ -1,8 +1,9 @@
 'use client'
 
-import { motion, useAnimationControls } from 'framer-motion'
-import { useEffect } from 'react'
+import { motion, useAnimationControls, animate, useMotionValue, useTransform, AnimatePresence } from 'framer-motion'
+import { useEffect, useState } from 'react'
 import Image from 'next/image'
+import { FaStar } from 'react-icons/fa'
 
 const galleryImages = [
   { id: 1, title: 'Riparazione Paraurti', category: 'riparazione', image: '/CarrozzeriaMilano/images/riparazioneparaurti.webp' },
@@ -15,8 +16,39 @@ const galleryImages = [
   { id: 8, title: 'Restauro Classica', category: 'restauro', image: 'https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=600&fit=crop' },
 ]
 
+const GOOGLE_REVIEWS = 187
+const GOOGLE_SCORE = 4.9
+const CLIENTI_SODDISFATTI = 5200
+const GOOGLE_REVIEWS_URL = 'https://www.google.com/maps/place/Carrozzeria+Milano+Seregno'
+const KEYWORDS = ['PROFESSIONALITA', 'PRECISIONE', 'CURA NEI DETTAGLI', 'CARROZZERIA MILANO']
+
+type CountUpProps = {
+  target: number
+  suffix?: string
+  decimals?: number
+  duration?: number
+}
+
+const CountUp = ({ target, suffix = '', decimals = 0, duration = 1.8 }: CountUpProps) => {
+  const count = useMotionValue(0)
+  const rounded = useTransform(count, (latest) => Number(latest.toFixed(decimals)))
+
+  useEffect(() => {
+    const controls = animate(count, target, { duration, ease: 'easeOut' })
+    return () => controls.stop()
+  }, [count, target, duration])
+
+  return (
+    <span className="inline-flex items-baseline gap-1 text-3xl font-extrabold text-primary drop-shadow-sm">
+      <motion.span>{rounded}</motion.span>
+      {suffix && <span className="text-lg text-gray-700">{suffix}</span>}
+    </span>
+  )
+}
+
 const Gallery = () => {
   const controls = useAnimationControls()
+  const [keywordIndex, setKeywordIndex] = useState(0)
 
   const startMarquee = () => {
     controls.start({
@@ -29,6 +61,13 @@ const Gallery = () => {
     startMarquee()
     return () => controls.stop()
   }, [controls])
+
+  useEffect(() => {
+    const id = setInterval(() => {
+      setKeywordIndex((i) => (i + 1) % KEYWORDS.length)
+    }, 2200)
+    return () => clearInterval(id)
+  }, [])
 
   return (
     <section id="gallery" className="py-20 bg-gray-50">
@@ -143,19 +182,84 @@ const Gallery = () => {
 
         </div>
 
+        {/* Blocchi recensioni e numeri animati */}
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7, delay: 0.2 }}
+          className="mt-12 bg-white rounded-2xl shadow-2xl p-8 md:p-10 border border-gray-100"
+        >
+          <div className="flex flex-col md:flex-row gap-8 items-center justify-between">
+            <div className="space-y-4 w-full md:w-auto">
+              <div className="flex items-center gap-3">
+                <div className="flex text-yellow-400 text-4xl drop-shadow-lg" aria-hidden="true">
+                  {Array.from({ length: 5 }).map((_, idx) => (
+                    <FaStar key={idx} className="drop-shadow" />
+                  ))}
+                </div>
+                <a
+                  href={GOOGLE_REVIEWS_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg font-semibold text-gray-800 hover:text-primary transition-colors"
+                >
+                  {GOOGLE_SCORE.toFixed(1)}/5 · Recensioni Google
+                </a>
+              </div>
+              <p className="text-gray-700 max-w-xl">
+                Feedback reali dei nostri clienti: punteggio eccellente e recensioni verificate. Guarda le opinioni su Google o contattaci per scoprire come possiamo aiutarti.
+              </p>
+              <a
+                href={GOOGLE_REVIEWS_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center px-5 py-3 rounded-full bg-primary text-white font-semibold shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+              >
+                Vedi le recensioni Google
+              </a>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 w-full">
+              <div className="bg-gray-50 border border-gray-100 rounded-xl p-5 shadow-sm">
+                <p className="text-sm uppercase tracking-[0.15em] text-gray-500 mb-2">Recensioni Google</p>
+                <CountUp target={GOOGLE_REVIEWS} suffix="+" />
+                <p className="text-gray-600 mt-1">Clienti che hanno lasciato una recensione</p>
+              </div>
+              <div className="bg-gray-50 border border-gray-100 rounded-xl p-5 shadow-sm">
+                <p className="text-sm uppercase tracking-[0.15em] text-gray-500 mb-2">Clienti soddisfatti</p>
+                <CountUp target={CLIENTI_SODDISFATTI} suffix="+" />
+                <p className="text-gray-600 mt-1">Auto riparate e riconsegnate con cura</p>
+              </div>
+              <div className="bg-gray-50 border border-gray-100 rounded-xl p-5 shadow-sm">
+                <p className="text-sm uppercase tracking-[0.15em] text-gray-500 mb-2">Punteggio medio</p>
+                <CountUp target={GOOGLE_SCORE} decimals={1} suffix="/5" />
+                <p className="text-gray-600 mt-1">Valutazione complessiva su Google</p>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Loop parole chiave in dissolvenza */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mt-12"
+          className="text-center mt-14"
         >
-          <p className="text-gray-600 mb-6">
-            Vuoi vedere più esempi del nostro lavoro? Visita il nostro showroom!
-          </p>
-          <a href="#contatti" className="btn-primary">
-            Prenota una Visita
-          </a>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={KEYWORDS[keywordIndex]}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.6, ease: 'easeOut' }}
+              className="text-2xl sm:text-3xl md:text-4xl font-black tracking-[0.08em] uppercase text-gray-900"
+            >
+              {KEYWORDS[keywordIndex]}
+            </motion.div>
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>
