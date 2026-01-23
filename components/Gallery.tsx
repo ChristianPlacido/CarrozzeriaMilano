@@ -21,7 +21,7 @@ const Gallery = () => {
   const startMarquee = () => {
     controls.start({
       x: ['0%', '-50%'],
-      transition: { repeat: Infinity, ease: 'linear', duration: 18 },
+      transition: { repeat: Infinity, ease: 'linear', duration: 12 },
     })
   }
 
@@ -105,6 +105,12 @@ const Gallery = () => {
                   </div>
                 )}
 
+                {/* Overlay titolo permanente in basso - semitrasparente */}
+                <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/60 to-transparent px-4 py-4 flex items-center justify-center">
+                  <h3 className="text-white font-semibold text-base text-center leading-tight">{image.title}</h3>
+                </div>
+
+                {/* Overlay hover originale */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                   <div className="p-6 w-full">
                     <h3 className="text-white font-bold text-lg mb-1">{image.title}</h3>

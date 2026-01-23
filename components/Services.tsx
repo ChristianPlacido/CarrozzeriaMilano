@@ -56,7 +56,7 @@ const ServiceCard = ({ service, index }: { service: typeof services[0], index: n
       initial={{ opacity: 0, y: 20 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.4, delay: index * 0.05 }}
+      transition={{ duration: 0.4, delay: index * 0.02 }}
       onClick={() => setIsSelected(!isSelected)}
       onHoverStart={() => !isSelected && null}
       className="group relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border-4 border-primary cursor-pointer"
