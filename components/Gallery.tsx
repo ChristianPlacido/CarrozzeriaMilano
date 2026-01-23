@@ -9,7 +9,7 @@ const galleryImages = [
   { id: 2, title: 'Verniciatura Completa', category: 'verniciatura', image: '/CarrozzeriaMilano/images/verniciaturacompleta.webp' },
   { id: 3, title: 'Restauro Auto d\'Epoca', category: 'restauro', image: '/CarrozzeriaMilano/images/restauroautoepoca.png' },
   { id: 4, title: 'Detailing Professionale', category: 'detailing', image: '/CarrozzeriaMilano/images/detailingprofessionale.png' },
-  { id: 5, title: 'Riparazione Fiancata', category: 'riparazione', image: 'https://images.unsplash.com/photo-1486262715619-f8ddc090c5e4?w=600&h=600&fit=crop' },
+  { id: 5, title: 'Riparazione Fiancata', category: 'riparazione', image: '/CarrozzeriaMilano/images/riparazionefiancata.webp' },
   { id: 6, title: 'Lucidatura', category: 'detailing', image: 'https://images.unsplash.com/photo-1609432373949-53583b1b9da3?w=600&h=600&fit=crop' },
   { id: 7, title: 'Verniciatura Sportiva', category: 'verniciatura', image: 'https://images.unsplash.com/photo-1567818735868-e71b99932e29?w=600&h=600&fit=crop' },
   { id: 8, title: 'Restauro Classica', category: 'restauro', image: 'https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=600&fit=crop' },
