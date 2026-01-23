@@ -105,28 +105,38 @@ const Gallery = () => {
                   </div>
                 )}
 
-                {/* Overlay titolo permanente in basso - semitrasparente con effetto shiny */}
+                {/* Overlay titolo permanente in basso con effetto shiny */}
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent px-4 py-5 flex items-center justify-center">
                   <motion.h3 
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="text-white font-bold text-lg text-center leading-tight uppercase tracking-wider"
+                    className="text-white font-bold text-lg text-center leading-tight uppercase tracking-wider relative"
                     style={{
                       textShadow: '0 2px 8px rgba(0,0,0,0.6), 0 0 20px rgba(220,20,60,0.3)',
                       letterSpacing: '0.08em',
                     }}
                   >
                     {image.title}
+                    {/* Effetto shiny animato */}
+                    <motion.span
+                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                      style={{
+                        backgroundSize: '200% 100%',
+                        maskImage: 'linear-gradient(90deg, transparent, white, transparent)',
+                        WebkitMaskImage: 'linear-gradient(90deg, transparent, white, transparent)',
+                      }}
+                      animate={{
+                        backgroundPosition: ['-200% 0', '200% 0'],
+                      }}
+                      transition={{
+                        duration: 3,
+                        repeat: Infinity,
+                        ease: 'linear',
+                        repeatDelay: 2,
+                      }}
+                    />
                   </motion.h3>
-                </div>
-
-                {/* Overlay hover originale */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
-                  <div className="p-6 w-full">
-                    <h3 className="text-white font-bold text-lg mb-1">{image.title}</h3>
-                    <p className="text-gray-300 text-sm capitalize">{image.category}</p>
-                  </div>
                 </div>
               </motion.div>
             ))}

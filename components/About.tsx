@@ -27,19 +27,19 @@ const About = () => {
             <h2 className="section-title">
               Chi <span className="text-primary">Siamo</span>
             </h2>
-            <p className="text-xl text-gray-600 mb-6">
+            <p className="text-2xl text-gray-600 mb-6 font-medium">
               Carrozzeria Milano di Marin Stefano – Seregno (MB)
             </p>
-            <div className="space-y-4 text-gray-700 leading-relaxed">
-              <p>
+            <div className="space-y-5 text-gray-700 leading-relaxed">
+              <p className="text-lg">
                 <strong className="text-primary">Carrozzeria Milano di Marin Stefano</strong> è un punto di riferimento a Seregno e in Brianza
                 per riparazioni di carrozzeria eseguite con precisione, competenza e attenzione al dettaglio.
               </p>
-              <p>
+              <p className="text-lg">
                 Ogni intervento nasce da un approccio professionale e trasparente: analisi accurata del danno, soluzioni
                 tecniche efficaci e risultati impeccabili, nel pieno rispetto degli standard qualitativi del settore automotive.
               </p>
-              <p>
+              <p className="text-lg">
                 Qui la carrozzeria non è solo riparazione, ma cura del veicolo e rispetto del cliente. Offriamo un servizio
                 <strong> completo e senza pensieri</strong>: gestione pratiche assicurative, supporto peritale, coordinamento con la compagnia
                 e, quando necessario, auto sostitutiva.
@@ -48,12 +48,12 @@ const About = () => {
 
             <div className="mt-8 grid grid-cols-2 gap-4">
               <div className="bg-primary/5 rounded-lg p-4 border-l-4 border-primary">
-                <h4 className="font-bold text-gray-900 mb-2">La Nostra Missione</h4>
-                <p className="text-sm text-gray-600">Lavorare bene, sempre: qualità, trasparenza, rispetto dei tempi</p>
+                <h4 className="font-bold text-gray-900 mb-2 text-lg">La Nostra Missione</h4>
+                <p className="text-base text-gray-600">Lavorare bene, sempre: qualità, trasparenza, rispetto dei tempi</p>
               </div>
               <div className="bg-primary/5 rounded-lg p-4 border-l-4 border-primary">
-                <h4 className="font-bold text-gray-900 mb-2">I Nostri Valori</h4>
-                <p className="text-sm text-gray-600">
+                <h4 className="font-bold text-gray-900 mb-2 text-lg">I Nostri Valori</h4>
+                <p className="text-base text-gray-600">
                   Professionalità, affidabilità moderna, attenzione autentica al risultato finale
                 </p>
               </div>
