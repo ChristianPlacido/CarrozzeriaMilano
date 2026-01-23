@@ -105,7 +105,7 @@ const Gallery = () => {
                   </div>
                 )}
 
-                {/* Overlay titolo permanente in basso con effetto shiny */}
+                {/* Overlay titolo permanente in basso con effetto shiny continuo */}
                 <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 via-black/50 to-transparent px-4 py-5 flex items-center justify-center">
                   <motion.h3 
                     initial={{ opacity: 0 }}
@@ -113,14 +113,14 @@ const Gallery = () => {
                     transition={{ delay: 0.2 }}
                     className="text-white font-bold text-lg text-center leading-tight uppercase tracking-wider relative"
                     style={{
-                      textShadow: '0 2px 8px rgba(0,0,0,0.6), 0 0 20px rgba(220,20,60,0.3)',
+                      textShadow: '0 2px 8px rgba(0,0,0,0.6), 0 0 20px rgba(220,20,60,0.35)',
                       letterSpacing: '0.08em',
                     }}
                   >
                     {image.title}
-                    {/* Effetto shiny animato */}
+                    {/* Effetto shiny animato continuo */}
                     <motion.span
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent"
+                      className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/45 to-transparent"
                       style={{
                         backgroundSize: '200% 100%',
                         maskImage: 'linear-gradient(90deg, transparent, white, transparent)',
@@ -130,10 +130,9 @@ const Gallery = () => {
                         backgroundPosition: ['-200% 0', '200% 0'],
                       }}
                       transition={{
-                        duration: 3,
+                        duration: 2.4,
                         repeat: Infinity,
                         ease: 'linear',
-                        repeatDelay: 2,
                       }}
                     />
                   </motion.h3>

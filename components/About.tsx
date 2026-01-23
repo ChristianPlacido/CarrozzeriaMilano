@@ -27,33 +27,33 @@ const About = () => {
             <h2 className="section-title">
               Chi <span className="text-primary">Siamo</span>
             </h2>
-            <p className="text-2xl text-gray-600 mb-6 font-medium">
+            <p className="text-3xl text-gray-700 mb-6 font-semibold">
               Carrozzeria Milano di Marin Stefano – Seregno (MB)
             </p>
-            <div className="space-y-5 text-gray-700 leading-relaxed">
-              <p className="text-lg">
+            <div className="space-y-6 text-gray-800 leading-relaxed max-w-3xl">
+              <p className="text-xl">
                 <strong className="text-primary">Carrozzeria Milano di Marin Stefano</strong> è un punto di riferimento a Seregno e in Brianza
                 per riparazioni di carrozzeria eseguite con precisione, competenza e attenzione al dettaglio.
               </p>
-              <p className="text-lg">
+              <p className="text-xl">
                 Ogni intervento nasce da un approccio professionale e trasparente: analisi accurata del danno, soluzioni
                 tecniche efficaci e risultati impeccabili, nel pieno rispetto degli standard qualitativi del settore automotive.
               </p>
-              <p className="text-lg">
+              <p className="text-xl">
                 Qui la carrozzeria non è solo riparazione, ma cura del veicolo e rispetto del cliente. Offriamo un servizio
                 <strong> completo e senza pensieri</strong>: gestione pratiche assicurative, supporto peritale, coordinamento con la compagnia
                 e, quando necessario, auto sostitutiva.
               </p>
             </div>
 
-            <div className="mt-8 grid grid-cols-2 gap-4">
-              <div className="bg-primary/5 rounded-lg p-4 border-l-4 border-primary">
-                <h4 className="font-bold text-gray-900 mb-2 text-lg">La Nostra Missione</h4>
-                <p className="text-base text-gray-600">Lavorare bene, sempre: qualità, trasparenza, rispetto dei tempi</p>
+            <div className="mt-10 grid grid-cols-2 gap-6">
+              <div className="bg-primary/5 rounded-lg p-5 border-l-4 border-primary">
+                <h4 className="font-bold text-gray-900 mb-2 text-xl">La Nostra Missione</h4>
+                <p className="text-lg text-gray-700">Lavorare bene, sempre: qualità, trasparenza, rispetto dei tempi</p>
               </div>
-              <div className="bg-primary/5 rounded-lg p-4 border-l-4 border-primary">
-                <h4 className="font-bold text-gray-900 mb-2 text-lg">I Nostri Valori</h4>
-                <p className="text-base text-gray-600">
+              <div className="bg-primary/5 rounded-lg p-5 border-l-4 border-primary">
+                <h4 className="font-bold text-gray-900 mb-2 text-xl">I Nostri Valori</h4>
+                <p className="text-lg text-gray-700">
                   Professionalità, affidabilità moderna, attenzione autentica al risultato finale
                 </p>
               </div>
@@ -68,7 +68,19 @@ const About = () => {
             transition={{ duration: 0.8 }}
             className="relative"
           >
-            {/* Immagine reale con didascalia in riquadro */}
+            {/* Titolo esterno con animazione da sinistra */}
+            <motion.div
+              initial={{ opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+              className="mb-4 text-left"
+            >
+              <p className="text-sm font-semibold tracking-[0.3em] text-primary uppercase">La tua auto</p>
+              <p className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-tight">Nelle mani giuste</p>
+            </motion.div>
+
+            {/* Immagine reale con didascalia minimal in basso */}
             <div className="relative rounded-2xl overflow-hidden shadow-2xl mb-8">
               <div className="relative aspect-[4/3]">
                 {(() => {
@@ -96,27 +108,11 @@ const About = () => {
                 })()}
                 {/* Gradient per leggibilità */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                
-                {/* Scritta sopra il riquadro - Apple Minimal */}
-                <motion.div
-                  initial={{ opacity: 0, y: -30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8, ease: "easeOut" }}
-                  className="absolute top-4 left-1/2 -translate-x-1/2 text-center z-20"
-                >
-                  <p className="text-sm font-light tracking-widest text-white/90 uppercase">
-                    La tua auto
-                  </p>
-                  <p className="text-3xl font-bold tracking-tight text-white mt-1">
-                    Nelle mani giuste
-                  </p>
-                </motion.div>
 
-                {/* Riquadro Apple Minimal - sottile e elegante */}
-                <div className="absolute top-32 left-1/2 -translate-x-1/2">
+                {/* Riquadro spostato in basso per non coprire l'auto */}
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2">
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                    initial={{ opacity: 0, scale: 0.85, y: 20 }}
                     whileInView={{ opacity: 1, scale: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
@@ -129,12 +125,11 @@ const About = () => {
                       boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.1)',
                     }}
                   >
-                    {/* Contenuto minimale */}
                     <div className="relative z-10 space-y-2">
-                      <p className="text-xs font-light tracking-widest text-white/60 uppercase">
+                      <p className="text-xs font-light tracking-widest text-white/70 uppercase">
                         Professionalità & Affidabilità
                       </p>
-                      <p className="text-sm font-light text-white/80">
+                      <p className="text-sm font-light text-white/90">
                         Marin Stefano - Seregno (MB)
                       </p>
                     </div>
