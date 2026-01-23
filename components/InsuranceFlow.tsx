@@ -2,7 +2,8 @@
 
 import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
-import { FaTimes, FaPhone, FaWhatsapp, FaCheckCircle, FaArrowLeftLong } from 'react-icons/fa'
+import { FaTimes, FaPhone, FaWhatsapp, FaCheckCircle } from 'react-icons/fa'
+import { FaArrowLeftLong } from 'react-icons/fa6'
 import { INSURANCE_COMPANIES } from '@/data/insurance-companies'
 
 type InsuranceFlowProps = {
