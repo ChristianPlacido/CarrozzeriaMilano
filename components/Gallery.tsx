@@ -87,7 +87,7 @@ const Gallery = () => {
           </p>
         </motion.div>
 
-        {/* Titolo grande CARROZZERIA MILANO */}
+        {/* Loop parole chiave in dissolvenza - sostituisce il titolo statico */}
         <motion.div
           initial={{ opacity: 0, y: -40 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -95,29 +95,19 @@ const Gallery = () => {
           transition={{ duration: 0.8, ease: 'easeOut' }}
           className="text-center mb-16 relative"
         >
-          <div className="relative inline-block overflow-hidden">
-            <h3 className="text-4xl sm:text-5xl md:text-6xl font-black tracking-[0.15em] uppercase text-gray-900 relative">
-              CARROZZERIA MILANO
-              {/* Effetto shiny animato */}
-              <motion.span
-                className="pointer-events-none absolute inset-0 bg-gradient-to-r from-transparent via-white/60 to-transparent"
-                style={{
-                  backgroundSize: '200% 100%',
-                  maskImage: 'linear-gradient(90deg, transparent, white, transparent)',
-                  WebkitMaskImage: 'linear-gradient(90deg, transparent, white, transparent)',
-                }}
-                animate={{
-                  backgroundPosition: ['-200% 0', '200% 0'],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: 'linear',
-                  repeatDelay: 2,
-                }}
-              />
-            </h3>
-          </div>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={KEYWORDS[keywordIndex]}
+              initial={{ opacity: 0, y: 30, scale: 0.8 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: -30, scale: 0.8 }}
+              transition={{ duration: 0.7, ease: 'easeOut' }}
+              className="text-4xl sm:text-5xl md:text-6xl font-bold tracking-tight uppercase text-gray-900"
+              style={{ fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}
+            >
+              {KEYWORDS[keywordIndex]}
+            </motion.div>
+          </AnimatePresence>
         </motion.div>
 
         {/* Carousel */}
@@ -271,29 +261,6 @@ const Gallery = () => {
               </div>
             </div>
           </div>
-        </motion.div>
-
-        {/* Loop parole chiave in dissolvenza */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center mt-14"
-        >
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={KEYWORDS[keywordIndex]}
-              initial={{ opacity: 0, y: 30, scale: 0.8 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              exit={{ opacity: 0, y: -30, scale: 0.8 }}
-              transition={{ duration: 0.7, ease: 'easeOut' }}
-              className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight uppercase text-gray-900"
-              style={{ fontFamily: 'var(--font-montserrat), system-ui, sans-serif' }}
-            >
-              {KEYWORDS[keywordIndex]}
-            </motion.div>
-          </AnimatePresence>
         </motion.div>
       </div>
     </section>
