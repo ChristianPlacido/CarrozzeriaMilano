@@ -115,12 +115,21 @@ const InsuranceFlow = ({ isOpen, onClose }: InsuranceFlowProps) => {
                         whileHover={{ scale: 1.05, y: -5 }}
                         whileTap={{ scale: 0.95 }}
                       >
-                        <div className="w-16 h-16 mb-2 flex items-center justify-center">
+                        <div className="w-16 h-16 mb-2 flex items-center justify-center bg-gray-100 rounded">
                           <img 
                             src={insurance.logo} 
                             alt={`Logo ${insurance.name}`}
                             className="max-w-full max-h-full object-contain"
                             loading="lazy"
+                            onError={(e) => {
+                              const img = e.target as HTMLImageElement;
+                              img.style.display = 'none';
+                              const parent = img.parentElement;
+                              if (parent) {
+                                parent.textContent = insurance.name.substring(0, 2).toUpperCase();
+                                parent.className = 'w-16 h-16 mb-2 flex items-center justify-center bg-gradient-to-br from-primary to-primary/80 rounded text-white font-bold text-lg';
+                              }
+                            }}
                           />
                         </div>
                         <p className="text-xs font-semibold text-gray-800 group-hover:text-primary transition-colors text-center">
@@ -177,11 +186,20 @@ const InsuranceFlow = ({ isOpen, onClose }: InsuranceFlowProps) => {
                       </h2>
                       <div className="bg-green-50 border-2 border-green-200 rounded-2xl p-6 mb-8">
                         <div className="flex items-center justify-center gap-4 mb-3">
-                          <div className="w-16 h-16 flex items-center justify-center">
+                          <div className="w-16 h-16 flex items-center justify-center bg-gray-100 rounded">
                             <img 
                               src={selectedInsurance.logo} 
                               alt={`Logo ${selectedInsurance.name}`}
                               className="max-w-full max-h-full object-contain"
+                              onError={(e) => {
+                                const img = e.target as HTMLImageElement;
+                                img.style.display = 'none';
+                                const parent = img.parentElement;
+                                if (parent) {
+                                  parent.textContent = selectedInsurance.name.substring(0, 2).toUpperCase();
+                                  parent.className = 'w-16 h-16 flex items-center justify-center bg-gradient-to-br from-green-100 to-green-50 rounded text-green-700 font-bold text-lg';
+                                }
+                              }}
                             />
                           </div>
                           <p className="text-xl font-bold text-gray-800">{selectedInsurance.name}</p>
@@ -243,11 +261,20 @@ const InsuranceFlow = ({ isOpen, onClose }: InsuranceFlowProps) => {
                       </h2>
                       <div className="bg-orange-50 border-2 border-orange-200 rounded-2xl p-6 mb-8">
                         <div className="flex items-center justify-center gap-4 mb-3">
-                          <div className="w-16 h-16 flex items-center justify-center">
+                          <div className="w-16 h-16 flex items-center justify-center bg-gray-100 rounded">
                             <img 
                               src={selectedInsurance.logo} 
                               alt={`Logo ${selectedInsurance.name}`}
                               className="max-w-full max-h-full object-contain"
+                              onError={(e) => {
+                                const img = e.target as HTMLImageElement;
+                                img.style.display = 'none';
+                                const parent = img.parentElement;
+                                if (parent) {
+                                  parent.textContent = selectedInsurance.name.substring(0, 2).toUpperCase();
+                                  parent.className = 'w-16 h-16 flex items-center justify-center bg-gradient-to-br from-orange-100 to-orange-50 rounded text-orange-700 font-bold text-lg';
+                                }
+                              }}
                             />
                           </div>
                           <p className="text-xl font-bold text-gray-800">{selectedInsurance.name}</p>

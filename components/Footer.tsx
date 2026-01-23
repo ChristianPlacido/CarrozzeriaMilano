@@ -129,10 +129,34 @@ const Footer = () => {
       {/* Bottom Footer */}
       <div className="border-t border-gray-800">
         <div className="container mx-auto px-4 py-6">
-          <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+          <div className="flex flex-col items-center space-y-4">
+            {/* Copyright */}
             <p className="text-gray-400 text-sm">
               © {currentYear} Carrozzeria Milano. Tutti i diritti riservati.
             </p>
+            
+            {/* Powered By Apex AI - Centro */}
+            <div className="flex items-center space-x-2 py-2 px-4 bg-gray-800 rounded-lg">
+              <span className="text-gray-400 text-sm">Powered by</span>
+              <a 
+                href="https://www.apexai.it" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center space-x-1 hover:opacity-80 transition-opacity"
+              >
+                <img 
+                  src="https://www.apexai.it/logo.png" 
+                  alt="Apex AI" 
+                  className="h-5 w-auto"
+                  onError={(e) => {
+                    (e.target as HTMLImageElement).style.display = 'none';
+                  }}
+                />
+                <span className="text-primary font-bold text-sm">Apex AI</span>
+              </a>
+            </div>
+            
+            {/* Links */}
             <div className="flex space-x-6 text-sm">
               <a href="#" className="text-gray-400 hover:text-primary transition-colors">
                 Privacy Policy
