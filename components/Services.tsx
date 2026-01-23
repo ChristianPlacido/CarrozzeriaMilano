@@ -53,17 +53,13 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => {
   return (
     <div className="h-64 relative">
       <motion.div
-        layoutId={`service-card-${service.id}`}
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: '-100px' }}
+        initial={{ opacity: 1, scale: 1 }}
+        animate={{ scale: isSelected ? 1.1 : 1 }}
         onClick={() => setIsSelected(!isSelected)}
         className="absolute inset-0 group relative rounded-2xl overflow-hidden shadow-md border-4 border-primary cursor-pointer"
-        animate={{ scale: isSelected ? 1.1 : 1 }}
         transition={{ duration: 0.3, type: 'spring', stiffness: 400, damping: 40 }}
         style={{
           transformOrigin: 'center',
-          contain: 'layout style paint',
           zIndex: isSelected ? 50 : 0
         }}
       >
@@ -74,14 +70,9 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
         
-        <motion.div
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.3 }}
-          className="absolute top-3 left-3 z-10"
-        >
+        <div className="absolute top-3 left-3 z-10">
           <span className="text-xs font-bold tracking-widest text-white/70 uppercase">Servizio</span>
-        </motion.div>
+        </div>
 
         <div className="absolute inset-0 flex items-end">
           <div className="p-4 text-white w-full flex items-center justify-between">
@@ -100,6 +91,7 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => {
                 href="tel:+390362328901"
                 aria-label="Chiama la carrozzeria"
                 className="bg-white/80 text-primary rounded-full w-9 h-9 flex items-center justify-center hover:bg-white transition-colors"
+                onClick={(e) => e.stopPropagation()}
               >
                 <FaPhone className="text-base" />
               </a>
@@ -107,6 +99,7 @@ const ServiceCard = ({ service }: { service: typeof services[0] }) => {
                 href="https://wa.me/393331234567"
                 aria-label="Scrivi su WhatsApp"
                 className="bg-white/80 text-green-600 rounded-full w-9 h-9 flex items-center justify-center hover:bg-white transition-colors"
+                onClick={(e) => e.stopPropagation()}
               >
                 <FaWhatsapp className="text-base" />
               </a>
@@ -122,16 +115,10 @@ const Services = () => {
   return (
     <section id="servizi" className="py-20 bg-white">
       <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
+        <div className="text-center mb-16">
           <h2 className="section-title">I nostri <span className="text-primary">Servizi</span></h2>
           <p className="text-gray-600 text-sm mt-3">Clicca su un servizio per zoommare e scopri di più</p>
-        </motion.div>
+        </div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:max-w-6xl lg:mx-auto">
           {services.slice(0, 3).map((service) => (

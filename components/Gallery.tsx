@@ -114,10 +114,7 @@ const Gallery = () => {
         {/* Carousel */}
         <div className="relative overflow-hidden pb-6">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.15 }}
+            initial={{ opacity: 1, y: 0 }}
             animate={controls}
             onHoverStart={() => controls.stop()}
             onHoverEnd={() => startMarquee()}
@@ -128,12 +125,9 @@ const Gallery = () => {
             {[...galleryImages, ...galleryImages].map((image, index) => (
               <motion.div
                 key={`${image.id}-${index}`}
-                initial={{ opacity: 0, scale: 0.92 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.5, delay: (index % galleryImages.length) * 0.05 }}
+                initial={{ opacity: 1, scale: 1 }}
                 whileHover={{ scale: 1.03 }}
+                transition={{ duration: 0.3 }}
                 className="relative group cursor-pointer rounded-xl overflow-hidden shadow-lg aspect-square min-w-[260px] sm:min-w-[300px] lg:min-w-[320px] flex-shrink-0"
               >
                 {image.image ? (
