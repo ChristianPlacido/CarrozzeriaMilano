@@ -47,67 +47,74 @@ const services = [
   },
 ]
 
-const ServiceCard = ({ service, index }: { service: typeof services[0], index: number }) => {
+const ServiceCard = ({ service }: { service: typeof services[0] }) => {
   const [isSelected, setIsSelected] = useState(false)
 
   return (
-    <motion.div
-      key={service.id}
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0, scale: isSelected ? 1.1 : 1 }}
-      transition={{ duration: 0.5, delay: index * 0.05 }}
-      onClick={() => setIsSelected(!isSelected)}
-      className="group relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all border-4 border-primary cursor-pointer"
-      style={{ willChange: 'transform, box-shadow', backfaceVisibility: 'hidden' }}
-    >
-      <img
-        src={service.image}
-        alt={service.title}
-        className="absolute inset-0 w-full h-full object-cover"
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
-      
-      {/* Etichetta "SERVIZIO" in sovraimpressione */}
+    <div className="h-64 relative">
       <motion.div
-        initial={{ opacity: 0, y: -10 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.3 }}
-        className="absolute top-3 left-3 z-10"
+        layoutId={`service-card-${service.id}`}
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true, margin: '-100px' }}
+        onClick={() => setIsSelected(!isSelected)}
+        className="absolute inset-0 group relative rounded-2xl overflow-hidden shadow-md border-4 border-primary cursor-pointer"
+        animate={{ scale: isSelected ? 1.1 : 1 }}
+        transition={{ duration: 0.3, type: 'spring', stiffness: 400, damping: 40 }}
+        style={{
+          transformOrigin: 'center',
+          contain: 'layout style paint',
+          zIndex: isSelected ? 50 : 0
+        }}
       >
-        <span className="text-xs font-bold tracking-widest text-white/70 uppercase">Servizio</span>
-      </motion.div>
+        <img
+          src={service.image}
+          alt={service.title}
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/30 to-transparent" />
+        
+        <motion.div
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3 }}
+          className="absolute top-3 left-3 z-10"
+        >
+          <span className="text-xs font-bold tracking-widest text-white/70 uppercase">Servizio</span>
+        </motion.div>
 
-      <div className="absolute inset-0 flex items-end">
-        <div className="p-4 text-white w-full flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <motion.div 
-              className="bg-white/20 rounded-full w-10 h-10 flex items-center justify-center"
-              whileHover={{ scale: 1.15 }}
-              transition={{ duration: 0.2 }}
-            >
-              <service.icon className="text-white text-lg" />
-            </motion.div>
-            <h3 className="text-lg font-bold leading-tight">{service.title}</h3>
-          </div>
-          <div className="flex items-center gap-2">
-            <a
-              href="tel:+390362328901"
-              aria-label="Chiama la carrozzeria"
-              className="bg-white/80 text-primary rounded-full w-9 h-9 flex items-center justify-center hover:bg-white transition-colors"
-            >
-              <FaPhone className="text-base" />
-            </a>
-            <a
-              href="https://wa.me/393331234567"
-              aria-label="Scrivi su WhatsApp"
-              className="bg-white/80 text-green-600 rounded-full w-9 h-9 flex items-center justify-center hover:bg-white transition-colors"
-            >
-              <FaWhatsapp className="text-base" />
-            </a>
+        <div className="absolute inset-0 flex items-end">
+          <div className="p-4 text-white w-full flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <motion.div 
+                className="bg-white/20 rounded-full w-10 h-10 flex items-center justify-center"
+                whileHover={{ scale: 1.15 }}
+                transition={{ duration: 0.2 }}
+              >
+                <service.icon className="text-white text-lg" />
+              </motion.div>
+              <h3 className="text-lg font-bold leading-tight">{service.title}</h3>
+            </div>
+            <div className="flex items-center gap-2">
+              <a
+                href="tel:+390362328901"
+                aria-label="Chiama la carrozzeria"
+                className="bg-white/80 text-primary rounded-full w-9 h-9 flex items-center justify-center hover:bg-white transition-colors"
+              >
+                <FaPhone className="text-base" />
+              </a>
+              <a
+                href="https://wa.me/393331234567"
+                aria-label="Scrivi su WhatsApp"
+                className="bg-white/80 text-green-600 rounded-full w-9 h-9 flex items-center justify-center hover:bg-white transition-colors"
+              >
+                <FaWhatsapp className="text-base" />
+              </a>
+            </div>
           </div>
         </div>
-      </div>
-    </motion.div>
+      </motion.div>
+    </div>
   )
 }
 
@@ -127,14 +134,14 @@ const Services = () => {
         </motion.div>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 lg:max-w-6xl lg:mx-auto">
-          {services.slice(0, 3).map((service, index) => (
-            <ServiceCard key={service.id} service={service} index={index} />
+          {services.slice(0, 3).map((service) => (
+            <ServiceCard key={service.id} service={service} />
           ))}
         </div>
         
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4 lg:max-w-4xl lg:mx-auto">
-          {services.slice(3, 5).map((service, index) => (
-            <ServiceCard key={service.id} service={service} index={index + 3} />
+          {services.slice(3, 5).map((service) => (
+            <ServiceCard key={service.id} service={service} />
           ))}
         </div>
       </div>
