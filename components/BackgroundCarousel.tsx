@@ -92,7 +92,7 @@ const BackgroundCarousel = ({ intervalMs = 3500, maxWidth = 1920 }: BackgroundCa
 
   return (
     <div className="absolute inset-0 z-0 overflow-hidden bg-black">
-      <AnimatePresence mode="wait" initial={false}>
+      <AnimatePresence mode="popLayout" initial={false}>
         {typeof currentSlide === 'string' ? (
           // IMMAGINE
           <motion.img
@@ -103,7 +103,11 @@ const BackgroundCarousel = ({ intervalMs = 3500, maxWidth = 1920 }: BackgroundCa
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            transition={{ 
+              duration: 0.8, 
+              ease: 'easeInOut',
+              opacity: { duration: 0.8, ease: 'linear' }
+            }}
           />
         ) : (
           // VIDEO
@@ -126,14 +130,18 @@ const BackgroundCarousel = ({ intervalMs = 3500, maxWidth = 1920 }: BackgroundCa
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            transition={{ duration: 0.5, ease: 'easeInOut' }}
+            transition={{ 
+              duration: 0.8, 
+              ease: 'easeInOut',
+              opacity: { duration: 0.8, ease: 'linear' }
+            }}
             style={{ pointerEvents: 'none' }}
           />
         )}
       </AnimatePresence>
 
       {/* Velo/gradiente per leggibilità testo */}
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/60 to-black/50 pointer-events-none" />
     </div>
   )
 }

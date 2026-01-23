@@ -5,14 +5,14 @@ import { useEffect } from 'react'
 import Image from 'next/image'
 
 const galleryImages = [
-  { id: 1, title: 'Riparazione Paraurti', category: 'riparazione', image: '/images/riparazione-paraurti.jpg' },
-  { id: 2, title: 'Verniciatura Completa', category: 'verniciatura', image: null },
-  { id: 3, title: 'Restauro Auto d\'Epoca', category: 'restauro', image: null },
-  { id: 4, title: 'Detailing Professionale', category: 'detailing', image: null },
-  { id: 5, title: 'Riparazione Fiancata', category: 'riparazione', image: null },
-  { id: 6, title: 'Lucidatura', category: 'detailing', image: null },
-  { id: 7, title: 'Verniciatura Sportiva', category: 'verniciatura', image: null },
-  { id: 8, title: 'Restauro Classica', category: 'restauro', image: null },
+  { id: 1, title: 'Riparazione Paraurti', category: 'riparazione', image: 'https://images.unsplash.com/photo-1486262715619-f8ddc090c5e4?w=600&h=600&fit=crop' },
+  { id: 2, title: 'Verniciatura Completa', category: 'verniciatura', image: 'https://images.unsplash.com/photo-1487754180144-351b8e29fbdf?w=600&h=600&fit=crop' },
+  { id: 3, title: 'Restauro Auto d\'Epoca', category: 'restauro', image: 'https://images.unsplash.com/photo-1464207687429-7505649dae38?w=600&h=600&fit=crop' },
+  { id: 4, title: 'Detailing Professionale', category: 'detailing', image: 'https://images.unsplash.com/photo-1551894416-1a1b5f2e4bc7?w=600&h=600&fit=crop' },
+  { id: 5, title: 'Riparazione Fiancata', category: 'riparazione', image: 'https://images.unsplash.com/photo-1486262715619-f8ddc090c5e4?w=600&h=600&fit=crop' },
+  { id: 6, title: 'Lucidatura', category: 'detailing', image: 'https://images.unsplash.com/photo-1609432373949-53583b1b9da3?w=600&h=600&fit=crop' },
+  { id: 7, title: 'Verniciatura Sportiva', category: 'verniciatura', image: 'https://images.unsplash.com/photo-1567818735868-e71b99932e29?w=600&h=600&fit=crop' },
+  { id: 8, title: 'Restauro Classica', category: 'restauro', image: 'https://images.unsplash.com/photo-1552820728-8ac41f1ce891?w=600&h=600&fit=crop' },
 ]
 
 const Gallery = () => {
@@ -21,7 +21,7 @@ const Gallery = () => {
   const startMarquee = () => {
     controls.start({
       x: ['0%', '-50%'],
-      transition: { repeat: Infinity, ease: 'linear', duration: 30 },
+      transition: { repeat: Infinity, ease: 'linear', duration: 18 },
     })
   }
 
@@ -79,6 +79,22 @@ const Gallery = () => {
                     fill
                     className="object-cover"
                     sizes="(max-width: 640px) 260px, (max-width: 1024px) 300px, 320px"
+                    onError={(e) => {
+                      // Fallback gradiente se l'immagine non carica
+                      const img = e.currentTarget as HTMLImageElement
+                      img.style.display = 'none'
+                      const parent = img.parentElement
+                      if (parent) {
+                        parent.style.background = 'linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 50%, var(--color-primary-light) 100%)'
+                        parent.style.display = 'flex'
+                        parent.style.alignItems = 'center'
+                        parent.style.justifyContent = 'center'
+                        const div = document.createElement('div')
+                        div.className = 'text-white text-center'
+                        div.innerHTML = `<div class="text-4xl mb-2">🚗</div><p class="text-sm font-medium">${image.title}</p>`
+                        parent.appendChild(div)
+                      }
+                    }}
                   />
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-primary-dark via-primary to-primary-light flex items-center justify-center">

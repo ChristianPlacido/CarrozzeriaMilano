@@ -96,12 +96,44 @@ const About = () => {
                 })()}
                 {/* Gradient per leggibilità */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                {/* Riquadro con la frase sopra l'immagine */}
+                {/* Riquadro moderno future-tech trasparente con il brand di Carrozzeria Milano */}
                 <div className="absolute top-4 left-1/2 -translate-x-1/2">
-                  <div className="bg-white/90 border border-gray-200 rounded-lg px-4 py-2 shadow-md text-gray-900 text-center backdrop-blur-sm">
-                    <p className="text-2xl font-bold leading-tight">La Tua Auto</p>
-                    <p className="text-xl leading-tight">Nelle Mani Giuste</p>
-                  </div>
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.8, y: -20 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8, ease: "easeOut" }}
+                    className="relative px-8 py-4 text-center"
+                    style={{
+                      background: 'linear-gradient(135deg, rgba(220, 20, 60, 0.15) 0%, rgba(220, 20, 60, 0.08) 100%)',
+                      backdropFilter: 'blur(12px)',
+                      border: '2px solid rgba(220, 20, 60, 0.35)',
+                      borderRadius: '12px',
+                      boxShadow: '0 8px 32px rgba(220, 20, 60, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
+                    }}
+                  >
+                    {/* Effetto glow border animato */}
+                    <div 
+                      className="absolute -inset-0.5 rounded-[12px] opacity-0 group-hover:opacity-100 transition-opacity blur"
+                      style={{
+                        background: 'linear-gradient(135deg, #DC143C, rgba(220, 20, 60, 0.5))',
+                      }}
+                    />
+                    {/* Contenuto */}
+                    <div className="relative z-10">
+                      <p className="text-xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/80 drop-shadow-lg"
+                        style={{ textShadow: '0 2px 8px rgba(220, 20, 60, 0.6)' }}>
+                        La Tua Auto
+                      </p>
+                      <p className="text-lg leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-primary/80 drop-shadow-lg"
+                        style={{ textShadow: '0 2px 8px rgba(220, 20, 60, 0.8)' }}>
+                        Nelle Mani Giuste
+                      </p>
+                    </div>
+                    {/* Particelle luminose corner */}
+                    <div className="absolute top-0 right-0 w-1 h-1 bg-primary rounded-full opacity-40"></div>
+                    <div className="absolute bottom-0 left-0 w-1 h-1 bg-primary rounded-full opacity-40"></div>
+                  </motion.div>
                 </div>
               </div>
             </div>
