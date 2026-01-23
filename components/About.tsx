@@ -96,43 +96,48 @@ const About = () => {
                 })()}
                 {/* Gradient per leggibilità */}
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                {/* Riquadro moderno future-tech trasparente con il brand di Carrozzeria Milano */}
-                <div className="absolute top-4 left-1/2 -translate-x-1/2">
+                
+                {/* Scritta sopra il riquadro - Apple Minimal */}
+                <motion.div
+                  initial={{ opacity: 0, y: -30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, ease: "easeOut" }}
+                  className="absolute top-4 left-1/2 -translate-x-1/2 text-center z-20"
+                >
+                  <p className="text-sm font-light tracking-widest text-white/90 uppercase">
+                    La tua auto
+                  </p>
+                  <p className="text-3xl font-bold tracking-tight text-white mt-1">
+                    Nelle mani giuste
+                  </p>
+                </motion.div>
+
+                {/* Riquadro Apple Minimal - sottile e elegante */}
+                <div className="absolute top-32 left-1/2 -translate-x-1/2">
                   <motion.div
-                    initial={{ opacity: 0, scale: 0.8, y: -20 }}
+                    initial={{ opacity: 0, scale: 0.8, y: 20 }}
                     whileInView={{ opacity: 1, scale: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    className="relative px-8 py-4 text-center"
+                    transition={{ duration: 0.8, delay: 0.1, ease: "easeOut" }}
+                    className="relative px-6 py-4 text-center"
                     style={{
-                      background: 'linear-gradient(135deg, rgba(220, 20, 60, 0.15) 0%, rgba(220, 20, 60, 0.08) 100%)',
-                      backdropFilter: 'blur(12px)',
-                      border: '2px solid rgba(220, 20, 60, 0.35)',
-                      borderRadius: '12px',
-                      boxShadow: '0 8px 32px rgba(220, 20, 60, 0.15), inset 0 1px 1px rgba(255, 255, 255, 0.2)',
+                      background: 'rgba(255, 255, 255, 0.08)',
+                      backdropFilter: 'blur(20px)',
+                      border: '1px solid rgba(255, 255, 255, 0.15)',
+                      borderRadius: '16px',
+                      boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1), inset 0 1px 1px rgba(255, 255, 255, 0.1)',
                     }}
                   >
-                    {/* Effetto glow border animato */}
-                    <div 
-                      className="absolute -inset-0.5 rounded-[12px] opacity-0 group-hover:opacity-100 transition-opacity blur"
-                      style={{
-                        background: 'linear-gradient(135deg, #DC143C, rgba(220, 20, 60, 0.5))',
-                      }}
-                    />
-                    {/* Contenuto */}
-                    <div className="relative z-10">
-                      <p className="text-xl font-bold leading-tight text-transparent bg-clip-text bg-gradient-to-r from-white via-white to-white/80 drop-shadow-lg"
-                        style={{ textShadow: '0 2px 8px rgba(220, 20, 60, 0.6)' }}>
-                        La Tua Auto
+                    {/* Contenuto minimale */}
+                    <div className="relative z-10 space-y-2">
+                      <p className="text-xs font-light tracking-widest text-white/60 uppercase">
+                        Professionalità & Affidabilità
                       </p>
-                      <p className="text-lg leading-tight font-bold text-transparent bg-clip-text bg-gradient-to-r from-primary via-primary to-primary/80 drop-shadow-lg"
-                        style={{ textShadow: '0 2px 8px rgba(220, 20, 60, 0.8)' }}>
-                        Nelle Mani Giuste
+                      <p className="text-sm font-light text-white/80">
+                        Marin Stefano - Seregno (MB)
                       </p>
                     </div>
-                    {/* Particelle luminose corner */}
-                    <div className="absolute top-0 right-0 w-1 h-1 bg-primary rounded-full opacity-40"></div>
-                    <div className="absolute bottom-0 left-0 w-1 h-1 bg-primary rounded-full opacity-40"></div>
                   </motion.div>
                 </div>
               </div>
